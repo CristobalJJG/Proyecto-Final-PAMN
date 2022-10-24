@@ -1,4 +1,4 @@
-# Proyecto Final PAMN
+# **Proyecto Final PAMN**
 
 Pretendemos hacer un aplicación "simple", pero que pueda, de alguna forma, ser útil. Decidimos realizar una aplicación con características informativas. 
 
@@ -17,8 +17,10 @@ Haciendo referencia a lo dado en clase, intentaremos seguir las fases Devops, a 
 
 ---
 
-## Fase 1: Planteamiento del proyecto 📝
-Mediante el uso de bocetos en digital propusimos ideas, tanto de como podría ser la interfaz, como de las distintas funcionalidades que podría llegar a tener la aplicación.  
+## **Fases del Desarrollo**
+
+### **Fase 1: Análisis del proyecto** 📝
+Mediante el uso de bocetos en digital propusimos ideas, tanto de de las distintas funcionalidades, como de la estética de la interfaz que podría llegar a tener la aplicación.  
 A su vez, usamos [trello](https://trello.com/es) para planear el proyecto. Con respecto a la Metodología de Desarrollo Ágil, hemos decidido adaptarnos, ya que tenemos muchos trabajos, de forma que:
 - Se irán proponiendo tareas durante la primera y segunda semana
 - Nos asignaremos las tareas propuestas
@@ -27,18 +29,22 @@ A su vez, usamos [trello](https://trello.com/es) para planear el proyecto. Con r
 
 Trello -> [Tablero de Trello ](https://trello.com/invite/b/5WkKyg91/ATTI7843f8fa3a9e5219bac81f54b5b7cdd45F76642F/pamndelega)
 
-Bocetos -> PDF ubicado en la carpeta **[Bocetos e Ideas]** (Se subirá en algún momento)
+Bocetos -> PDF ubicado en la carpeta **[Bocetos e Ideas]** (Se subirá en algún momento y se irá modificando a necesidad)
 
 ---
 
-## Fase 2: Diseño de la aplicación 🖌
+### **Fase 2: Diseño de la aplicación** 🖌
 Dado que pretendemos hacer una aplicación para la Delegación de Estudiantes de la Escuela de Ingeniería Informática, se tomaron las fotos de la [página oficial](https://www.ulpgc.es/identidad-corporativa/marca-grafica-ulpgc), para poder usarlas de forma correcta.
 
 También se tomaron ideas de la pagina de registro de MiULPGC  
-![MiULPGC](/Bocetos%20e%20Ideas/Inicio_MiULPGC2.png)
+![MiULPGC](docs/Bocetos%20e%20Ideas/Inicio_MiULPGC2.png)
 
 Se sacaron los colore básicos de la ULPGC:  
-![Colores ULPGC](/Bocetos%20e%20Ideas/Colores.png)
+![Colores ULPGC](docs/Bocetos%20e%20Ideas/Colores.png)
+
+Se cogió un wireframe de un móvil con android -> 
+[Samsung Galaxy Wireframe Mockup](https://www.figma.com/file/YxhF8ALI0VuQqARKTiDSUe/samsung-galaxy-wireframe-mockup-(Community)?node-id=0%3A1)
+
 
 
 Figma -> [Esquema en Figma](https://www.figma.com/file/G9zPa1o3azyYjJuFsx6RSS/COSA-PAMN?node-id=0%3A1)
@@ -51,9 +57,45 @@ Se ha hecho unos de algunos plugins, como son:
 
 ---
 
-## Fase 3: Desarrollo 📐
+### **Fase 3: Documentación y estudio** 📚
+Se irán colocando los Codelabs más interesantes para el desarrollo del trabajo, así como vídeos o páginas que nos sirvan de ayuda.
+- [www.codigofacilito.com](https://codigofacilito.com/articulos/articulo_18_10_2019_18_25_35) -> Puede ayudar a la hora de hacer el login 
+- []() ->
+- []() ->
+- []() ->
+
+---
+
+### **Fase 4: Desarrollo** 📐
+Cuando hagamos cosas se pondrá aquí
+
+---
+
+### **Fase 5: Pruebas y despliegue** 💻
+Se irán haciendo pruebas en el emulador que nos aporta Android Studio, y a terminar la app se descargará en nuestro dispositivo físico para ver su correcto uso.
+
+---
+
+## **Temporización**
+Una vez acabemos el trello se pondrán cosas aquí (Seguramente esté sujeto a cambios)
 
 
 ---
 
-## Fase 4: Despliegue 💻
+## **Herramientas utilizadas**
+- [GitKraken](https://www.gitkraken.com/) -> Para el control de versiones.
+- [Trello](https://trello.com/) -> Monitorizar las tareas y el trabajo que se va realizando.  
+- [Figma](https://www.figma.com/) -> Bocetos y diseño de la aplicación.  
+- [Android Studio](https://developer.android.com/studio) -> Para el desarrollor de la Aplicación.  
+- [Firebase]() ->  Para cosas de Login y BBDD.  
+- []() ->   
+- []() ->   
+- []() ->   
+- []() ->   
+
+
+---
+
+## **Desarrollo / Ejecución**
+
+Aquí se irán colocando las distintas **Actividades** que vayamos desarrollando
