@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "668580455298",
+    "project_id": "delegaapp",
+    "storage_bucket": "delegaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668580455298:android:7195341b3860899888e59b",
+        "android_client_info": {
+          "package_name": "com.example.delegaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668580455298-km03n4p8apc8dap6t7l4hjs4i2ii8m7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv1pVhSMLaiwcddINZ-P7SzGuiUGb1msM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668580455298-km03n4p8apc8dap6t7l4hjs4i2ii8m7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668580455298:android:c413d0ae431faf5788e59b",
+        "android_client_info": {
+          "package_name": "com.example.delegadosapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668580455298-km03n4p8apc8dap6t7l4hjs4i2ii8m7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv1pVhSMLaiwcddINZ-P7SzGuiUGb1msM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668580455298-km03n4p8apc8dap6t7l4hjs4i2ii8m7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
