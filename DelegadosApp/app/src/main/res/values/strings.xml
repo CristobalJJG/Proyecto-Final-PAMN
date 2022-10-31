@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">DelegadosApp</string>
+    <string name="btn_reg">Registrarse</string>
+    <string name="btn_login">Iniciar Sesión</string>
     <string name="request_dni">E-mail:</string>
     <string name="resquest_pass">Contraseña:</string>
     <string name="registrarse">¿No tienes cuenta?</string>
@@ -8,4 +10,8 @@
 
 
     <!--string name=""></string-->
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
 </resources>
