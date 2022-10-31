@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DelegadosApp</string>
+    <string name="request_dni">E-mail:</string>
+    <string name="resquest_pass">Contraseña:</string>
+    <string name="registrarse">¿No tienes cuenta?</string>
+    <string name="remember_pass">¿Has olvidado tu contraseña?</string>
+    <string name="request_invitado">Entrar como </string>
+
+
+    <!--string name=""></string-->
 </resources>
