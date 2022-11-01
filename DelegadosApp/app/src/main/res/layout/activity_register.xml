@@ -19,13 +19,38 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="350dp"
-        android:layout_height="300dp"
+        android:layout_width="348dp"
+        android:layout_height="358dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <TextView
+            android:id="@+id/lbl_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request_mail"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:translationX="50dp"
+            android:translationY="15dp" />
+
+        <EditText
+            android:id="@+id/txt_mail"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/light_black"
+            android:ems="10"
+            android:hint="@string/mail_example"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_white"
+            android:translationX="50dp"
+            android:translationY="55dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/lbl_pass"
@@ -53,29 +78,22 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/lbl_mail"
+            android:id="@+id/lbl_grado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/request_mail"
+            android:text="@string/request_grado"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:translationX="50dp"
-            android:translationY="15dp" />
+            android:translationY="210dp" />
 
-        <EditText
-            android:id="@+id/txt_mail"
+        <Spinner
+            android:id="@+id/spn_grados"
             android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:backgroundTint="@color/light_black"
-            android:ems="10"
-            android:hint="@string/mail_example"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/black"
-            android:textColorHint="@color/dark_white"
+            android:layout_height="40dp"
+            android:background="@color/dark_white"
             android:translationX="50dp"
-            android:translationY="55dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,UsingOnClickInXml" />
+            android:translationY="255dp" />
 
         <Button
             android:id="@+id/btn_login"
@@ -85,11 +103,11 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="128dp"
             android:layout_marginBottom="10dp"
-            android:onClick="onClick_login"
-            android:text="@string/btn_login"
+            android:onClick="onClick_register"
+            android:text="@string/btn_reg"
             android:textColor="@color/white"
             android:translationX="-77dp"
-            android:translationY="225dp"
+            android:translationY="300dp"
             tools:ignore="UsingOnClickInXml" />
 
     </androidx.cardview.widget.CardView>
@@ -101,13 +119,13 @@
         android:layout_marginStart="110dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="1dp"
-        android:onClick="onClick_goToRegister"
-        android:text="@string/registrarse"
+        android:onClick="onClick_goToLogin"
+        android:text="@string/login"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/registrarse_btn2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
+        tools:ignore="UsingOnClickInXml" />
 
     <TextView
         android:id="@+id/registrarse_btn2"
@@ -116,54 +134,21 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="110dp"
-        android:onClick="onClick_goToRegister"
-        android:text="@string/reg"
+        android:onClick="onClick_goToLogin"
+        android:text="@string/log"
         android:textColor="@color/yellow"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/registrarse_btn1"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/registrarse_btn4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="1dp"
-        android:text="@string/remember_pass"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/registrarse_btn2"
-        app:layout_constraintHorizontal_bias="0.291"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck"
-        android:onClick="onClick_rememberPass" />
-
-    <TextView
-        android:id="@+id/registrarse_btn5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="100dp"
-        android:text="@string/rem_pass"
-        android:textColor="@color/yellow"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.565"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck"
-        android:onClick="onClick_rememberPass" />
+        tools:ignore="UsingOnClickInXml" />
 
     <TextView
         android:id="@+id/registrarse_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="225dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="4dp"
         android:onClick="onClick_goToInvite"
         android:text="@string/invitado"
@@ -172,23 +157,23 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
+        tools:ignore="UsingOnClickInXml" />
 
     <TextView
         android:id="@+id/registrarse_btn3"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="225dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="110dp"
+        android:onClick="onClick_goToInvite"
         android:text="@string/inv"
         android:textColor="@color/light_blue"
         android:textSize="20sp"
-        android:onClick="onClick_goToInvite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/registrarse_btn1"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:ignore="UsingOnClickInXml,TouchTargetSizeCheck" />
+        tools:ignore="UsingOnClickInXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
