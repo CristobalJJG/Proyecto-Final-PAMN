@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginEnd="118dp"
+        android:src="@drawable/logo_big"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <TextView
+            android:id="@+id/lbl_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request_pass"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:translationX="50dp"
+            android:translationY="115dp" />
+
+        <EditText
+            android:id="@+id/txt_pass"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/light_black"
+            android:ems="10"
+            android:hint="@string/pass_example"
+            android:importantForAutofill="no"
+            android:inputType="textPassword|textWebPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_white"
+            android:translationX="50dp"
+            android:translationY="155dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/lbl_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request_mail"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:translationX="50dp"
+            android:translationY="15dp" />
+
+        <EditText
+            android:id="@+id/txt_mail"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/light_black"
+            android:ems="10"
+            android:hint="@string/mail_example"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_white"
+            android:translationX="50dp"
+            android:translationY="55dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="128dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/btn_login"
+            android:onClick="onClick_login"
+            android:textColor="@color/white"
+            android:translationX="-77dp"
+            android:translationY="225dp"
+            tools:ignore="UsingOnClickInXml" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/registrarse_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="1dp"
+        android:onClick="onClick_goToRegister"
+        android:text="@string/registrarse"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/registrarse_btn2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:ignore="UsingOnClickInXml" />
+
+    <TextView
+        android:id="@+id/registrarse_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="110dp"
+        android:onClick="onClick_goToRegister"
+        android:text="@string/reg"
+        android:textColor="@color/yellow"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/registrarse_btn1"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:ignore="UsingOnClickInXml" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

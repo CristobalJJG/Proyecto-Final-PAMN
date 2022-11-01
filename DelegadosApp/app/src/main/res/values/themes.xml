@@ -13,4 +13,13 @@
         <item name="android:statusBarColor">@color/dark_white</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.DelegadosApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.DelegadosApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.DelegadosApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
