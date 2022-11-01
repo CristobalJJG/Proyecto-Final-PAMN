@@ -1,44 +1,44 @@
 package com.example.delegadosapp
 
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.delegadosapp.databinding.ActivityLoginBinding
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import org.w3c.dom.Text
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
-class LoginActivity : Fragment() {
+class LoginActivity : AppCompatActivity() {
+    private var mail:String = ""
+    private var pass:String = ""
 
-    private var _binding: ActivityLoginBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = ActivityLoginBinding.inflate(inflater, container, false)
-        return binding.root
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    fun onClick_login(view: View) {
+        mail = findViewById<TextView>(R.id.txt_mail).text.toString()
+        pass = findViewById<TextView>(R.id.txt_pass).text.toString()
+        val regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
+        if(mail.matches(regex)) showMessage(mail)
+        else showMessage("Error, correo chungo")
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    fun onClick_goToRegister(view:View){
+        /*
+        val intent: Intent = Intent(this,OrderActivity::class.java)
+        intent.putExtra("mail", mail)
+        intent.putExtra("pass", pass)
+        startActivity(intent)
+        */
+        showMessage("Irías a 'Register', pero no está hecho todavía, sorry")
+    }
+
+    fun showMessage(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 }
