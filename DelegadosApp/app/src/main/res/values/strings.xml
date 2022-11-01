@@ -17,4 +17,17 @@
     <string name="mail_example">alumno@alu.ulpgc.es</string>
     <string name="pass_example">************</string>
     <string name="reg">Regístrate</string>
+    <string name="login">¿Ya tienes cuenta?</string>
+    <string name="log">Iniciar Sesión</string>
+    <string name="invitado">Acceder como</string>
+    <string name="inv">Invitado</string>
+    <string name="request_grado">Grado:</string>
+    <string name="rem_pass">Recordar Contraseña</string>
+
+    <string-array name="grados">
+        <item>Grado en Ingeniería Informática</item>
+        <item>Grado en Ingerniería de Datos</item>
+        <item>Grado en Arquitectura</item>
+        <item>Grado en Química</item>
+    </string-array>
 </resources>
