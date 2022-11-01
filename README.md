@@ -60,7 +60,7 @@ Se ha hecho unos de algunos plugins, como son:
 ### **Fase 3: Documentación y estudio** 📚
 Se irán colocando los Codelabs más interesantes para el desarrollo del trabajo, así como vídeos o páginas que nos sirvan de ayuda.
 - [www.codigofacilito.com](https://codigofacilito.com/articulos/articulo_18_10_2019_18_25_35) -> Puede ayudar a la hora de hacer el login 
-- []() ->
+- [Creación de layouts](https://youtu.be/5jXy2S-qdVQ?t=2729) -> Puede ayudar a la creación de las distintas publicaciones, comentarios y zonas donde tengamos que mostrar información.
 - []() ->
 - []() ->
 
