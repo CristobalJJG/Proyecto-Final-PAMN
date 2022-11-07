@@ -43,9 +43,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onClick_goToInvite(view:View){
-        //val intent: Intent = Intent(this,RegisterActivity::class.java)
-        //startActivity(intent)
-        showMessage("Irías a ver las publciaciones, modo INVITADO, pero no está hecho todavía, sorry")
+        val intent: Intent = Intent(this,PublicationsActivity::class.java)
+        startActivity(intent)
+        showMessage("Acceso como invitado, habrá ciertas cosas que no podrás hacer")
+        //showMessage("Irías a ver las publciaciones, modo INVITADO, pero no está hecho todavía, sorry")
     }
 
     fun showMessage(message: String) {
