@@ -5,38 +5,39 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.example.delegadosapp.R
 
-class PostAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
-    val titles = arrayOf("Game fest", "Asadero GII/GICD", "Curso de Git")
-    val descriptions = arrayOf("Pretende ser un lugar cordial, donde presumir de dotes videojugabilísticas a nivel usuario avanzado.",
-        "Pretende ser una concurrecia de personas con intención de socializar, algo que, por lo general, 1 de los 2 programadores de esta aplicación no está acostumbrado, y, por lo tanto, no es fácil explicar como se desarrolla tal actividad",
-        "Súper curso impartido por nuestra tan querida profesora MariLola, con el que se pretende obtener los conocimientos básicos de Git para un uso profesional.")
-    val images = arrayOf(R.drawable.default_picture, R.drawable.default_picture)
+class PostAdapter(
+    private val titles: Array<String>, private val descriptions: Array<String>,
+    private val images: Array<Int?>, private val rol: Int) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.post_layout, parent, false)
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, i: Int) {
-        holder.title.text = titles[i]
-        holder.description.text = descriptions[i]
-        holder.img?.setImageResource(images[i])
+    override fun onBindViewHolder(vh: ViewHolder, i: Int) {
+        vh.title.text = titles[i]
+        vh.description.text = descriptions[i]
+        if(images[i] != null) images[i]?.let { vh.img.setImageResource(it) }
+
+
     }
 
-    override fun getItemCount(): Int {
-        return titles.size
-    }
+    override fun getItemCount(): Int { return titles.size }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        var img: ImageView? = null
+        var img: ImageView
         var title: TextView
         var description: TextView
+        var imgPart: CardView
 
         init {
-            if(img != null) img = itemView.findViewById(R.id.img_post)
+            imgPart = itemView.findViewById(R.id.cv_photo)
+            img = itemView.findViewById(R.id.img_post)
             title = itemView.findViewById(R.id.txt_title)
             description = itemView.findViewById(R.id.txt_description)
         }
