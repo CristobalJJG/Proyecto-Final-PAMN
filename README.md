@@ -99,3 +99,40 @@ Una vez acabemos el trello se pondrán cosas aquí (Seguramente esté sujeto a c
 ## **Desarrollo / Ejecución**
 
 Aquí se irán colocando las distintas **Actividades** que vayamos desarrollando
+
+
+---
+
+## Planteamiento de la Base de Datos (Abierto a cambios)##
+Como se ha planteado se utilizara Firebase en concreto el recurso CloudFirestore para almacenar y sincronizar los datos de la app.
+El planteamiento para la primera versión sería tener dos colecciones -> "users"y "news".
+
+La colección "users" almacenará todos los usuarios y estos tendrán propiedades para poder identificarlos.
+	Propiedades de los "users" (El nombre de los documentos dentro de esta colección será el nombre de los propios usuarios):
+		-id = number
+			La id será dada por el programa, de forma simple se le agrega un número y al siguiente usuario se la suceción del anterior.
+		-rol = number
+			Habrán 3 tipos de rol: "1" -> Delegados, "2" -> Usuarios, "3" -> Invitados.
+		-password = String
+			Contraseña dada por el usuario, por ahora no esta incriptada, es una simple String, ¡Habrá que cambiarlo!
+		-description = String
+			Descripción simple de quien es el usuario.
+		-movil = number
+			Móvil del usuario, se usara como vía de comunicación.
+		-email = String
+			Correo institucional del usuario, se usará para el login y como via de comunicación.
+		-discord = String
+			Discord del usuario, se usará como vía de comunicación
+
+
+
+La colección "news" almacenará todas las noticias y estas tendrán propiedades para poder identificarlas.
+	Propiedades de las "news" (El nombre de los documentos dentro de esta colección será el titulos de las propias news):
+		-id = number
+			La id de la publicación para poder identificarla, vendra dada por un numero que ira cambiando secuencialemente.
+		-image = String
+			Será una imagen guardada en CloudFirestore
+		-description = String
+			Descripción de la publicación
+		-users = List of users
+			Lista de Usuarios que habrán agregado a favoritos la propia publicacíon.
