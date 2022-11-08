@@ -23,7 +23,7 @@ object ServeFirebase {
             "email" to usuario.getEmail(),
             "discord" to usuario.getDiscord()
         )
-        db.document(usuario.getNombre()).set(addusuario).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+        db.collection("users").document(usuario.getNombre()).set(addusuario).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
