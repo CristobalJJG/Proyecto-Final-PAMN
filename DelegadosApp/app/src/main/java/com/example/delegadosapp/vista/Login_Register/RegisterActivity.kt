@@ -1,4 +1,4 @@
-package com.example.delegadosapp
+package com.example.delegadosapp.vista.Login_Register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import com.example.delegadosapp.R
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -46,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun onClick_goToLogin(view:View){
-        val intent: Intent = Intent(this,LoginActivity::class.java)
+        val intent: Intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("mail", mail)
         intent.putExtra("pass", pass)
         startActivity(intent)

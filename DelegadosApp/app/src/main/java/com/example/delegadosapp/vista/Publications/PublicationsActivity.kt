@@ -1,9 +1,10 @@
-package com.example.delegadosapp
+package com.example.delegadosapp.vista.Publications
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.delegadosapp.R
 
 class PublicationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
