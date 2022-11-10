@@ -17,6 +17,7 @@ object ServeFirebase {
         val addusuario = hashMapOf(
             "id" to id,
             "rol" to usuario.getRol(),
+            "name" to usuario.getNombre(),
             "password" to usuario.getContraseña(),
             "description" to usuario.getDescripcion(),
             "movil" to usuario.getMovil(),
@@ -27,12 +28,14 @@ object ServeFirebase {
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
-    /*suspend fun getUsers(): List<User>? {
-
-        return try {
-            ListaUsuarios: List<User> = db.collection("users").get()
-
+    fun existeUsuario(email: String, contraseña: String): Boolean {
+        val usuario = db.collection("user")
+        val usuarioConsultaCorreo = usuario.whereEqualTo("email", email)
+        val usuarioVerificado = usuario.whereEqualTo("password", contraseña)
+        if (usuarioVerificado == null){
+            return false
         }
-    }*/
+        return true
+    }
 
 }
