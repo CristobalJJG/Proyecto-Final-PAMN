@@ -7,7 +7,11 @@
 
     <fragment
         android:id="@+id/FirstFragment"
+<<<<<<< HEAD
         android:name="com.example.delegadosapp.Login_Register.LoginActivity"
+=======
+        android:name="com.example.delegadosapp.vista.Login_Register.LoginActivity"
+>>>>>>> main
         android:label="@string/first_fragment_label"
         tools:layout="@layout/activity_login">
 
@@ -17,7 +21,11 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
+<<<<<<< HEAD
         android:name="com.example.delegadosapp.Login_Register.RegisterActivity"
+=======
+        android:name="com.example.delegadosapp.vista.Login_Register.RegisterActivity"
+>>>>>>> main
         android:label="@string/second_fragment_label"
         tools:layout="@layout/activity_register">
 
