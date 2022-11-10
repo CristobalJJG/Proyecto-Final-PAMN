@@ -1,16 +1,56 @@
 package com.example.delegadosapp.controlador
 
 
+import android.app.Activity.RESULT_OK
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.delegadosapp.modelo.Usuario
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
 
 object ServeFirebase {
 
     val db = FirebaseFirestore.getInstance()
     var id: Int = 0
+
+    /* --> Iniciar Sesión <-- */
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { res ->
+        this.onSignInResult(res)
+    }
+
+    // Choose authentication providers
+    val providers = arrayListOf(
+        AuthUI.IdpConfig.EmailBuilder().build())
+
+
+    // Create and launch sign-in intent
+    val signInIntent = AuthUI.getInstance()
+        .createSignInIntentBuilder()
+        .setAvailableProviders(providers)
+        .build()
+    signInLauncher.launch(signInIntent)
+
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
+        if (result.resultCode == RESULT_OK) {
+            // Successfully signed in
+            val user = FirebaseAuth.getInstance().currentUser
+            // ...
+        } else {
+            // Sign in failed. If response is null the user canceled the
+            // sign-in flow using the back button. Otherwise check
+            // response.getError().getErrorCode() and handle the error.
+            // ...
+        }
+    }
+
+
+
 
     fun añadirUsuario(usuario: Usuario) {
         id+=1
@@ -26,16 +66,6 @@ object ServeFirebase {
         )
         db.collection("users").document(usuario.getNombre()).set(addusuario).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-    }
-
-    fun existeUsuario(email: String, contraseña: String): Boolean {
-        val usuario = db.collection("user")
-        val usuarioConsultaCorreo = usuario.whereEqualTo("email", email)
-        val usuarioVerificado = usuario.whereEqualTo("password", contraseña)
-        if (usuarioVerificado == null){
-            return false
-        }
-        return true
     }
 
 }
