@@ -4,26 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    tools:context=".Publications.PublicationsActivity">
-=======
-    tools:context=".vista.Publications.PublicationsActivity">
->>>>>>> main
-=======
     android:backgroundTint="@color/dark_black"
     tools:context=".vista.Publications.PublicationsActivity">
->>>>>>> Front
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_width="0dp"
+        android:layout_width="410dp"
         android:layout_height="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -43,7 +35,7 @@
         android:layout_marginBottom="15dp"
         android:clickable="true"
         app:backgroundTint="@color/dark_black"
-        app:elevation="10dp"
+        app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/light_white"

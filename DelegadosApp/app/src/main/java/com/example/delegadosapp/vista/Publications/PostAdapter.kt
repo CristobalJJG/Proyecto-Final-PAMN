@@ -9,12 +9,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.delegadosapp.R
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
-
-    val titles = arrayOf("Nano", "Jose", "Cristóbal")
-    val descriptions = arrayOf("Nano", "Jose", "Cristóbal")
+    //Aquí realmente iría la llamada para reolectar los datos
+    val titles = arrayOf(
+        "Game Super Fest",
+        "Asadero GII/GCID",
+        "Partido de Padel",
+        "Game Super Fest",
+        "Asadero GII/GCID",
+        "Partido de Padel"
+    )
+    val descriptions = arrayOf(
+        "Sitio donde se podrán desarrollar distintos métodos de socialización, como pueden ser: \nJugar a videojuegos, cartas o juegos de mesa. \nVer películas y series. \nAmpliar conceptos de juegos a nivel general",
+        "Sitio de socialización donde la gente beberá, comerá y socializará como si no hubiera un mañana.  Serán 10€ por persona, ya que tendremos que comprar comidita y ALCOHOL para que se puedan emborrachar.",
+        "Partidito de Padel ejecutado por el Gran e Invencible Jose Manuel Illera Rodriguez (Siento si alguna parte de tu nombre está mal), se desarrollará un americano con todos los jugadores. Como premio habrá un abrazo dado por el mismísimo Jose Manuel Illera Rodríguez en persona. !Increíble¡",
+        "Sitio donde se podrán desarrollar distintos métodos de socialización, como pueden ser: \nJugar a videojuegos, cartas o juegos de mesa. \nVer películas y series. \nAmpliar conceptos de juegos a nivel general",
+        "Sitio de socialización donde la gente beberá, comerá y socializará como si no hubiera un mañana.  Serán 10€ por persona, ya que tendremos que comprar comidita y ALCOHOL para que se puedan emborrachar.",
+        "Partidito de Padel ejecutado por el Gran e Invencible Jose Manuel Illera Rodriguez (Siento si alguna parte de tu nombre está mal), se desarrollará un americano con todos los jugadores. Como premio habrá un abrazo dado por el mismísimo Jose Manuel Illera Rodríguez en persona. !Increíble¡"
+    )
     val images = arrayOf(
         R.drawable.default_picture,
+        "",
         R.drawable.default_picture,
+        "",
+        "",
         R.drawable.default_picture
     )
 
@@ -26,7 +43,8 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, i: Int) {
         holder.title.text = titles[i]
         holder.description.text = descriptions[i]
-        holder.img.setImageResource(images[i])
+        if(images[i]!= "") holder.img.setImageResource(images[i] as Int)
+        else holder.img.visibility = View.GONE
     }
 
     override fun getItemCount(): Int {
