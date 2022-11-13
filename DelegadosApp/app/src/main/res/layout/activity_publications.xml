@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".Publications.PublicationsActivity">
-=======
+    android:backgroundTint="@color/dark_black"
     tools:context=".vista.Publications.PublicationsActivity">
->>>>>>> main
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -24,7 +21,25 @@
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:contentDescription="TODO"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_long"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:ignore="ImageContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        app:backgroundTint="@color/dark_black"
+        app:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/light_white"
+        app:srcCompat="@android:drawable/alert_dark_frame" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

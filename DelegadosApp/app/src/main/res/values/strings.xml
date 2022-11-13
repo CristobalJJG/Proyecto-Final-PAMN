@@ -31,4 +31,5 @@
         <item>Grado en Arquitectura</item>
         <item>Grado en Química</item>
     </string-array>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>
