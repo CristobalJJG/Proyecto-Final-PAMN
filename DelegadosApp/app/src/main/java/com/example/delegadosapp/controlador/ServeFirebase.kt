@@ -5,7 +5,6 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.delegadosapp.modelo.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
 
 object ServeFirebase {
 
