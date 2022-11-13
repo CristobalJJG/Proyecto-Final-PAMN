@@ -6,12 +6,19 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_ulpgc"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_ulpgc_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DelegadosApp"
         tools:targetApi="31">
+        <activity
+            android:name=".vista.ProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".vista.Publications.PublicationsActivity"
             android:exported="false">
@@ -29,21 +36,6 @@
         <activity
             android:name=".vista.Login_Register.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.DelegadosApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+# Proyecto Final PAMN
+=======
+=======
+>>>>>>> main
 # **Proyecto Final PAMN**
 
 Pretendemos hacer un aplicación "simple", pero que pueda, de alguna forma, ser útil. Decidimos realizar una aplicación con características informativas. 
@@ -61,7 +67,11 @@ Se ha hecho unos de algunos plugins, como son:
 Se irán colocando los Codelabs más interesantes para el desarrollo del trabajo, así como vídeos o páginas que nos sirvan de ayuda.
 - [www.codigofacilito.com](https://codigofacilito.com/articulos/articulo_18_10_2019_18_25_35) -> Puede ayudar a la hora de hacer el login 
 - [Creación de layouts](https://youtu.be/5jXy2S-qdVQ?t=2729) -> Puede ayudar a la creación de las distintas publicaciones, comentarios y zonas donde tengamos que mostrar información.
+<<<<<<< HEAD
+- [Creación de diálogos](https://developer.android.com/guide/topics/ui/dialogs?hl=es-419)
+=======
 - []() ->
+>>>>>>> main
 - []() ->
 
 ---
@@ -99,6 +109,9 @@ Una vez acabemos el trello se pondrán cosas aquí (Seguramente esté sujeto a c
 ## **Desarrollo / Ejecución**
 
 Aquí se irán colocando las distintas **Actividades** que vayamos desarrollando
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
 
 
 ---
@@ -136,3 +149,4 @@ La colección "news" almacenará todas las noticias y estas tendrán propiedades
 			Descripción de la publicación
 		-users = List of users
 			Lista de Usuarios que habrán agregado a favoritos la propia publicacíon.
+>>>>>>> main

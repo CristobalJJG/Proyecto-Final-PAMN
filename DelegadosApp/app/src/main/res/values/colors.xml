@@ -19,6 +19,7 @@
     <color name="light_black">#4F5356</color>
     <color name="black">#2D3134</color>
     <color name="dark_black">#0B0912</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <!--color name="color">#000000</color-->
 </resources>
