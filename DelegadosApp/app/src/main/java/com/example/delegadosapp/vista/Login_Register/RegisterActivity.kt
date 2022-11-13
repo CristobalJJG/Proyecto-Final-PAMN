@@ -7,8 +7,9 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import com.example.delegadosapp.R
+import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.vista.Publications.PublicationsActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -43,24 +44,20 @@ class RegisterActivity : AppCompatActivity() {
         pass = findViewById<TextView>(R.id.txt_pass).text.toString()
         val regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
         grado = spinner.selectedItem.toString()
-        if(mail.matches(regex)) showMessage(mail + "\n" + pass + "\n" + grado)
-        else showMessage("Error, correo chungo")
+        if(mail.matches(regex)) showMessage(applicationContext,mail + "\n" + pass + "\n" + grado)
+        else showMessage(applicationContext,"Error, correo chungo")
     }
 
     fun onClick_goToLogin(view:View){
         val intent: Intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("mail", mail)
-        intent.putExtra("pass", pass)
         startActivity(intent)
     }
 
     fun onClick_goToInvite(view:View){
-        //val intent: Intent = Intent(this,RegisterActivity::class.java)
-        //startActivity(intent)
-        showMessage("Irías a ver las publciaciones, modo INVITADO, pero no está hecho todavía, sorry")
-    }
-
-    fun showMessage(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        val intent: Intent = Intent(this, PublicationsActivity::class.java)
+        intent.putExtra("rol", 0)
+        startActivity(intent)
+        showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
 }
