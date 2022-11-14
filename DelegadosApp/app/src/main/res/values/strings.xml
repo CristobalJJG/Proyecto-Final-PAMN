@@ -32,4 +32,7 @@
         <item>Grado en Química</item>
     </string-array>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="label_grado">Grado al que perteneces</string>
+    <string name="contacto">Contacto</string>
+    <string name="movil">Movil:</string>
 </resources>
