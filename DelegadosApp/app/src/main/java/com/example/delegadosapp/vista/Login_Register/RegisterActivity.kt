@@ -49,13 +49,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun onClick_goToLogin(view:View){
-        val intent: Intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("mail", mail)
         startActivity(intent)
     }
 
     fun onClick_goToInvite(view:View){
-        val intent: Intent = Intent(this, PublicationsActivity::class.java)
+        val intent = Intent(this, PublicationsActivity::class.java)
         intent.putExtra("rol", 0)
         startActivity(intent)
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
