@@ -13,6 +13,13 @@
         android:theme="@style/Theme.DelegadosApp"
         tools:targetApi="31">
         <activity
+            android:name=".vista.publications.AddNewPublicationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".vista.ProfileActivity"
             android:exported="false">
             <meta-data
@@ -20,21 +27,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".vista.Publications.PublicationsActivity"
+            android:name=".vista.publications.PublicationsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".vista.Login_Register.RegisterActivity"
+            android:name=".vista.login_register.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".vista.Login_Register.LoginActivity"
+            android:name=".vista.login_register.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,4 +58,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>

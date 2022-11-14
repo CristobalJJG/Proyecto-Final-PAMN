@@ -1,4 +1,4 @@
-package com.example.delegadosapp.vista.Publications
+package com.example.delegadosapp.vista.publications
 
 import android.view.LayoutInflater
 import android.view.View

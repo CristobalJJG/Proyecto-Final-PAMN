@@ -1,4 +1,4 @@
-package com.example.delegadosapp.vista.Login_Register
+package com.example.delegadosapp.vista.login_register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.delegadosapp.vista.Publications.PublicationsActivity
+import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.example.delegadosapp.R
 import com.example.delegadosapp.controlador.AuxFunctions.showMessage
 
@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun onClick_goToInvite(view:View){
         val intent: Intent = Intent(this, PublicationsActivity::class.java)
-        intent.putExtra("rol", 0)
+        intent.putExtra("rol", 2)
         startActivity(intent)
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }

@@ -1,4 +1,4 @@
-package com.example.delegadosapp.vista.Login_Register
+package com.example.delegadosapp.vista.login_register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import com.example.delegadosapp.R
 import com.example.delegadosapp.controlador.AuxFunctions.showMessage
-import com.example.delegadosapp.vista.Publications.PublicationsActivity
+import com.example.delegadosapp.vista.publications.PublicationsActivity
 
 class RegisterActivity : AppCompatActivity() {
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/dark_black"
-    tools:context=".vista.Publications.PublicationsActivity">
+    tools:context=".vista.publications.PublicationsActivity">
 
 
     <ImageView
@@ -19,6 +19,7 @@
         tools:ignore="ImageContrastCheck" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="1dp"
@@ -50,13 +51,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:clickable="true"
-        android:onClick="goToAddPublication"
+        android:contentDescription="@string/app_name"
         app:backgroundTint="@color/dark_black"
         app:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:rippleColor="@color/light_white"
         app:srcCompat="@android:drawable/alert_dark_frame" />
 
