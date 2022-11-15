@@ -8,9 +8,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.example.delegadosapp.R
 import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -77,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
 
     fun onClick_goToInvite(view:View){
         val intent: Intent = Intent(this, PublicationsActivity::class.java)
-        intent.putExtra("rol", 2)
         startActivity(intent)
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
