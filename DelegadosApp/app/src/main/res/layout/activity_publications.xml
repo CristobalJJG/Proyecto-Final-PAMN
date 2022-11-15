@@ -61,7 +61,8 @@ tools:context=".vista.publications.PublicationsActivity">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/cardView2"
     app:rippleColor="@color/light_white"
-    app:srcCompat="@android:drawable/alert_dark_frame" />
+    app:srcCompat="@android:drawable/alert_dark_frame"
+    tools:ignore="UsingOnClickInXml" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

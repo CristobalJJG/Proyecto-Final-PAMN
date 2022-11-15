@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onClick_goToRegister(view:View){
-        val intent: Intent = Intent(this, RegisterActivity::class.java)
+        val intent = Intent(this, RegisterActivity::class.java)
         intent.putExtra("mail", mail)
         startActivity(intent)
         //showMessage(applicationContext, "Irías a 'Register', pero no está hecho todavía, sorry")
@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onClick_goToInvite(view:View){
-        val intent: Intent = Intent(this, PublicationsActivity::class.java)
+        val intent = Intent(this, PublicationsActivity::class.java)
         startActivity(intent)
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }

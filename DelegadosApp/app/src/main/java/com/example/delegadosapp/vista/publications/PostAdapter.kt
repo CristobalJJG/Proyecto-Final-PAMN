@@ -11,7 +11,7 @@ import com.example.delegadosapp.R
 
 class PostAdapter(
     private val titles: Array<String>, private val descriptions: Array<String>,
-    private val images: Array<Int?>, private val rol: Int) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+    private val images: Array<Int?>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.post_layout, parent, false)
