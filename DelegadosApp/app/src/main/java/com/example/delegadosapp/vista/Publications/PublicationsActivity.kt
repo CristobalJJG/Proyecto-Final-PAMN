@@ -10,14 +10,21 @@ import com.example.delegadosapp.R
 import com.example.delegadosapp.controlador.AuxFunctions.showMessage
 import com.example.delegadosapp.vista.Login_Register.RegisterActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 
 class PublicationsActivity : AppCompatActivity() {
+
+
+    //Declaramos FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_publications)
 
+        //Iniciamos auth
+        //auth = intent.get
 
         val rol = intent.getIntExtra("rol", 0)
         showMessage(this, "rol = "+rol)
