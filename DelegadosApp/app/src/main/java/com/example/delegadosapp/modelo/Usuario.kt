@@ -1,29 +1,26 @@
 package com.example.delegadosapp.modelo
 
+
 public class Usuario {
 
     private var discord: String
     private var email: String
     private var movil: Int
     private var descripcion: String
-    private var contraseña: String
     private var nombre: String
     private var rol: Int
+    private var grade: String
 
 
 
-    constructor(rol: Int, nombre: String, contraseña: String, descripcion: String, movil: Int, email: String, discord: String){
+    constructor(rol: Int = 1, nombre: String = "", descripcion: String = "", movil: Int = 0, email: String = "", discord: String = "", grade: String = ""){
         this.rol=rol
         this.nombre=nombre
-        this.contraseña=contraseña
         this.descripcion=descripcion
         this.movil=movil
         this.email=email
         this.discord=discord
-    }
-
-    fun getContraseña(): String{
-        return contraseña
+        this.grade=grade
     }
 
     fun getDescripcion(): String {
@@ -49,5 +46,23 @@ public class Usuario {
     fun getNombre(): String {
         return nombre
     }
+
+    fun getGrade(): String{
+        return grade
+    }
+
+    fun getHashUsuario(): HashMap<String, Any?> {
+        val addusuario = hashMapOf<String, Any?>(
+            "rol" to getRol(),
+            "name" to getNombre(),
+            "grade" to getGrade(),
+            "description" to getDescripcion(),
+            "movil" to getMovil(),
+            "email" to getEmail(),
+            "discord" to getDiscord()
+        )
+        return addusuario
+    }
+
 
 }
