@@ -9,13 +9,14 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import com.example.delegadosapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.delegadosapp.modelo.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
+import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.vista.Publications.PublicationsActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -33,6 +34,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.supportActionBar?.hide()
         setContentView(R.layout.activity_register)
 
         //Iniciamos Firebase.auth
@@ -61,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
         val regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
         grado = spinner.selectedItem.toString()
         if(mail.matches(regex)) {
-            showMessage(mail + "\n" + pass + "\n" + grado)
+            showMessage(applicationContext,mail + "\n" + pass + "\n" + grado)
             auth.createUserWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -72,8 +74,7 @@ class RegisterActivity : AppCompatActivity() {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
+                        showMessage(baseContext, "Authentication failed.")
                         //updateUI(null)
                     }
                 }
@@ -81,23 +82,19 @@ class RegisterActivity : AppCompatActivity() {
             db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
             }
-        else showMessage("Error, correo chungo")
+        else showMessage(applicationContext,"Error, correo chungo")
     }
 
     fun onClick_goToLogin(view:View){
         val intent: Intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("mail", mail)
-        intent.putExtra("pass", pass)
         startActivity(intent)
     }
 
     fun onClick_goToInvite(view:View){
-        //val intent: Intent = Intent(this,RegisterActivity::class.java)
-        //startActivity(intent)
-        showMessage("Irías a ver las publciaciones, modo INVITADO, pero no está hecho todavía, sorry")
-    }
-
-    fun showMessage(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        val intent: Intent = Intent(this, PublicationsActivity::class.java)
+        intent.putExtra("rol", 0)
+        startActivity(intent)
+        showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
 }

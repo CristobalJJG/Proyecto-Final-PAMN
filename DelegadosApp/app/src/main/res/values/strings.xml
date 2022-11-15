@@ -23,6 +23,7 @@
     <string name="inv">Invitado</string>
     <string name="request_grado">Grado:</string>
     <string name="rem_pass">Recordar Contraseña</string>
+    <string name="todo">TODO</string>
 
     <string-array name="grados">
         <item>Grado en Ingeniería Informática</item>
@@ -30,4 +31,5 @@
         <item>Grado en Arquitectura</item>
         <item>Grado en Química</item>
     </string-array>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>
