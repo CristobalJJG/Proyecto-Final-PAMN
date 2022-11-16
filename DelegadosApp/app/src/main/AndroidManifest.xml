@@ -13,6 +13,20 @@
         android:theme="@style/Theme.DelegadosApp"
         tools:targetApi="31">
         <activity
+            android:name=".vista.profile.EditProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".vista.profile.ProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".vista.publications.PublicationsActivity"
             android:exported="false">
             <meta-data
@@ -22,13 +36,6 @@
         <activity
             android:name=".vista.publications.AddNewPublicationActivity"
             android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".vista.ProfileActivity"
-            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

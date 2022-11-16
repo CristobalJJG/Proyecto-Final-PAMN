@@ -40,16 +40,16 @@ class LoginActivity : AppCompatActivity() {
 
             mail = findViewById<TextView>(R.id.txt_mail).text.toString()
             pass = findViewById<TextView>(R.id.txt_pass).text.toString()
-            val regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
-            if(mail.matches(regex)) {
+            val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
+            val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
+            if(mail.matches(mail_regex) && pass.matches(pass_regex)) {
                 auth.signInWithEmailAndPassword(mail, pass)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            showMessage(applicationContext, "Has iniciado sesión")
                             val user = auth.currentUser
                             val intent: Intent = Intent(this, PublicationsActivity::class.java)
-                            intent.putExtra("user", user)
+                            intent.putExtra("mail", mail)
+                            showMessage(applicationContext, "Has iniciado sesión")
                             startActivity(intent)
                         } else {
                             // If sign in fails, display a message to the user.
@@ -58,7 +58,13 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
             }
-            else showMessage( applicationContext,"Error, correo chungo")
+            //Control de fallos
+            else{
+                if(!mail.matches(mail_regex)) showMessage(baseContext, "Error, el correo no está bien formateado (user@host.com).")
+                else if(!pass.matches(pass_regex)) showMessage(baseContext, "Error, contraseña incorrecta. Solo se permiten caracteres alfanuméricos")
+                else if(pass.length<6) showMessage(baseContext, "Error, la contraseña tiene que tener mínimo 6 caracteres.")
+                else showMessage(baseContext, "Error. Algo ha fallado, no sabemos el qué, so sorry.")
+            }
         }
     }
 
