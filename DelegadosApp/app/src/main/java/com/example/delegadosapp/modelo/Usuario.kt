@@ -10,17 +10,23 @@ public class Usuario {
     private var nombre: String
     private var rol: Int
     private var grade: String
+    private var uid: String
 
 
 
-    constructor(rol: Int = 1, nombre: String = "", descripcion: String = "", movil: Int = 0, email: String = "", discord: String = "", grade: String = ""){
+    constructor(rol: Int = 1, uid: String = "", nombre: String = "", descripcion: String = "", movil: Int = 0, email: String = "", discord: String = "", grade: String = ""){
         this.rol=rol
+        this.uid=uid
         this.nombre=nombre
         this.descripcion=descripcion
         this.movil=movil
         this.email=email
         this.discord=discord
         this.grade=grade
+    }
+
+    fun getUid(): String{
+        return uid
     }
 
     fun getDescripcion(): String {

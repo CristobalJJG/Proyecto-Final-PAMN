@@ -68,9 +68,15 @@ class RegisterActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        newUsuario = Usuario(email = mail, grade = grado)
-                        db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-                            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                        val user = Firebase.auth.currentUser
+                        user?.let {
+                            // Name, email address, and profile photo Url
+                            val email = user.email
+                            val uid = user.uid
+                            newUsuario = Usuario(uid = uid, email = mail, grade = grado)
+                            db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                                .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                        }
                         val intent = Intent(this, EditProfileActivity::class.java)
                         intent.putExtra("mail", mail)
                         startActivity(intent)
