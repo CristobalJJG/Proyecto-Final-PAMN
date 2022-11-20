@@ -33,12 +33,20 @@ public class Usuario {
         return descripcion
     }
 
+    fun setDescripcion(descripcion: String){
+        this.descripcion=descripcion
+    }
+
     fun getRol(): Int {
         return rol
     }
 
     fun getMovil(): Int {
         return movil
+    }
+
+    fun setMovil(movil: Int){
+        this.movil=movil
     }
 
     fun getEmail(): String {
@@ -49,8 +57,16 @@ public class Usuario {
        return descripcion
     }
 
+    fun setDiscord(discord: String){
+        this.discord=discord
+    }
+
     fun getNombre(): String {
         return nombre
+    }
+
+    fun setNombre(nombre: String){
+        this.nombre=nombre
     }
 
     fun getGrade(): String{
