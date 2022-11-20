@@ -45,14 +45,20 @@ class EditProfileActivity : AppCompatActivity() {
             // Recuperamos los datos del usuario
             val user = Firebase.auth.currentUser
             if (user != null) {
-                aux_user = intent.extras?.get("newUser") as Usuario
-                aux_user.setNombre(name)
-                aux_user.setDescripcion(description)
-                aux_user.setMovil(movile.toInt())
-                aux_user.setDiscord(discord)
-                db.collection("users").document(aux_user.getEmail()).set(aux_user.getHashUsuario()).addOnSuccessListener { Log.d(
-                    ContentValues.TAG, "Actualización de los datos") }
-                    .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error writing document", e) }
+                val addusuario = hashMapOf<String, String>(
+                    "name" to name,
+                    "description" to description,
+                    "movil" to movile,
+                    "discord" to discord,
+                    "telegram" to telegram,
+                    "instagram" to instagram
+                )
+
+                user.email?.let { it1 ->
+                    db.collection("users").document(it1).set( addusuario ).addOnSuccessListener { Log.d(
+                        ContentValues.TAG, "Actualización de los datos") }
+                        .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error writing document", e) }
+                }
             }
 
             val intent = Intent(this, PublicationsActivity::class.java)
