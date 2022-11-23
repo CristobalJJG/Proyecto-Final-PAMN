@@ -11,10 +11,14 @@ public class Usuario {
     private var rol: Int
     private var grade: String
     private var uid: String
+    private var telegram: String
+    private var instagram: String
 
 
 
-    constructor(rol: Int = 1, uid: String = "", nombre: String = "", descripcion: String = "", movil: Int = 0, email: String = "", discord: String = "", grade: String = ""){
+    constructor(rol: Int = 0, uid: String = "", nombre: String = "", descripcion: String = "",
+                movil: Int = 0, email: String = "", discord: String = "", grade: String = "",
+                telegram: String = "", instagram: String =""){
         this.rol=rol
         this.uid=uid
         this.nombre=nombre
@@ -23,6 +27,24 @@ public class Usuario {
         this.email=email
         this.discord=discord
         this.grade=grade
+        this.telegram=telegram
+        this.instagram=instagram
+    }
+
+    fun getTelegram(): String{
+        return telegram
+    }
+
+    fun setTelegram(telegram: String){
+        this.telegram=telegram
+    }
+
+    fun getInstagram(): String{
+        return instagram
+    }
+
+    fun setInstagram(instagram: String){
+        this.instagram=instagram
     }
 
     fun getUid(): String{
