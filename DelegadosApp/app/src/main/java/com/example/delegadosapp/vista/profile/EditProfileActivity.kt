@@ -21,7 +21,6 @@ class EditProfileActivity : AppCompatActivity() {
     lateinit var btn: Button
     //Iniciamos Firebase
     val db = FirebaseFirestore.getInstance()
-    lateinit var aux_user: Usuario
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

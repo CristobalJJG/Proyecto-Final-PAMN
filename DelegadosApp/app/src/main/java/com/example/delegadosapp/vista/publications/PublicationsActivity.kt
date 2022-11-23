@@ -1,7 +1,9 @@
 package com.example.delegadosapp.vista.publications
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.delegadosapp.Publications.PostAdapter
 import com.example.delegadosapp.R
 import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.modelo.Noticias
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class PublicationsActivity : AppCompatActivity() {
@@ -18,10 +22,16 @@ class PublicationsActivity : AppCompatActivity() {
     private lateinit var uid: String
     private var rol: Int = 2
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_publications)
+
+        //Prueba Orden
+        val noticias = Noticias()
+
 
         val user = Firebase.auth.currentUser
         user?.let {
@@ -32,12 +42,14 @@ class PublicationsActivity : AppCompatActivity() {
 
         showMessage(this, "email: " + email + "\n" + "uid: " + uid)
 
-
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
+        /*
         val titles = arrayOf(
             "Game fest", "Asadero GII/GICD", "Curso de Git",
             "Hola1", "Hola2", "Hola3"
-        )
+        )*/
+        val titles = noticias.tituloNoticias()
+
         val descriptions = arrayOf(
             "Pretende ser un lugar cordial, donde presumir de dotes videojugabilísticas a nivel usuario avanzado.",
             "Pretende ser una concurrecia de personas con intención de socializar, algo que, por lo general, 1 de los 2 programadores de esta aplicación no está acostumbrado, y, por lo tanto, no es fácil explicar como se desarrolla tal actividad",
