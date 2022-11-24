@@ -16,17 +16,20 @@ class Noticias {
 
     fun tituloNoticias(): Array<String>{
         val listTitulo: MutableList<String> = mutableListOf()
-        db.collection("news")
-            .orderBy("fecha")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    listTitulo.add(document.id)
+        while (listTitulo.isNotEmpty()) {
+            db.collection("news")
+                .orderBy("fecha")
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        listTitulo.add(document.id)
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents: ", exception)
+                }
+        }
+        Log.d( listTitulo[0],"Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         return listTitulo.toTypedArray()
     }
 

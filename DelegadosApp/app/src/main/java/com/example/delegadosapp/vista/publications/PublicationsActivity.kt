@@ -31,6 +31,7 @@ class PublicationsActivity : AppCompatActivity() {
 
         //Prueba Orden
         val noticias = Noticias()
+        noticias.tituloNoticias()
 
 
         val user = Firebase.auth.currentUser
@@ -43,12 +44,12 @@ class PublicationsActivity : AppCompatActivity() {
         showMessage(this, "email: " + email + "\n" + "uid: " + uid)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
-        /*
+
         val titles = arrayOf(
             "Game fest", "Asadero GII/GICD", "Curso de Git",
             "Hola1", "Hola2", "Hola3"
-        )*/
-        val titles = noticias.tituloNoticias()
+        )
+
 
         val descriptions = arrayOf(
             "Pretende ser un lugar cordial, donde presumir de dotes videojugabilísticas a nivel usuario avanzado.",
