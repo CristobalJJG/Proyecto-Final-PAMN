@@ -1,6 +1,5 @@
 package com.example.delegadosapp.vista.publications
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,11 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.delegadosapp.Publications.PostAdapter
 import com.example.delegadosapp.R
-import com.example.delegadosapp.controlador.AuxFunctions.showMessage
 import com.example.delegadosapp.modelo.Noticias
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class PublicationsActivity : AppCompatActivity() {
@@ -31,6 +28,7 @@ class PublicationsActivity : AppCompatActivity() {
 
         //Prueba Orden
         val noticias = Noticias()
+        noticias.tituloNoticias()
 
 
         val user = Firebase.auth.currentUser
@@ -40,15 +38,21 @@ class PublicationsActivity : AppCompatActivity() {
             this.uid = user.uid
         }
 
-        showMessage(this, "email: " + email + "\n" + "uid: " + uid)
+        //showMessage(this, "email: " + email + "\n" + "uid: " + uid)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
-        /*
+
         val titles = arrayOf(
             "Game fest", "Asadero GII/GICD", "Curso de Git",
             "Hola1", "Hola2", "Hola3"
+<<<<<<< Updated upstream
+        )
+
+=======
         )*/
         val titles = noticias.tituloNoticias()
+        Log.d("Holaaaaaaaaaaaaaaaaaaaa",titles.toString())
+>>>>>>> Stashed changes
 
         val descriptions = arrayOf(
             "Pretende ser un lugar cordial, donde presumir de dotes videojugabilísticas a nivel usuario avanzado.",
