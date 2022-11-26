@@ -2,7 +2,9 @@ package com.example.delegadosapp.vista.publications
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,11 +14,17 @@ import com.example.delegadosapp.controlador.AuxFunctions.showMessage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.example.delegadosapp.databinding.ActivityPublicationsBinding
+import com.example.delegadosapp.vista.menu.AlumnoMenu
+import com.example.delegadosapp.vista.menu.DelegadoMenu
+import com.example.delegadosapp.vista.menu.InvitadoMenu
 
 class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var uid: String
-    private var rol: Int = 2
+    private var rol: Int = 0
+
+    private lateinit var binding: ActivityPublicationsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +38,7 @@ class PublicationsActivity : AppCompatActivity() {
             this.uid = user.uid
         }
 
-        showMessage(this, "email: " + email + "\n" + "uid: " + uid)
+        //showMessage(this, "email: " + email + "\n" + "uid: " + uid)
 
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
@@ -68,5 +76,24 @@ class PublicationsActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        //Forma de abrir el modal del menú para redirigir a todas las pantallas
+        findViewById<FloatingActionButton>(R.id.btn_modalMenu)
+            .setOnClickListener {
+                when(rol){
+                    0 -> {
+                        val modalBottomSheet = InvitadoMenu()
+                        modalBottomSheet.show(supportFragmentManager, InvitadoMenu.TAG)
+                    }
+                    1-> {
+                        val modalBottomSheet = AlumnoMenu()
+                        modalBottomSheet.show(supportFragmentManager, AlumnoMenu.TAG)
+                    }
+                    2 -> {
+                        val modalBottomSheet = DelegadoMenu()
+                        modalBottomSheet.show(supportFragmentManager, DelegadoMenu.TAG)
+                    }
+                }
+            }
     }
 }
