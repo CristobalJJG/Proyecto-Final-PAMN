@@ -13,32 +13,58 @@
         android:paddingRight="100dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txt_modalUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="15dp"
             android:text="Title Bottom Sheet"
             android:textAlignment="center"
 
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/txt_modalCargo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/blue"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:text="State behavior"
             android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btn_menuLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/blue"
+            android:onClick="onClick_goToLogin"
+            android:visibility="gone"
+            android:text="Iniciar Sesión"
+            android:textColor="@color/white"
+            tools:ignore="UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/btn_menuRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/blue"
+            android:onClick="onClick_goToRegister"
+            android:text="Registrarse"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            tools:ignore="UsingOnClickInXml" />
 
         <Button
             android:id="@+id/btn_menuInicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClick_goToInicio"
-            android:backgroundTint="@color/blue"
-            android:text="Inicio"
             android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/blue"
+            android:backgroundTintMode="add"
+            android:onClick="onClick_goToInicio"
+            android:text="Inicio"
+            android:visibility="gone"
             android:textColor="@color/white"
             tools:ignore="UsingOnClickInXml" />
 
@@ -48,6 +74,7 @@
             android:backgroundTint="@color/blue"
             android:layout_height="wrap_content"
             android:onClick="onClick_goToProfile"
+            android:visibility="gone"
             android:text="Perfil"
             android:layout_marginBottom="5dp"
             android:textColor="@color/white"
@@ -56,10 +83,11 @@
         <Button
             android:id="@+id/btn_menuFavs"
             android:layout_width="match_parent"
+            android:backgroundTint="@color/blue"
             android:layout_height="wrap_content"
             android:onClick="onClick_goToFavs"
-            android:backgroundTint="@color/blue"
             android:text="Favoritos"
+            android:visibility="gone"
             android:layout_marginBottom="5dp"
             android:textColor="@color/white"
             tools:ignore="UsingOnClickInXml" />
@@ -67,11 +95,24 @@
         <Button
             android:id="@+id/btn_menuListDelega"
             android:layout_width="match_parent"
+            android:backgroundTint="@color/blue"
             android:layout_height="wrap_content"
             android:onClick="onClick_goToListDelega"
-            android:backgroundTint="@color/blue"
             android:text="Lista de Delegados"
             android:layout_marginBottom="5dp"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            tools:ignore="UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/btn_menuMeetings"
+            android:backgroundTint="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick_goToListDelega"
+            android:text="Próximas reuniones"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"
             android:textColor="@color/white"
             tools:ignore="UsingOnClickInXml" />
 
@@ -79,11 +120,12 @@
             android:id="@+id/btn_menuLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/blue"
+            android:visibility="gone"
             android:onClick="onClick_goToLogout"
             android:text="Cerrar Sesión"
-            android:backgroundTint="@color/blue"
             android:textColor="@color/white"
-            android:layout_marginBottom="5dp"
             tools:ignore="UsingOnClickInXml" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

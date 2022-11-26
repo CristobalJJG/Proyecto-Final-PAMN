@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.delegadosapp.R
-import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
