@@ -1,27 +1,18 @@
 package com.example.delegadosapp.modelo
 
 
-public class Usuario {
+class Usuario(
+    private var rol: Int = 1,
+    private var instagram: String = "@",
+    private var telegram: String = "@",
+    private var nombre: String = "",
+    private var descripcion: String = "",
+    private var movil: String = "+34000000000",
+    private var email: String = "",
+    private var discord: String = "",
+    private var grade: String = ""
+) {
 
-    private var discord: String
-    private var email: String
-    private var movil: Int
-    private var descripcion: String
-    private var nombre: String
-    private var rol: Int
-    private var grade: String
-
-
-
-    constructor(rol: Int = 1, nombre: String = "", descripcion: String = "", movil: Int = 0, email: String = "", discord: String = "", grade: String = ""){
-        this.rol=rol
-        this.nombre=nombre
-        this.descripcion=descripcion
-        this.movil=movil
-        this.email=email
-        this.discord=discord
-        this.grade=grade
-    }
 
     fun getDescripcion(): String {
         return descripcion
@@ -31,7 +22,7 @@ public class Usuario {
         return rol
     }
 
-    fun getMovil(): Int {
+    fun getMovil(): String {
         return movil
     }
 
@@ -40,7 +31,15 @@ public class Usuario {
     }
 
     fun getDiscord(): String {
-       return descripcion
+       return discord
+    }
+
+    fun getInstagram():String{
+        return instagram
+    }
+
+    fun getTelegram():String{
+        return telegram
     }
 
     fun getNombre(): String {
@@ -59,9 +58,18 @@ public class Usuario {
             "description" to getDescripcion(),
             "movil" to getMovil(),
             "email" to getEmail(),
-            "discord" to getDiscord()
+            "discord" to getDiscord(),
+            "telegram" to getTelegram(),
+            "instagram" to getInstagram()
         )
         return addusuario
+    }
+
+    fun toUser: Usuario
+
+    override fun toString(): String {
+        return "{$nombre, $grade, $rol, $descripcion," +
+                "$movil, $email, $telegram, $instagram, $discord}"
     }
 
 

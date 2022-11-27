@@ -3,6 +3,7 @@ package com.example.delegadosapp.vista.publications
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -16,30 +17,34 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.delegadosapp.databinding.ActivityPublicationsBinding
+import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.delay
+
+var rol:Int = 0
 
 class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var uid: String
-    private var rol: Int = 2
 
-    private lateinit var binding: ActivityPublicationsBinding
-
-    @SuppressLint("InflateParams", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_publications)
 
-        val user = Firebase.auth.currentUser
+        var user = Firebase.auth.currentUser
         user?.let {
             // Name, email address, and profile photo Url
             this.email = user.email.toString()
             this.uid = user.uid
         }
+
+        fetchData(this.email)
+        Log.d("l-49", rol.toString())
 
         //showMessage(this, "email: " + email + "\n" + "uid: " + uid)
 
@@ -140,3 +145,16 @@ class PublicationsActivity : AppCompatActivity() {
             btn_logout.setOnClickListener{ showMessage(this, "Asumamos que has cerrado sesión (Spoiler, WIP)") }
         }
     }
+
+fun fetchData(mail:String) {
+    val db = FirebaseFirestore.getInstance()
+    db.collection("users")
+        .whereEqualTo("email", mail)
+        .get()
+        .addOnSuccessListener { docs ->
+            for(doc in docs){
+                rol = doc.data.get("rol").toString().toInt()
+            }
+        }
+
+}

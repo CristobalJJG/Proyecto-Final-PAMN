@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.delegadosapp.R
 import com.example.delegadosapp.AuxFunctions.showMessage
+import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -37,17 +38,18 @@ class LoginActivity : AppCompatActivity() {
 
         btn_login = findViewById(R.id.btn_login)
         btn_login.setOnClickListener{
-
             mail = findViewById<TextView>(R.id.txt_mail).text.toString()
             pass = findViewById<TextView>(R.id.txt_pass).text.toString()
             val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
             val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
+
+            //Se verifica que tengan un buen formato
             if(mail.matches(mail_regex) && pass.matches(pass_regex)) {
+                //Se intenta hacer el loggeo
                 auth.signInWithEmailAndPassword(mail, pass)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val user = auth.currentUser
-                            val intent: Intent = Intent(this, PublicationsActivity::class.java)
+                            val intent = Intent(this, PublicationsActivity::class.java)
                             intent.putExtra("mail", mail)
                             showMessage(applicationContext, "Has iniciado sesión")
                             startActivity(intent)
