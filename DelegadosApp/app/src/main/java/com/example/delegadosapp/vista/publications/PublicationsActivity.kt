@@ -1,6 +1,5 @@
 package com.example.delegadosapp.vista.publications
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,16 +15,12 @@ import com.example.delegadosapp.AuxFunctions.showMessage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.example.delegadosapp.databinding.ActivityPublicationsBinding
-import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
+import com.example.delegadosapp.vista.login_register.User
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.delay
 
-var rol:Int = 0
 
 class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
@@ -43,8 +38,8 @@ class PublicationsActivity : AppCompatActivity() {
             this.uid = user.uid
         }
 
-        fetchData(this.email)
-        Log.d("l-49", rol.toString())
+        //fetchData(this.email)
+        Log.d("l-49", User.toString())
 
         //showMessage(this, "email: " + email + "\n" + "uid: " + uid)
 
@@ -76,7 +71,7 @@ class PublicationsActivity : AppCompatActivity() {
 
         //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
         val fab = findViewById<FloatingActionButton>(R.id.btn_addPublication)
-        if (rol == 0 || rol == 1) {
+        if (User.getRol() == 0 || User.getRol() == 1) {
             fab.visibility = View.GONE
         } else {
             fab.setOnClickListener {
@@ -91,7 +86,7 @@ class PublicationsActivity : AppCompatActivity() {
                 val modal = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.menu_layout, null)
 
-                if(rol == 0) modalInvite(view)
+                if(User.getRol() == 0) modalInvite(view)
                 else modalRegistrado(view)
 
                 modal.setContentView(view)
@@ -116,7 +111,7 @@ class PublicationsActivity : AppCompatActivity() {
         fun modalRegistrado(view:View){
 
             view.findViewById<TextView>(R.id.txt_modalUserName).text = "Nombre del usuario"
-            if(rol == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
+            if(User.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
             else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
             val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
@@ -131,7 +126,7 @@ class PublicationsActivity : AppCompatActivity() {
             btn_favs.visibility = View.VISIBLE
             btn_favs.setOnClickListener{ showMessage(this, "Work In Progress") }
 
-            if(rol==2){
+            if(User.getRol()==2){
                 val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
                 btn_meetings.visibility = View.VISIBLE
                 btn_meetings.setOnClickListener{ showMessage(this, "Work In Progress") }
@@ -145,16 +140,3 @@ class PublicationsActivity : AppCompatActivity() {
             btn_logout.setOnClickListener{ showMessage(this, "Asumamos que has cerrado sesión (Spoiler, WIP)") }
         }
     }
-
-fun fetchData(mail:String) {
-    val db = FirebaseFirestore.getInstance()
-    db.collection("users")
-        .whereEqualTo("email", mail)
-        .get()
-        .addOnSuccessListener { docs ->
-            for(doc in docs){
-                rol = doc.data.get("rol").toString().toInt()
-            }
-        }
-
-}

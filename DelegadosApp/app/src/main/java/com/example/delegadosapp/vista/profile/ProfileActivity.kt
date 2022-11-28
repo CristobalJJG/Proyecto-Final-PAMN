@@ -19,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 
 class ProfileActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
