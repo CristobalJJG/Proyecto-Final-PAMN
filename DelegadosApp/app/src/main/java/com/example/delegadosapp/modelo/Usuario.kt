@@ -13,7 +13,6 @@ class Usuario(
     private var grade: String = ""
 ) {
 
-
     fun getDescripcion(): String { return descripcion }
     fun getRol(): Int { return rol }
     fun getMovil(): String { return movil  }

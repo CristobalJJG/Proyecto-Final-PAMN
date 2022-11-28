@@ -21,7 +21,6 @@ import com.example.delegadosapp.vista.login_register.User
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-
 class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var uid: String
@@ -31,7 +30,7 @@ class PublicationsActivity : AppCompatActivity() {
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_publications)
 
-        var user = Firebase.auth.currentUser
+        val user = Firebase.auth.currentUser
         user?.let {
             // Name, email address, and profile photo Url
             this.email = user.email.toString()
