@@ -1,8 +1,8 @@
 package com.example.delegadosapp.vista.publications
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -15,20 +15,16 @@ import com.example.delegadosapp.AuxFunctions.showMessage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.example.delegadosapp.databinding.ActivityPublicationsBinding
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
+import com.example.delegadosapp.vista.login_register.User
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var uid: String
-    private var rol: Int = 2
 
-    private lateinit var binding: ActivityPublicationsBinding
-
-    @SuppressLint("InflateParams", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
@@ -40,6 +36,9 @@ class PublicationsActivity : AppCompatActivity() {
             this.email = user.email.toString()
             this.uid = user.uid
         }
+
+        //fetchData(this.email)
+        Log.d("l-49", User.toString())
 
         //showMessage(this, "email: " + email + "\n" + "uid: " + uid)
 
@@ -71,7 +70,7 @@ class PublicationsActivity : AppCompatActivity() {
 
         //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
         val fab = findViewById<FloatingActionButton>(R.id.btn_addPublication)
-        if (rol == 0 || rol == 1) {
+        if (User.getRol() == 0 || User.getRol() == 1) {
             fab.visibility = View.GONE
         } else {
             fab.setOnClickListener {
@@ -86,7 +85,7 @@ class PublicationsActivity : AppCompatActivity() {
                 val modal = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.menu_layout, null)
 
-                if(rol == 0) modalInvite(view)
+                if(User.getRol() == 0) modalInvite(view)
                 else modalRegistrado(view)
 
                 modal.setContentView(view)
@@ -111,7 +110,7 @@ class PublicationsActivity : AppCompatActivity() {
         fun modalRegistrado(view:View){
 
             view.findViewById<TextView>(R.id.txt_modalUserName).text = "Nombre del usuario"
-            if(rol == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
+            if(User.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
             else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
             val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
@@ -126,7 +125,7 @@ class PublicationsActivity : AppCompatActivity() {
             btn_favs.visibility = View.VISIBLE
             btn_favs.setOnClickListener{ showMessage(this, "Work In Progress") }
 
-            if(rol==2){
+            if(User.getRol()==2){
                 val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
                 btn_meetings.visibility = View.VISIBLE
                 btn_meetings.setOnClickListener{ showMessage(this, "Work In Progress") }
