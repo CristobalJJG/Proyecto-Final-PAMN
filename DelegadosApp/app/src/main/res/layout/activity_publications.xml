@@ -46,23 +46,44 @@ tools:context=".vista.publications.PublicationsActivity">
 
 </androidx.cardview.widget.CardView>
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/btn_addPublication"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="15dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp"
-    android:clickable="true"
-    android:contentDescription="@string/app_name"
-    app:backgroundTint="@color/dark_black"
-    app:elevation="5dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/cardView2"
-    app:rippleColor="@color/light_white"
-    app:srcCompat="@android:drawable/alert_dark_frame"
-    tools:ignore="UsingOnClickInXml" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_addPublication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:scaleX="1.25"
+        android:scaleY="1.25"
+        app:backgroundTint="@color/dark_black"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:rippleColor="@color/light_white"
+        app:srcCompat="@android:drawable/ic_input_add"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_modalMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:scaleX="1.25"
+        android:scaleY="1.25"
+        app:backgroundTint="@color/dark_black"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.0"
+        app:rippleColor="@color/light_white"
+        app:srcCompat="@android:drawable/button_onoff_indicator_off" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

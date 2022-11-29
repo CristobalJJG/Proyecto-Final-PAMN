@@ -9,12 +9,16 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.delegadosapp.R
-import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.AuxFunctions.showMessage
+import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+
+
+var User:Usuario = Usuario()
 
 class LoginActivity : AppCompatActivity() {
     private var mail:String = ""
@@ -37,18 +41,20 @@ class LoginActivity : AppCompatActivity() {
 
         btn_login = findViewById(R.id.btn_login)
         btn_login.setOnClickListener{
-
             mail = findViewById<TextView>(R.id.txt_mail).text.toString()
             pass = findViewById<TextView>(R.id.txt_pass).text.toString()
             val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
             val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
+
+            //Se verifica que tengan un buen formato
             if(mail.matches(mail_regex) && pass.matches(pass_regex)) {
+                //Se intenta hacer el loggeo
                 auth.signInWithEmailAndPassword(mail, pass)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val user = auth.currentUser
-                            val intent: Intent = Intent(this, PublicationsActivity::class.java)
-                            intent.putExtra("mail", mail)
+                            val intent = Intent(this, PublicationsActivity::class.java)
+                            fetchData(mail)
+                            intent.putExtra("user", User.toString())
                             showMessage(applicationContext, "Has iniciado sesión")
                             startActivity(intent)
                         } else {
@@ -86,4 +92,24 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
+}
+
+fun fetchData(mail:String) {
+    val db = FirebaseFirestore.getInstance()
+    db.collection("users")
+        .whereEqualTo("email", mail)
+        .get()
+        .addOnSuccessListener { docs ->
+            for(doc in docs){
+                User.setRol(doc.data.get("rol").toString().toInt())
+                User.setInstagram(doc.data.get("instagram").toString())
+                User.setTelegram(doc.data.get("telegram").toString())
+                User.setNombre(doc.data.get("name").toString())
+                User.setDescripcion(doc.data.get("description").toString())
+                User.setMovil(doc.data.get("movil").toString())
+                User.setEmail(doc.data.get("email").toString())
+                User.setDiscord(doc.data.get("discord").toString())
+                User.setGrade(doc.data.get("grade").toString())
+            }
+        }
 }

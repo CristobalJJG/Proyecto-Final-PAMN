@@ -15,7 +15,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.delegadosapp.modelo.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.vista.profile.EditProfileActivity
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 

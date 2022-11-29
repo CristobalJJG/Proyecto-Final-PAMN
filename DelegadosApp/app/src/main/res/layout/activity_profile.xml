@@ -200,6 +200,22 @@
                 android:padding="5dp"
                 android:text="Discord:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/txt_Instagram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Discord:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/txt_telegram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Discord:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -208,9 +224,11 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
         android:baselineAlignBottom="true"
+        android:scaleX="1.25"
+        android:scaleY="1.25"
         android:clickable="true"
         android:contentDescription="@string/app_name"
         app:backgroundTint="@color/blue"
@@ -218,4 +236,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/dark_white"
         app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_modalMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:scaleX="1.25"
+        android:scaleY="1.25"
+        app:backgroundTint="@color/dark_black"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/light_white"
+        app:srcCompat="@android:drawable/button_onoff_indicator_off" />
 </androidx.constraintlayout.widget.ConstraintLayout>
