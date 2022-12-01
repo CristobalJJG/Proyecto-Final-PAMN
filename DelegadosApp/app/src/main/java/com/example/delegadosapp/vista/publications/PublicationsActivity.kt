@@ -48,10 +48,14 @@ class PublicationsActivity : AppCompatActivity() {
         //Información del usuario que esta logeado
         val user = Firebase.auth.currentUser
         user?.let {
+         /*   if(user? == null){
+
+        }*/
             // Name, email address, and profile photo Url
             this.email = user.email.toString()
             this.uid = user.uid
         }
+        Log.w("Correo:        ", "${email}")
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
 
@@ -110,7 +114,7 @@ class PublicationsActivity : AppCompatActivity() {
                         val modal = BottomSheetDialog(contex)
                         val view = layoutInflater.inflate(R.layout.menu_layout, null)
 
-                        if(User.getRol() == 0) modalInvite(view)
+                        if(log_usuatio?.getRol() == 0) modalInvite(view)
                         else modalRegistrado(view)
 
                         modal.setContentView(view)
