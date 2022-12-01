@@ -1,6 +1,6 @@
 package com.example.delegadosapp.vista.publications
 
-import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +15,7 @@ import com.example.delegadosapp.R
 import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.MyCallback
 import com.example.delegadosapp.modelo.Noticias
+import com.example.delegadosapp.modelo.Usuario
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -43,7 +44,8 @@ class PublicationsActivity : AppCompatActivity() {
 
         //Rescatar los datos de las noticias
         val noticias = Noticias()
-        noticias.tituloNoticias()
+        val usuario = Usuario()
+
 
         //Información del usuario que esta logeado
         val user = Firebase.auth.currentUser
@@ -78,34 +80,55 @@ class PublicationsActivity : AppCompatActivity() {
                 recyclerView.adapter = adapter
 
             }
+
+            override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
+                TODO("Not yet implemented")
+            }
         })
+
+        usuario.fetchData(object : MyCallback {
+            override fun onCallback(value: Array<String>?, value1: Array<String>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
+                //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
+                val fab = findViewById<FloatingActionButton>(R.id.btn_addPublication)
+                if (actual_usr != null) {
+                    if (actual_usr.getRol() == 0 || actual_usr.getRol() == 1) {
+                        fab.visibility = View.GONE
+                    } else {
+                        fab.setOnClickListener {
+                            val intent = Intent(contex, AddNewPublicationActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+
+                //Forma de abrir el modal del menú para redirigir a todas las pantallas
+                findViewById<FloatingActionButton>(R.id.btn_modalMenu)
+                    .setOnClickListener {
+                        val modal = BottomSheetDialog(contex)
+                        val view = layoutInflater.inflate(R.layout.menu_layout, null)
+
+                        if(User.getRol() == 0) modalInvite(view)
+                        else modalRegistrado(view)
+
+                        modal.setContentView(view)
+                        modal.show()
+                    }
+
+            }
+
+        }, email, this)
+
+
+
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-        //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
-        val fab = findViewById<FloatingActionButton>(R.id.btn_addPublication)
-        if (User.getRol() == 0 || User.getRol() == 1) {
-            fab.visibility = View.GONE
-        } else {
-            fab.setOnClickListener {
-                val intent = Intent(this, AddNewPublicationActivity::class.java)
-                startActivity(intent)
-            }
-        }
 
-        //Forma de abrir el modal del menú para redirigir a todas las pantallas
-        findViewById<FloatingActionButton>(R.id.btn_modalMenu)
-            .setOnClickListener {
-                val modal = BottomSheetDialog(this)
-                val view = layoutInflater.inflate(R.layout.menu_layout, null)
-
-                if(User.getRol() == 0) modalInvite(view)
-                else modalRegistrado(view)
-
-                modal.setContentView(view)
-                modal.show()
-            }
-        }
+    }
 
         fun modalInvite(view:View){
 

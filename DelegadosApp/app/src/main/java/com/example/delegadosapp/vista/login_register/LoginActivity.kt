@@ -53,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val intent = Intent(this, PublicationsActivity::class.java)
-                            fetchData(mail)
                             intent.putExtra("user", User.toString())
                             showMessage(applicationContext, "Has iniciado sesión")
                             startActivity(intent)
@@ -92,24 +91,4 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
-}
-
-fun fetchData(mail:String) {
-    val db = FirebaseFirestore.getInstance()
-    db.collection("users")
-        .whereEqualTo("email", mail)
-        .get()
-        .addOnSuccessListener { docs ->
-            for(doc in docs){
-                User.setRol(doc.data.get("rol").toString().toInt())
-                User.setInstagram(doc.data.get("instagram").toString())
-                User.setTelegram(doc.data.get("telegram").toString())
-                User.setNombre(doc.data.get("name").toString())
-                User.setDescripcion(doc.data.get("description").toString())
-                User.setMovil(doc.data.get("movil").toString())
-                User.setEmail(doc.data.get("email").toString())
-                User.setDiscord(doc.data.get("discord").toString())
-                User.setGrade(doc.data.get("grade").toString())
-            }
-        }
 }
