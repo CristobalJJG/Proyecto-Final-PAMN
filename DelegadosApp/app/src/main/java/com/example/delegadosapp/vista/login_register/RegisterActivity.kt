@@ -15,7 +15,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.delegadosapp.modelo.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.delegadosapp.controlador.AuxFunctions.showMessage
+import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.vista.profile.EditProfileActivity
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 
@@ -73,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
                             // Name, email address, and profile photo Url
                             val email = user.email
                             val uid = user.uid
-                            newUsuario = Usuario(uid = uid, email = mail, grade = grado)
+                            newUsuario = Usuario(email = mail, grade = grado)
                             db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
                         }
