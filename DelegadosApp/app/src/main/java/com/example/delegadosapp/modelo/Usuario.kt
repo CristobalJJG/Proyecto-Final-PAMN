@@ -6,7 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 
 class Usuario(
-    private var rol: Int = 1,
+    private var rol: Int = 0,
     private var instagram: String = "@",
     private var telegram: String = "@",
     private var nombre: String = "",

@@ -24,7 +24,6 @@ import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.login_register.User
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.tabs.TabLayout.TabGravity
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PublicationsActivity : AppCompatActivity() {
@@ -33,8 +32,7 @@ class PublicationsActivity : AppCompatActivity() {
     private lateinit var titles: Array<String>
     private lateinit var descriptions: Array<String>
     private var db = FirebaseFirestore.getInstance()
-
-
+    private var log_usuatio: Usuario? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,6 +90,7 @@ class PublicationsActivity : AppCompatActivity() {
             }
 
             override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
+                log_usuatio=actual_usr
                 //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
                 val fab = findViewById<FloatingActionButton>(R.id.btn_addPublication)
                 if (actual_usr != null) {
@@ -144,9 +143,9 @@ class PublicationsActivity : AppCompatActivity() {
             btn_register.setOnClickListener{ startActivity(Intent(this, RegisterActivity::class.java)) }
         }
 
-        fun modalRegistrado(view:View){
+        fun modalRegistrado(view: View){
 
-            view.findViewById<TextView>(R.id.txt_modalUserName).text = User.getNombre()
+            view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuatio?.getNombre();
             if(User.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
             else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
@@ -173,6 +172,11 @@ class PublicationsActivity : AppCompatActivity() {
 
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
-            btn_logout.setOnClickListener{ showMessage(this, "Asumamos que has cerrado sesión (Spoiler, WIP)") }
+            btn_logout.setOnClickListener{
+                log_usuatio = Usuario()
+                showMessage(this, "Cerrado sesión")
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+
         }
     }
