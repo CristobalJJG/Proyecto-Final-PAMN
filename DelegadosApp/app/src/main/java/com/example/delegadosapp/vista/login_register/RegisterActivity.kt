@@ -68,11 +68,17 @@ class RegisterActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        newUsuario = Usuario(email = mail, grade = grado)
-                        db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-                            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                        val user = Firebase.auth.currentUser
+                        user?.let {
+                            // Name, email address, and profile photo Url
+                            val email = user.email
+                            val uid = user.uid
+                            newUsuario = Usuario(email = mail, grade = grado)
+                            db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                                .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                        }
                         val intent = Intent(this, EditProfileActivity::class.java)
-                        intent.putExtra("mail", mail)
+                        intent.putExtra("newUser", newUsuario)
                         startActivity(intent)
                     } else {
                         Log.d(TAG, "RegistrarUsuario: failure", task.exception)
@@ -101,4 +107,8 @@ class RegisterActivity : AppCompatActivity() {
         startActivity(intent)
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
+}
+
+private fun Intent.putExtra(s: String, newUsuario: Usuario) {
+
 }
