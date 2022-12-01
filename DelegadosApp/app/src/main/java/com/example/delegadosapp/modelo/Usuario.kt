@@ -1,5 +1,8 @@
 package com.example.delegadosapp.modelo
 
+import com.example.delegadosapp.vista.login_register.User
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 class Usuario(
     private var rol: Int = 1,
@@ -52,6 +55,5 @@ class Usuario(
         return "$nombre, $grade, $rol, $descripcion," +
                 "$movil, $email, $telegram, $instagram, $discord"
     }
-
 
 }

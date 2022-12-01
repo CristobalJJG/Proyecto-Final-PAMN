@@ -1,6 +1,6 @@
 package com.example.delegadosapp.vista.publications
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -23,15 +23,15 @@ import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.login_register.User
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.android.material.tabs.TabLayout.TabGravity
+import com.google.firebase.firestore.FirebaseFirestore
 
 class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var uid: String
     private lateinit var titles: Array<String>
     private lateinit var descriptions: Array<String>
+    private var db = FirebaseFirestore.getInstance()
 
 
 
@@ -41,10 +41,10 @@ class PublicationsActivity : AppCompatActivity() {
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_publications)
 
-        //Prueba Orden
+        //Rescatar los datos de las noticias
         val noticias = Noticias()
 
-
+        //Información del usuario que esta logeado
         val user = Firebase.auth.currentUser
         user?.let {
             // Name, email address, and profile photo Url
@@ -52,13 +52,9 @@ class PublicationsActivity : AppCompatActivity() {
             this.uid = user.uid
         }
 
-        //fetchData(this.email)
-        Log.d("l-49", User.toString())
-
-        //showMessage(this, "email: " + email + "\n" + "uid: " + uid)
-
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
 
+        //Llamada a la funcion para rescatar datos
         noticias.datosNoticias(object : MyCallback {
             override fun onCallback(value: Array<String>?, value1: Array<String>?) {
                 if (value != null) {
@@ -126,7 +122,7 @@ class PublicationsActivity : AppCompatActivity() {
 
         fun modalRegistrado(view:View){
 
-            view.findViewById<TextView>(R.id.txt_modalUserName).text = "Nombre del usuario"
+            view.findViewById<TextView>(R.id.txt_modalUserName).text = User.getNombre()
             if(User.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
             else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 

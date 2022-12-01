@@ -24,23 +24,20 @@ class Noticias {
     fun datosNoticias(myCallback: MyCallback){
         val listTitulo: MutableList<String> = mutableListOf()
         val listDescripcion: MutableList<String> = mutableListOf()
-        //CoroutineScope(Dispatchers.IO).launch {
-            db.collection("news")
-                .orderBy("fecha")
-                .get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        listTitulo.add(document.id)
-                        listDescripcion.add(document.get("description") as String)
-                    }
-                    myCallback.onCallback(listTitulo.toTypedArray(), listDescripcion.toTypedArray())
-                    Log.i("firebase", "Got value ${listTitulo[0]}")
+        db.collection("news")
+            .orderBy("fecha")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    listTitulo.add(document.id)
+                    listDescripcion.add(document.get("description") as String)
                 }
-                .addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents: ", exception)
-                }
-           // documents.await()
-       // }
+                myCallback.onCallback(listTitulo.toTypedArray(), listDescripcion.toTypedArray())
+                Log.i("firebase", "Got value ${listTitulo[0]}")
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
     }
 
 }
