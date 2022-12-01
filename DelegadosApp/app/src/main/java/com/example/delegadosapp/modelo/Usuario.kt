@@ -1,6 +1,7 @@
 package com.example.delegadosapp.modelo
 
-import com.example.delegadosapp.vista.login_register.User
+import android.content.Context
+import com.example.delegadosapp.MyCallback
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -54,6 +55,25 @@ class Usuario(
     override fun toString(): String {
         return "$nombre, $grade, $rol, $descripcion," +
                 "$movil, $email, $telegram, $instagram, $discord"
+    }
+
+    fun fetchData(myCallback: MyCallback, email: String, contex: Context){
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users")
+            .document(email)
+            .get()
+            .addOnSuccessListener { doc ->
+                setRol(doc.data?.get("rol").toString().toInt())
+                setInstagram(doc.data?.get("instagram").toString())
+                setTelegram(doc.data?.get("telegram").toString())
+                setNombre(doc.data?.get("name").toString())
+                setDescripcion(doc.data?.get("description").toString())
+                setMovil(doc.data?.get("movil").toString())
+                setEmail(doc.data?.get("email").toString())
+                setDiscord(doc.data?.get("discord").toString())
+                setGrade(doc.data?.get("grade").toString())
+                myCallback.usuarioCallback(this, contex)
+            }
     }
 
 }
