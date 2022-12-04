@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val intent = Intent(this, PublicationsActivity::class.java)
-                            fetchData(mail)
+                            //fetchData(mail)
                             showMessage(applicationContext, "Has iniciado sesión")
                             startActivity(intent)
                         } else {
