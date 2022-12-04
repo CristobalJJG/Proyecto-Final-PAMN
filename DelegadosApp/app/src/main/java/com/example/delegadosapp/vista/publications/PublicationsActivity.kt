@@ -16,6 +16,7 @@ import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.MyCallback
 import com.example.delegadosapp.modelo.Noticias
 import com.example.delegadosapp.modelo.Usuario
+import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -24,7 +25,6 @@ import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.login_register.User
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.tabs.TabLayout.TabGravity
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PublicationsActivity : AppCompatActivity() {
@@ -34,9 +34,6 @@ class PublicationsActivity : AppCompatActivity() {
     private lateinit var descriptions: Array<String>
     private var db = FirebaseFirestore.getInstance()
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
@@ -45,8 +42,7 @@ class PublicationsActivity : AppCompatActivity() {
         //Rescatar los datos de las noticias
         val noticias = Noticias()
         val usuario = Usuario()
-
-
+        
         //Información del usuario que esta logeado
         val user = Firebase.auth.currentUser
         user?.let {
@@ -169,7 +165,7 @@ class PublicationsActivity : AppCompatActivity() {
             }
             val btn_listaDelega = view.findViewById<Button>(R.id.btn_menuListDelega)
             btn_listaDelega.visibility = View.VISIBLE
-            btn_listaDelega.setOnClickListener{ showMessage(this, "Work In Progress") }
+            btn_listaDelega.setOnClickListener{ startActivity(Intent(this, DelegaListActivity::class.java)) }
 
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
