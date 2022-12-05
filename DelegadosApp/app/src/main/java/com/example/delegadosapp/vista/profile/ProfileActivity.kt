@@ -63,8 +63,10 @@ class ProfileActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.txt_userName).text = log_usuario.getNombre()
                 findViewById<TextView>(R.id.txt_userDesc).text = log_usuario.getDescripcion()
                 findViewById<TextView>(R.id.txt_grado).text = log_usuario.getGrade()
-                findViewById<TextView>(R.id.txt_labelDelega).text = "Delegado"
-                findViewById<TextView>(R.id.txt_posDelega).text = "Delegado, sin más"
+                if (log_usuario.getRol() == 2){
+                    findViewById<TextView>(R.id.txt_labelDelega).text = "Delegado"
+                    findViewById<TextView>(R.id.txt_posDelega).text = "Delegado, sin más"
+                }
 
                 if(log_usuario.getMovil() != "")  findViewById<TextView>(R.id.txt_movil).text = "Movil: " + log_usuario.getMovil()
                 else findViewById<TextView>(R.id.txt_movil).text = "Movil: X"
@@ -145,7 +147,10 @@ class ProfileActivity : AppCompatActivity() {
         val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
         btn_logout.visibility = View.VISIBLE
         btn_logout.setOnClickListener{
-            AuxFunctions.showMessage( this, "Asumamos que has cerrado sesión (Spoiler, WIP)" )
+            this.log_usuario = Usuario()
+            Firebase.auth.signOut()
+            AuxFunctions.showMessage(this, "Cerrado sesión")
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 }

@@ -32,7 +32,7 @@ class PublicationsActivity : AppCompatActivity() {
     private lateinit var titles: Array<String>
     private lateinit var descriptions: Array<String>
     private var db = FirebaseFirestore.getInstance()
-    private var log_usuatio: Usuario? = null
+    private var log_usuario: Usuario? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,7 +94,7 @@ class PublicationsActivity : AppCompatActivity() {
             }
 
             override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
-                log_usuatio=actual_usr
+                log_usuario=actual_usr
                 //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
                 val fab = findViewById<FloatingActionButton>(R.id.btn_addPublication)
                 if (actual_usr != null) {
@@ -114,7 +114,7 @@ class PublicationsActivity : AppCompatActivity() {
                         val modal = BottomSheetDialog(contex)
                         val view = layoutInflater.inflate(R.layout.menu_layout, null)
 
-                        if(log_usuatio?.getRol() == 0) modalInvite(view)
+                        if(log_usuario?.getRol() == 0) modalInvite(view)
                         else modalRegistrado(view)
 
                         modal.setContentView(view)
@@ -149,7 +149,7 @@ class PublicationsActivity : AppCompatActivity() {
 
         fun modalRegistrado(view: View){
 
-            view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuatio?.getNombre();
+            view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario?.getNombre();
             if(User.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
             else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
@@ -177,7 +177,8 @@ class PublicationsActivity : AppCompatActivity() {
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
             btn_logout.setOnClickListener{
-                log_usuatio = Usuario()
+                this.log_usuario = Usuario()
+                Firebase.auth.signOut()
                 showMessage(this, "Cerrado sesión")
                 startActivity(Intent(this, LoginActivity::class.java))
             }
