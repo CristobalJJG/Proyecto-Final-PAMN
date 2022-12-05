@@ -1,6 +1,7 @@
 package com.example.delegadosapp.modelo
 
 import android.content.Context
+import android.util.Log
 import com.example.delegadosapp.MyCallback
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.Serializable
@@ -17,6 +18,9 @@ class Usuario (
     private var discord: String = "",
     private var grade: String = ""
 ): Serializable {
+
+
+    val db = FirebaseFirestore.getInstance()
 
     fun getDescripcion(): String { return descripcion }
     fun getRol(): Int { return rol }
@@ -59,7 +63,6 @@ class Usuario (
     }
 
     fun fetchData(myCallback: MyCallback, email: String, contex: Context){
-        val db = FirebaseFirestore.getInstance()
         db.collection("users")
             .document(email)
             .get()
@@ -73,6 +76,7 @@ class Usuario (
                 setEmail(doc.data?.get("email").toString())
                 setDiscord(doc.data?.get("discord").toString())
                 setGrade(doc.data?.get("grade").toString())
+                Log.w("USUARIO1", this.toString())
                 myCallback.usuarioCallback(this, contex)
             }
     }

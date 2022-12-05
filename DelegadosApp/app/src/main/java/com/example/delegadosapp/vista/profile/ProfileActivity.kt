@@ -27,7 +27,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var email: String
     private lateinit var uid: String
-    private lateinit var log_usuario: Usuario
+    private var log_usuario: Usuario = Usuario()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,10 +54,28 @@ class ProfileActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
 
-            override fun usuarioCallback(actual_usr: Usuario, contex: Context) {
-                Log.w("USUARIO1", actual_usr.getEmail())
-                log_usuario=actual_usr
+            override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
+                if (actual_usr != null) {
+                    log_usuario=actual_usr
+                    Log.w("USUARIO1", actual_usr.toString())
+                }
 
+                findViewById<TextView>(R.id.txt_userName).text = log_usuario.getNombre()
+                findViewById<TextView>(R.id.txt_userDesc).text = log_usuario.getDescripcion()
+                findViewById<TextView>(R.id.txt_grado).text = log_usuario.getGrade()
+                findViewById<TextView>(R.id.txt_labelDelega).text = "Delegado"
+                findViewById<TextView>(R.id.txt_posDelega).text = "Delegado, sin más"
+
+                if(log_usuario.getMovil() != "")  findViewById<TextView>(R.id.txt_movil).text = "Movil: " + log_usuario.getMovil()
+                else findViewById<TextView>(R.id.txt_movil).text = "Movil: X"
+                if(log_usuario.getEmail() != "")  findViewById<TextView>(R.id.txt_correo).text = "Correo: " + log_usuario.getEmail()
+                else findViewById<TextView>(R.id.txt_correo).text = "Correo: X"
+                if(log_usuario.getInstagram() != "null") findViewById<TextView>(R.id.txt_Instagram).text = "Instagram: " + log_usuario.getInstagram()
+                else findViewById<TextView>(R.id.txt_Instagram).text = "Instagram: X"
+                if(log_usuario.getDiscord() != "null")  findViewById<TextView>(R.id.txt_discord).text = "Discord: " + log_usuario.getDiscord()
+                else findViewById<TextView>(R.id.txt_discord).text = "Discord: X"
+                if(log_usuario.getTelegram() != "null") findViewById<TextView>(R.id.txt_telegram).text = "Telegram: " + log_usuario.getTelegram()
+                else findViewById<TextView>(R.id.txt_telegram).text = "Telegram: X"
 
 
 
@@ -68,22 +86,7 @@ class ProfileActivity : AppCompatActivity() {
 
         //Log.w("USUARIO", log_usuario.getEmail().toString())
 
-        findViewById<TextView>(R.id.txt_userName).text = log_usuario.getNombre()
-        findViewById<TextView>(R.id.txt_userDesc).text = log_usuario.getDescripcion()
-        findViewById<TextView>(R.id.txt_grado).text = log_usuario.getGrade()
-        findViewById<TextView>(R.id.txt_labelDelega).text = "Delegado"
-        findViewById<TextView>(R.id.txt_posDelega).text = "Delegado, sin más"
 
-        if(log_usuario.getMovil() != "")  findViewById<TextView>(R.id.txt_movil).text = "Movil: " + log_usuario.getMovil()
-        else findViewById<TextView>(R.id.txt_movil).text = "Movil: X"
-        if(log_usuario.getEmail() != "")  findViewById<TextView>(R.id.txt_correo).text = "Correo: " + log_usuario.getEmail()
-        else findViewById<TextView>(R.id.txt_correo).text = "Correo: X"
-        if(log_usuario.getInstagram() != "null") findViewById<TextView>(R.id.txt_Instagram).text = "Instagram: " + log_usuario.getInstagram()
-        else findViewById<TextView>(R.id.txt_Instagram).text = "Instagram: X"
-        if(log_usuario.getDiscord() != "null")  findViewById<TextView>(R.id.txt_discord).text = "Discord: " + log_usuario.getDiscord()
-        else findViewById<TextView>(R.id.txt_discord).text = "Discord: X"
-        if(log_usuario.getTelegram() != "null") findViewById<TextView>(R.id.txt_telegram).text = "Telegram: " + log_usuario.getTelegram()
-        else findViewById<TextView>(R.id.txt_telegram).text = "Telegram: X"
 
         //Forma de abrir el modal del menú para redirigir a todas las pantallas
         findViewById<FloatingActionButton>(R.id.btn_modalMenu)
