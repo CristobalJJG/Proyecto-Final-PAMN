@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.MyCallback
 import com.example.delegadosapp.R
@@ -63,23 +64,25 @@ class ProfileActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.txt_userName).text = log_usuario.getNombre()
                 findViewById<TextView>(R.id.txt_userDesc).text = log_usuario.getDescripcion()
                 findViewById<TextView>(R.id.txt_grado).text = log_usuario.getGrade()
-                findViewById<TextView>(R.id.txt_labelDelega).text = "Delegado"
-                findViewById<TextView>(R.id.txt_posDelega).text = "Delegado, sin más"
+                if(log_usuario.getRol() == 2){
+                    findViewById<TextView>(R.id.txt_labelDelega).text = "Delegado"
+                    findViewById<TextView>(R.id.txt_posDelega).text = "Delegado, sin más"
+                }else findViewById<CardView>(R.id.cv_top3).visibility = View.GONE
 
                 if(log_usuario.getMovil() != "")  findViewById<TextView>(R.id.txt_movil).text = "Movil: " + log_usuario.getMovil()
                 else findViewById<TextView>(R.id.txt_movil).text = "Movil: X"
+
                 if(log_usuario.getEmail() != "")  findViewById<TextView>(R.id.txt_correo).text = "Correo: " + log_usuario.getEmail()
                 else findViewById<TextView>(R.id.txt_correo).text = "Correo: X"
+
                 if(log_usuario.getInstagram() != "null") findViewById<TextView>(R.id.txt_Instagram).text = "Instagram: " + log_usuario.getInstagram()
-                else findViewById<TextView>(R.id.txt_Instagram).text = "Instagram: X"
+                else findViewById<TextView>(R.id.txt_Instagram).visibility = View.GONE
+
                 if(log_usuario.getDiscord() != "null")  findViewById<TextView>(R.id.txt_discord).text = "Discord: " + log_usuario.getDiscord()
-                else findViewById<TextView>(R.id.txt_discord).text = "Discord: X"
+                else findViewById<TextView>(R.id.txt_discord).visibility = View.GONE
+
                 if(log_usuario.getTelegram() != "null") findViewById<TextView>(R.id.txt_telegram).text = "Telegram: " + log_usuario.getTelegram()
-                else findViewById<TextView>(R.id.txt_telegram).text = "Telegram: X"
-
-
-
-
+                else findViewById<TextView>(R.id.txt_telegram).visibility = View.GONE
             }
         }, email, this)
 
