@@ -14,6 +14,7 @@ import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 
 class EditProfileActivity : AppCompatActivity() {
@@ -54,7 +55,7 @@ class EditProfileActivity : AppCompatActivity() {
                 )
 
                 user.email?.let { it1 ->
-                    db.collection("users").document(it1).set( addusuario ).addOnSuccessListener { Log.d(
+                    db.collection("users").document(it1).set( addusuario, SetOptions.merge() ).addOnSuccessListener { Log.d(
                         ContentValues.TAG, "Actualización de los datos") }
                         .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error writing document", e) }
                 }

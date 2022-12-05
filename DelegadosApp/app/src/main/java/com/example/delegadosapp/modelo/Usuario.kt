@@ -3,9 +3,10 @@ package com.example.delegadosapp.modelo
 import android.content.Context
 import com.example.delegadosapp.MyCallback
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.Serializable
 
 
-class Usuario(
+class Usuario (
     private var rol: Int = 0,
     private var instagram: String = "@",
     private var telegram: String = "@",
@@ -15,7 +16,7 @@ class Usuario(
     private var email: String = "",
     private var discord: String = "",
     private var grade: String = ""
-) {
+): Serializable {
 
     fun getDescripcion(): String { return descripcion }
     fun getRol(): Int { return rol }
