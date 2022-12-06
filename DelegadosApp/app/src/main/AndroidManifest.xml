@@ -13,6 +13,13 @@
         android:theme="@style/Theme.DelegadosApp"
         tools:targetApi="31">
         <activity
+            android:name=".vista.publications.SinglePublicationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".vista.listaDelegados.DelegaListActivity"
             android:exported="false">
             <meta-data

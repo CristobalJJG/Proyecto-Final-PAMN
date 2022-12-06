@@ -11,18 +11,16 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.delegadosapp.AuxFunctions
-import com.example.delegadosapp.MyCallback
+import com.example.delegadosapp.UserCallback
 import com.example.delegadosapp.R
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
-import com.example.delegadosapp.vista.publications.AddNewPublicationActivity
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlin.math.log
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -49,12 +47,7 @@ class ProfileActivity : AppCompatActivity() {
             this.uid = user.uid
         }
 
-        usuario.fetchData(object : MyCallback {
-
-            override fun onCallback(value: Array<String>?, value1: Array<String>?) {
-                TODO("Not yet implemented")
-            }
-
+        usuario.fetchData(object : UserCallback {
             override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
                 if (actual_usr != null) {
                     log_usuario=actual_usr
@@ -86,10 +79,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         }, email, this)
 
-
         //Log.w("USUARIO", log_usuario.getEmail().toString())
-
-
 
         //Forma de abrir el modal del menú para redirigir a todas las pantallas
         findViewById<FloatingActionButton>(R.id.btn_modalMenu)

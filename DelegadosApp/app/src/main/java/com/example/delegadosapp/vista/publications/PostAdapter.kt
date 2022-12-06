@@ -1,42 +1,52 @@
 package com.example.delegadosapp.Publications
 
+import android.content.DialogInterface.OnClickListener
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.R
+import com.example.delegadosapp.databinding.PostLayoutBinding
+import com.example.delegadosapp.modelo.Noticias
+import com.example.delegadosapp.vista.publications.SinglePublicationActivity
 
 class PostAdapter(
-    private val titles: Array<String>, private val descriptions: Array<String>,
-    private val images: Array<Int?>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+    private val news: Array<Noticias>,
+    private val onClickListener: (Noticias) -> Unit) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.post_layout, parent, false)
-        return ViewHolder(v)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return ViewHolder(layoutInflater.inflate(R.layout.post_layout, parent, false))
+        //return PostLayoutBinding.bind(parent:View)
     }
 
     override fun onBindViewHolder(vh: ViewHolder, i: Int) {
-        vh.title.text = titles[i]
-        vh.description.text = descriptions[i]
-        if(images[i] != null) images[i]?.let { vh.img.setImageResource(it) }
+        vh.render(news[i], onClickListener)
     }
 
-    override fun getItemCount(): Int { return titles.size }
+    override fun getItemCount(): Int = news.size
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        var img: ImageView
-        var title: TextView
-        var description: TextView
-        var imgPart: CardView
+        val binding = PostLayoutBinding.bind(itemView)
 
-        init {
-            imgPart = itemView.findViewById(R.id.cv_photo)
-            img = itemView.findViewById(R.id.img_post)
-            title = itemView.findViewById(R.id.txt_title)
-            description = itemView.findViewById(R.id.txt_description)
+        fun render(news: Noticias, onClickListener: (Noticias) -> Unit){
+            //img?.let { binding.imgPost.setImageResource(news.getImage()) }
+            binding.txtTitle.text = news.getTitle()
+            binding.txtDescription.text = news.getDescription()
+
+            binding.cvHolder.setOnClickListener{ onClickListener(news)
+                //val intent = Intent(binding.cvHolder.context, SinglePublicationActivity::class.java)
+
+                //intent.putExtra("title", title)
+                //intent.putExtra("picture", img)
+                //intent.putExtra("description", description)
+
+                //startActivity(binding.cvHolder.context)
+            }
         }
     }
 }

@@ -9,11 +9,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.delegadosapp.Publications.PostAdapter
 import com.example.delegadosapp.R
 import com.example.delegadosapp.AuxFunctions.showMessage
-import com.example.delegadosapp.MyCallback
+import com.example.delegadosapp.*
+import com.example.delegadosapp.databinding.ActivityPublicationsBinding
 import com.example.delegadosapp.modelo.Noticias
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
@@ -35,10 +35,14 @@ class PublicationsActivity : AppCompatActivity() {
     private var db = FirebaseFirestore.getInstance()
     private var log_usuatio: Usuario? = null
 
+    private lateinit var binding: ActivityPublicationsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
-        setContentView(R.layout.activity_publications)
+        //setContentView(R.layout.activity_publications)
+        binding = ActivityPublicationsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //Rescatar los datos de las noticias
         val noticias = Noticias()
@@ -54,44 +58,17 @@ class PublicationsActivity : AppCompatActivity() {
             this.email = user.email.toString()
             this.uid = user.uid
         }
-        Log.w("Correo:        ", "${email}")
-
-        val recyclerView = findViewById<RecyclerView>(R.id.rv)
+        Log.w("Correo:        ", email)
 
         //Llamada a la funcion para rescatar datos
-        noticias.datosNoticias(object : MyCallback {
-            override fun onCallback(value: Array<String>?, value1: Array<String>?) {
-                if (value != null) {
-                    titles = value
-                    Log.d("TAG", value.toString());
-                }
-                if (value1 != null) {
-                    descriptions = value1
-                    Log.d("TAG", value1.toString());
-                }
-                val images = arrayOf(
-                    R.drawable.default_picture,
-                    R.drawable.default_picture,
-                    null,
-                    null,
-                    R.drawable.default_picture,
-                    null
-                )
-                val adapter = PostAdapter(titles, descriptions, images)
-                recyclerView.adapter = adapter
-
-            }
-
-            override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
-                TODO("Not yet implemented")
+        noticias.datosNoticias(object : NewsCallback {
+            override fun onCallback(value: Array<Noticias>) {
+                val adapter = PostAdapter(value, {onItemSelected(it)})
+                binding.rv.adapter = adapter
             }
         })
 
-        usuario.fetchData(object : MyCallback {
-            override fun onCallback(value: Array<String>?, value1: Array<String>?) {
-                TODO("Not yet implemented")
-            }
-
+        usuario.fetchData(object : UserCallback {
             override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
                 log_usuatio=actual_usr
                 //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
@@ -124,11 +101,10 @@ class PublicationsActivity : AppCompatActivity() {
 
         }, email, this)
 
+        binding.rv.layoutManager = LinearLayoutManager(this)
+    }
 
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-
+    fun onItemSelected(title: Noticias){
 
     }
 
