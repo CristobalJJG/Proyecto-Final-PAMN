@@ -97,8 +97,8 @@ class PublicationsActivity : AppCompatActivity() {
             binding.rv.layoutManager = LinearLayoutManager(this)
         }
 
-        fun onItemSelected(title: Noticias){
-
+        fun onItemSelected(noticia: Noticias){
+            showMessage(this, noticia.getTitle());
         }
 
         fun modalInvite(view:View){
