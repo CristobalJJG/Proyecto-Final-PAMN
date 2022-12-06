@@ -22,18 +22,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
-import com.example.delegadosapp.vista.login_register.User
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
 
+
+var log_usuario: Usuario? = null
+
 class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var uid: String
-    private lateinit var titles: Array<String>
-    private lateinit var descriptions: Array<String>
-    private var db = FirebaseFirestore.getInstance()
-    private var log_usuatio: Usuario? = null
 
     private lateinit var binding: ActivityPublicationsBinding
 
@@ -51,9 +49,6 @@ class PublicationsActivity : AppCompatActivity() {
         //Información del usuario que esta logeado
         val user = Firebase.auth.currentUser
         user?.let {
-         /*   if(user? == null){
-
-        }*/
             // Name, email address, and profile photo Url
             this.email = user.email.toString()
             this.uid = user.uid
@@ -70,7 +65,7 @@ class PublicationsActivity : AppCompatActivity() {
 
         usuario.fetchData(object : UserCallback {
             override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
-                log_usuatio=actual_usr
+                log_usuario=actual_usr
                 //Si el rol es invitado-0 o usuario-1, no se muestra el botón de añadir
                 val fab = findViewById<FloatingActionButton>(R.id.btn_addPublication)
                 if (actual_usr != null) {
@@ -90,23 +85,21 @@ class PublicationsActivity : AppCompatActivity() {
                         val modal = BottomSheetDialog(contex)
                         val view = layoutInflater.inflate(R.layout.menu_layout, null)
 
-                        if(log_usuatio?.getRol() == 0) modalInvite(view)
+                        if(log_usuario?.getRol() == 0) modalInvite(view)
                         else modalRegistrado(view)
 
                         modal.setContentView(view)
                         modal.show()
                     }
+                }
+            }, email, this)
 
-            }
+            binding.rv.layoutManager = LinearLayoutManager(this)
+        }
 
-        }, email, this)
+        fun onItemSelected(title: Noticias){
 
-        binding.rv.layoutManager = LinearLayoutManager(this)
-    }
-
-    fun onItemSelected(title: Noticias){
-
-    }
+        }
 
         fun modalInvite(view:View){
 
@@ -122,40 +115,54 @@ class PublicationsActivity : AppCompatActivity() {
             btn_register.setOnClickListener{ startActivity(Intent(this, RegisterActivity::class.java)) }
         }
 
-        fun modalRegistrado(view: View){
+        fun modalRegistrado(view: View) {
 
-            view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuatio?.getNombre();
-            if(User.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
+            view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario?.getNombre();
+            if (log_usuario?.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
             else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
             val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
             btn_inicio.visibility = View.VISIBLE
-            btn_inicio.setOnClickListener{ startActivity(Intent(this, PublicationsActivity::class.java)) }
+            btn_inicio.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this,
+                        PublicationsActivity::class.java
+                    )
+                )
+            }
 
             val btn_profile = view.findViewById<Button>(R.id.btn_menuProfile)
             btn_profile.visibility = View.VISIBLE
-            btn_profile.setOnClickListener{ startActivity(Intent(this, ProfileActivity::class.java)) }
+            btn_profile.setOnClickListener { startActivity(Intent(this, ProfileActivity::class.java)) }
 
             val btn_favs = view.findViewById<Button>(R.id.btn_menuFavs)
             btn_favs.visibility = View.VISIBLE
-            btn_favs.setOnClickListener{ showMessage(this, "Work In Progress") }
+            btn_favs.setOnClickListener { showMessage(this, "Work In Progress") }
 
-            if(User.getRol()==2){
+            if (log_usuario?.getRol() == 2) {
                 val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
                 btn_meetings.visibility = View.VISIBLE
-                btn_meetings.setOnClickListener{ showMessage(this, "Work In Progress") }
+                btn_meetings.setOnClickListener { showMessage(this, "Work In Progress") }
             }
+
             val btn_listaDelega = view.findViewById<Button>(R.id.btn_menuListDelega)
             btn_listaDelega.visibility = View.VISIBLE
-            btn_listaDelega.setOnClickListener{ startActivity(Intent(this, DelegaListActivity::class.java)) }
+            btn_listaDelega.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this,
+                        DelegaListActivity::class.java
+                    )
+                )
+            }
 
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
-            btn_logout.setOnClickListener{
-                log_usuatio = Usuario()
+            btn_logout.setOnClickListener {
+                log_usuario = null
                 showMessage(this, "Cerrado sesión")
                 startActivity(Intent(this, LoginActivity::class.java))
             }
-
         }
     }
