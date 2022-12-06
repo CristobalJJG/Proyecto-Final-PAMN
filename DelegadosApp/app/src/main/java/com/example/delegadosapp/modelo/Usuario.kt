@@ -3,6 +3,7 @@ package com.example.delegadosapp.modelo
 import android.content.Context
 import android.util.Log
 import com.example.delegadosapp.UserCallback
+import com.example.delegadosapp.UsersCallback
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.Serializable
 
@@ -16,9 +17,12 @@ class Usuario (
     private var movil: String = "+34000000000",
     private var email: String = "",
     private var discord: String = "",
-    private var grade: String = ""
+    private var grade: String = "",
+    private var puesto: String = ""
 ): Serializable {
     val db = FirebaseFirestore.getInstance()
+
+    var listOfUsers: ArrayList<Usuario> = ArrayList()
 
     fun getDescripcion(): String { return descripcion }
     fun getRol(): Int { return rol }
@@ -78,23 +82,36 @@ class Usuario (
                 myCallback.usuarioCallback(this, contex)
             }
     }
-    /*
-    fun getAllUsers(myCallback: UserCallback, contex: Context){
-        db.collection("users")
-            .get()
-            .addOnSuccessListener { doc ->
-                setRol(doc.data?.get("rol").toString().toInt())
-                setInstagram(doc.data?.get("instagram").toString())
-                setTelegram(doc.data?.get("telegram").toString())
-                setNombre(doc.data?.get("name").toString())
-                setDescripcion(doc.data?.get("description").toString())
-                setMovil(doc.data?.get("movil").toString())
-                setEmail(doc.data?.get("email").toString())
-                setDiscord(doc.data?.get("discord").toString())
-                setGrade(doc.data?.get("grade").toString())
-                Log.w("USUARIO1", this.toString())
-                myCallback.usuarioCallback(this, contex)
-            }
-    }*/
 
+    fun getDelegadosCallback(myCallback: UsersCallback) {
+        db.collection("users")
+            .whereEqualTo("rol",  2)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (doc in documents) {
+                    val rol = (doc.data["rol"].toString().toInt())
+                    if(rol == 2) {
+                        val insta = (doc.data["instagram"].toString())
+                        val telegram = (doc.data["telegram"].toString())
+                        val nombre = (doc.data["name"].toString())
+                        val desc = (doc.data["description"].toString())
+                        val movil = (doc.data["movil"].toString())
+                        val email = (doc.data["email"].toString())
+                        val discord = (doc.data["discord"].toString())
+                        val grade = (doc.data["grade"].toString())
+                        val puesto = (doc.data["puesto"].toString())
+                        listOfUsers.add(
+                            Usuario(
+                                rol, insta, telegram,
+                                nombre, desc, movil,
+                                email, discord, grade, puesto
+                            )
+                        )
+                    }
+                }
+
+                Log.w("Lista", listOfUsers[0].toString())
+                myCallback.getDelegadosCallback(listOfUsers)
+            }
+    }
 }

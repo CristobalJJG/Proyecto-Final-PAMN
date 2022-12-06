@@ -11,3 +11,7 @@ interface UserCallback {
 interface NewsCallback {
     fun onCallback(value: Array<Noticias>)
 }
+
+interface UsersCallback {
+    fun getDelegadosCallback(users: ArrayList<Usuario>)
+}
