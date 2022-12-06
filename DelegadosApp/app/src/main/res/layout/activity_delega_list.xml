@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".vista.listaDelegados.DelegaListActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_modalMenu2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:scaleX="1.25"
+        android:scaleY="1.25"
+        app:backgroundTint="@color/dark_black"
+        app:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/light_white"
+        app:srcCompat="@android:drawable/button_onoff_indicator_off" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lv"
         android:layout_width="409dp"
