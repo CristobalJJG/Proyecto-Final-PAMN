@@ -2,7 +2,7 @@ package com.example.delegadosapp.modelo
 
 import android.content.Context
 import android.util.Log
-import com.example.delegadosapp.MyCallback
+import com.example.delegadosapp.UserCallback
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.Serializable
 
@@ -18,8 +18,6 @@ class Usuario (
     private var discord: String = "",
     private var grade: String = ""
 ): Serializable {
-
-
     val db = FirebaseFirestore.getInstance()
 
     fun getDescripcion(): String { return descripcion }
@@ -62,7 +60,7 @@ class Usuario (
                 "$movil, $email, $telegram, $instagram, $discord"
     }
 
-    fun fetchData(myCallback: MyCallback, email: String, contex: Context){
+    fun fetchData(myCallback: UserCallback, email: String, contex: Context){
         db.collection("users")
             .document(email)
             .get()
@@ -80,5 +78,23 @@ class Usuario (
                 myCallback.usuarioCallback(this, contex)
             }
     }
+    /*
+    fun getAllUsers(myCallback: UserCallback, contex: Context){
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { doc ->
+                setRol(doc.data?.get("rol").toString().toInt())
+                setInstagram(doc.data?.get("instagram").toString())
+                setTelegram(doc.data?.get("telegram").toString())
+                setNombre(doc.data?.get("name").toString())
+                setDescripcion(doc.data?.get("description").toString())
+                setMovil(doc.data?.get("movil").toString())
+                setEmail(doc.data?.get("email").toString())
+                setDiscord(doc.data?.get("discord").toString())
+                setGrade(doc.data?.get("grade").toString())
+                Log.w("USUARIO1", this.toString())
+                myCallback.usuarioCallback(this, contex)
+            }
+    }*/
 
 }
