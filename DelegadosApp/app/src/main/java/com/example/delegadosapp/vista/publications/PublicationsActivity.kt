@@ -150,7 +150,7 @@ class PublicationsActivity : AppCompatActivity() {
         fun modalRegistrado(view: View){
 
             view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario?.getNombre();
-            if(User.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
+            if(log_usuario?.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
             else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
             val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
@@ -165,7 +165,7 @@ class PublicationsActivity : AppCompatActivity() {
             btn_favs.visibility = View.VISIBLE
             btn_favs.setOnClickListener{ showMessage(this, "Work In Progress") }
 
-            if(User.getRol()==2){
+            if(log_usuario?.getRol()==2){
                 val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
                 btn_meetings.visibility = View.VISIBLE
                 btn_meetings.setOnClickListener{ showMessage(this, "Work In Progress") }

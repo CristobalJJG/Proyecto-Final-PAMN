@@ -119,7 +119,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun modalRegistrado(view: View){
-        view.findViewById<TextView>(R.id.txt_modalUserName).text = "Nombre del usuario"
+        view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario.getNombre();
         if(log_usuario.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
         else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
