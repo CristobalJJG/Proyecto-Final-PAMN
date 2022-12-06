@@ -17,9 +17,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
-
-var User:Usuario = Usuario()
-
 class LoginActivity : AppCompatActivity() {
     private var mail:String = ""
     private var pass:String = ""
@@ -53,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val intent = Intent(this, PublicationsActivity::class.java)
-                            intent.putExtra("user", User.toString())
+                            //fetchData(mail)
                             showMessage(applicationContext, "Has iniciado sesión")
                             startActivity(intent)
                         } else {

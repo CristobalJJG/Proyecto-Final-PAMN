@@ -2,38 +2,41 @@ package com.example.delegadosapp.modelo
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.delegadosapp.MyCallback
-import com.google.android.gms.tasks.Tasks.await
+import com.example.delegadosapp.NewsCallback
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
-class Noticias {
+class Noticias(
+    private var title: String = "",
+    private var description: String = "",
+    private var img: String? = null
+) {
 
-    //Firestore
     val db = FirebaseFirestore.getInstance()
-    val listTitulo: MutableList<String> = mutableListOf()
-    constructor(){
 
-    }
+    fun getTitle(): String { return title }
+    fun getDescription(): String { return description }
+    fun getImage(): String? { return img }
 
-    fun datosNoticias(myCallback: MyCallback){
-        val listTitulo: MutableList<String> = mutableListOf()
-        val listDescripcion: MutableList<String> = mutableListOf()
+    fun setTitle(string:String) { this.title = string }
+    fun setDescription(string:String) { this.description = string }
+    fun setImage(string:String) { this.img = string }
+
+    fun datosNoticias(myCallback: NewsCallback){
+        val listNews: MutableList<Noticias> = mutableListOf()
         db.collection("news")
             .orderBy("fecha")
             .get()
             .addOnSuccessListener { documents ->
                 //Log.d("hola2", documents.toString())
                 for (document in documents) {
-                    listTitulo.add(document.id)
-                    listDescripcion.add(document.get("description") as String)
+                    listNews.add(Noticias(
+                        document.id,
+                        document.get("description") as String,
+                        document.get("img") as String
+                    ))
                 }
-                myCallback.onCallback(listTitulo.toTypedArray(), listDescripcion.toTypedArray())
-                Log.i("firebase", "Got value ${listTitulo[0]}")
+                myCallback.onCallback(listNews.toTypedArray())
+                Log.i("firebase", "Got value ${listNews[0]}")
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
