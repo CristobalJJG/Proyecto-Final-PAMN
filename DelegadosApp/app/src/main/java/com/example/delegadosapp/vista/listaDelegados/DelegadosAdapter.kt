@@ -13,8 +13,8 @@ class DelegadosAdapter (
     private val onClickListener: (Usuario) -> Unit) : RecyclerView.Adapter<DelegadosAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
-            val v = LayoutInflater.from(parent.context).inflate(R.layout.delegado_layout, parent, false)
-            return ViewHolder(v)
+            val v = LayoutInflater.from(parent.context)
+            return ViewHolder(v.inflate(R.layout.delegado_layout, parent, false))
         }
 
         override fun onBindViewHolder(vh: ViewHolder, i: Int) {
@@ -30,6 +30,7 @@ class DelegadosAdapter (
                 binding.txtDelegaRol.text = delegado.getRol().toString()
                 binding.txtUsername.text = delegado.getNombre()
                 //binding.txtDelegaRol.img = delegado.getImage()
+                binding.cvDelegado.setOnClickListener{ onClickAction(delegado)}
             }
         }
 }

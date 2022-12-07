@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_delegado"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="5dp"
@@ -11,39 +12,40 @@
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
     tools:ignore="MissingClass">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_userProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="15dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/img_userProfile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="15dp"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/txt_Username"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Nombre"
+                android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/txt_Username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:text="Nombre"
-                    android:textAlignment="center" />
+            <TextView
+                android:id="@+id/txt_delegaRol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Rol"
+                android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/txt_delegaRol"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:text="Rol"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

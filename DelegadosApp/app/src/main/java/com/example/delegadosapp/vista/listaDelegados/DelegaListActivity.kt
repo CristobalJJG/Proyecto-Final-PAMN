@@ -40,7 +40,7 @@ class DelegaListActivity : AppCompatActivity() {
         usuario.getDelegadosCallback(
             object : UsersCallback {
                 override fun getDelegadosCallback(users: ArrayList<Usuario>) {
-                    val adapter = DelegadosAdapter(users, {onItemSelected(it)})
+                    val adapter = DelegadosAdapter(users) { onItemSelected(it) }
                     binding.lv.adapter = adapter
                 }
             }
@@ -59,7 +59,8 @@ class DelegaListActivity : AppCompatActivity() {
         }
 
     fun onItemSelected(user: Usuario){
-        showMessage(this, user.getEmail());
+        Log.i("Delegado Clicked", user.getEmail())
+        showMessage(this, user.getEmail())
     }
 
 
