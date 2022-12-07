@@ -50,11 +50,9 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val intent = Intent(this, PublicationsActivity::class.java)
-                            //fetchData(mail)
                             showMessage(applicationContext, "Has iniciado sesión")
                             startActivity(intent)
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
                             showMessage(baseContext, "Authentication failed.")
                         }
@@ -74,7 +72,6 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         intent.putExtra("mail", mail)
         startActivity(intent)
-        //showMessage(applicationContext, "Irías a 'Register', pero no está hecho todavía, sorry")
     }
 
     fun onClick_rememberPass(view: View){
@@ -84,8 +81,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onClick_goToInvite(view:View){
-        val intent = Intent(this, PublicationsActivity::class.java)
-        startActivity(intent)
+        //Se intenta hacer el loggeo
+        auth.signInWithEmailAndPassword("invitado@invitado.invitado", "invitado")
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val intent = Intent(this, PublicationsActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    showMessage(baseContext, "Authentication failed.")
+                }
+            }
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
+
 }

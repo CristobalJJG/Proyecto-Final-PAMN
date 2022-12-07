@@ -102,9 +102,18 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun onClick_goToInvite(view:View){
-        val intent = Intent(this, PublicationsActivity::class.java)
-        intent.putExtra("rol", 0)
-        startActivity(intent)
+        //Se intenta hacer el loggeo
+        auth.signInWithEmailAndPassword("invitado@invitado.invitado", "invitado")
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val intent = Intent(this, PublicationsActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    showMessage(baseContext, "Authentication failed.")
+                }
+            }
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
 }

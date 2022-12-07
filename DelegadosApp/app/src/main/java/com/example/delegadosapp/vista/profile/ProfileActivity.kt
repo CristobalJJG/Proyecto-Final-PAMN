@@ -90,20 +90,6 @@ class ProfileActivity : AppCompatActivity() {
             }
     }
 
-    fun modalRegistrado(view: View) {
-
-        view.findViewById<TextView>(R.id.txt_modalUserName).text = "Invitado"
-        view.findViewById<TextView>(R.id.txt_modalCargo).visibility = View.GONE
-
-        val btn_login = view.findViewById<Button>(R.id.btn_menuLogin)
-        btn_login.visibility = View.VISIBLE
-        btn_login.setOnClickListener{ startActivity(Intent(this, LoginActivity::class.java)) }
-
-        val btn_register = view.findViewById<Button>(R.id.btn_menuRegister)
-        btn_register.visibility = View.VISIBLE
-        btn_register.setOnClickListener{ startActivity(Intent(this, RegisterActivity::class.java)) }
-    }
-
     fun modalRegistrado(view: View){
         view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario.getNombre();
         if(log_usuario.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"

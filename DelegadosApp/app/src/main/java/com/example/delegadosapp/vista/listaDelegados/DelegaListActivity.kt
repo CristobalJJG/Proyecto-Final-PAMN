@@ -23,7 +23,9 @@ import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.example.delegadosapp.vista.publications.log_usuario
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 
 class DelegaListActivity : AppCompatActivity() {
@@ -110,6 +112,7 @@ class DelegaListActivity : AppCompatActivity() {
             btn_logout.visibility = View.VISIBLE
             btn_logout.setOnClickListener {
                 log_usuario = Usuario()
+                Firebase.auth.signOut()
                 showMessage(this, "Cerrado sesión")
                 startActivity(Intent(this, LoginActivity::class.java))
             }
