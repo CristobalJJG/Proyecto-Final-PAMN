@@ -90,7 +90,6 @@ class Usuario (
             .addOnSuccessListener { documents ->
                 for (doc in documents) {
                     val rol = (doc.data["rol"].toString().toInt())
-                    if(rol == 2) {
                         val insta = (doc.data["instagram"].toString())
                         val telegram = (doc.data["telegram"].toString())
                         val nombre = (doc.data["name"].toString())
@@ -107,10 +106,7 @@ class Usuario (
                                 email, discord, grade, puesto
                             )
                         )
-                    }
                 }
-
-                Log.w("Lista", listOfUsers[0].toString())
                 myCallback.getDelegadosCallback(listOfUsers)
             }
     }

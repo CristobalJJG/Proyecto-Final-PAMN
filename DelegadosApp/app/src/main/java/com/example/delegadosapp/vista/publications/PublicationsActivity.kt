@@ -53,12 +53,11 @@ class PublicationsActivity : AppCompatActivity() {
             this.email = user.email.toString()
             this.uid = user.uid
         }
-        Log.w("Correo:        ", email)
 
         //Llamada a la funcion para rescatar datos
         noticias.datosNoticias(object : NewsCallback {
             override fun onCallback(value: Array<Noticias>) {
-                val adapter = PostAdapter(value, {onItemSelected(it)})
+                val adapter = PostAdapter(value) { onItemSelected(it) }
                 binding.rv.adapter = adapter
             }
         })
@@ -98,7 +97,16 @@ class PublicationsActivity : AppCompatActivity() {
         }
 
         fun onItemSelected(noticia: Noticias){
-            showMessage(this, noticia.getTitle());
+            Log.i("Noticia Clicked", noticia.getTitle())
+            showMessage(this, noticia.getTitle())
+
+            val intent = Intent(this, SinglePublicationActivity::class.java)
+
+            intent.putExtra("title", noticia.getTitle())
+            intent.putExtra("picture", noticia.getImage())
+            intent.putExtra("description", noticia.getDescription())
+
+            startActivity(intent)
         }
 
         fun modalInvite(view:View){
@@ -108,11 +116,15 @@ class PublicationsActivity : AppCompatActivity() {
 
             val btn_login = view.findViewById<Button>(R.id.btn_menuLogin)
             btn_login.visibility = View.VISIBLE
-            btn_login.setOnClickListener{ startActivity(Intent(this, LoginActivity::class.java)) }
+            btn_login.setOnClickListener{
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
 
             val btn_register = view.findViewById<Button>(R.id.btn_menuRegister)
             btn_register.visibility = View.VISIBLE
-            btn_register.setOnClickListener{ startActivity(Intent(this, RegisterActivity::class.java)) }
+            btn_register.setOnClickListener{
+                startActivity(Intent(this, RegisterActivity::class.java))
+            }
         }
 
         fun modalRegistrado(view: View) {
@@ -124,12 +136,7 @@ class PublicationsActivity : AppCompatActivity() {
             val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
             btn_inicio.visibility = View.VISIBLE
             btn_inicio.setOnClickListener {
-                startActivity(
-                    Intent(
-                        this,
-                        PublicationsActivity::class.java
-                    )
-                )
+                startActivity( Intent(this, PublicationsActivity::class.java ) )
             }
 
             val btn_profile = view.findViewById<Button>(R.id.btn_menuProfile)
@@ -138,29 +145,29 @@ class PublicationsActivity : AppCompatActivity() {
 
             val btn_favs = view.findViewById<Button>(R.id.btn_menuFavs)
             btn_favs.visibility = View.VISIBLE
-            btn_favs.setOnClickListener { showMessage(this, "Work In Progress") }
+            btn_favs.setOnClickListener {
+                showMessage(this, "Work In Progress")
+            }
 
             if (log_usuario?.getRol() == 2) {
                 val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
                 btn_meetings.visibility = View.VISIBLE
-                btn_meetings.setOnClickListener { showMessage(this, "Work In Progress") }
+                btn_meetings.setOnClickListener {
+                    showMessage(this, "Work In Progress")
+                }
             }
 
             val btn_listaDelega = view.findViewById<Button>(R.id.btn_menuListDelega)
             btn_listaDelega.visibility = View.VISIBLE
             btn_listaDelega.setOnClickListener {
-                startActivity(
-                    Intent(
-                        this,
-                        DelegaListActivity::class.java
-                    )
-                )
+                startActivity(Intent(this, DelegaListActivity::class.java ))
             }
 
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
-            btn_logout.setOnClickListener {
-                log_usuario = null
+            btn_logout.setOnClickListener{
+                log_usuario = Usuario()
+                Firebase.auth.signOut()
                 showMessage(this, "Cerrado sesión")
                 startActivity(Intent(this, LoginActivity::class.java))
             }
