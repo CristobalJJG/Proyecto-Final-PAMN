@@ -159,8 +159,9 @@ class PublicationsActivity : AppCompatActivity() {
 
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
-            btn_logout.setOnClickListener {
-                log_usuario = null
+            btn_logout.setOnClickListener{
+                this.log_usuario = Usuario()
+                Firebase.auth.signOut()
                 showMessage(this, "Cerrado sesión")
                 startActivity(Intent(this, LoginActivity::class.java))
             }
