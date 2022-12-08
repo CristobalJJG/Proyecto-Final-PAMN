@@ -1,22 +1,22 @@
 package com.example.delegadosapp.Publications
 
-import android.content.DialogInterface.OnClickListener
-import android.content.Intent
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.delegadosapp.AuxFunctions.showMessage
+import com.bumptech.glide.Glide
 import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.PostLayoutBinding
 import com.example.delegadosapp.modelo.Noticias
-import com.example.delegadosapp.vista.publications.SinglePublicationActivity
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class PostAdapter(
     private val news: Array<Noticias>,
-    private val onClickListener: (Noticias) -> Unit) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+    private val onClickListener: (Noticias) -> Unit,
+    private val  context: Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -35,6 +35,16 @@ class PostAdapter(
 
         fun render(news: Noticias, onClickListener: (Noticias) -> Unit){
             //img?.let { binding.imgPost.setImageResource(news.getImage()) }
+            // Get a non-default Storage bucket
+            val storage = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/" + news.getImage().toString())
+
+            storage.downloadUrl.addOnSuccessListener { url ->
+                Log.w("URL: =>", url.toString())
+                Glide.with(context)
+                    .load(url)
+                    .into(binding.imgPost)
+            }
+
             binding.txtTitle.text = news.getTitle()
             binding.txtDescription.text = news.getDescription()
 

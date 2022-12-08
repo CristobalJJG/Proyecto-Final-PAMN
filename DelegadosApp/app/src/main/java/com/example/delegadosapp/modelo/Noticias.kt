@@ -1,6 +1,7 @@
 package com.example.delegadosapp.modelo
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.util.Log
 import com.example.delegadosapp.NewsCallback
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,7 +22,7 @@ class Noticias(
     fun setDescription(string:String) { this.description = string }
     fun setImage(string:String) { this.img = string }
 
-    fun datosNoticias(myCallback: NewsCallback){
+    fun datosNoticias(myCallback: NewsCallback, context: Context){
         val listNews: MutableList<Noticias> = mutableListOf()
         db.collection("news")
             .orderBy("fecha")
@@ -35,7 +36,7 @@ class Noticias(
                         document.get("img") as String
                     ))
                 }
-                myCallback.onCallback(listNews.toTypedArray())
+                myCallback.onCallback(listNews.toTypedArray(),context)
                 Log.i("firebase", "Got value ${listNews[0]}")
             }
             .addOnFailureListener { exception ->

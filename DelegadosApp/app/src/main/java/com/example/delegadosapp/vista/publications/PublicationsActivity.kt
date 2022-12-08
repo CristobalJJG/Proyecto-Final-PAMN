@@ -58,11 +58,11 @@ class PublicationsActivity : AppCompatActivity() {
 
         //Llamada a la funcion para rescatar datos
         noticias.datosNoticias(object : NewsCallback {
-            override fun onCallback(value: Array<Noticias>) {
-                val adapter = PostAdapter(value, {onItemSelected(it)})
+            override fun onCallback(value: Array<Noticias>, context: Context) {
+                val adapter = PostAdapter(value, {onItemSelected(it)}, context)
                 binding.rv.adapter = adapter
             }
-        })
+        },this)
 
         usuario.fetchData(object : UserCallback {
             override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
