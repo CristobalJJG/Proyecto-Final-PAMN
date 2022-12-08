@@ -53,10 +53,6 @@ class ProfileActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.txt_userName).text = log_usuario.getNombre()
                 findViewById<TextView>(R.id.txt_userDesc).text = log_usuario.getDescripcion()
                 findViewById<TextView>(R.id.txt_grado).text = log_usuario.getGrade()
-<<<<<<< HEAD
-
-=======
->>>>>>> main
                 if(log_usuario.getRol() == 2){
                     findViewById<TextView>(R.id.txt_labelDelega).text = "Delegado"
                     findViewById<TextView>(R.id.txt_posDelega).text = "Delegado, sin más"
@@ -94,15 +90,10 @@ class ProfileActivity : AppCompatActivity() {
             }
     }
 
-<<<<<<< HEAD
-    fun modalRegistrado(view: View) {
-        view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario.getNombre();
-        if (log_usuario.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
-=======
+
     fun modalRegistrado(view: View){
         view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario.getNombre();
         if(log_usuario.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
->>>>>>> main
         else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
 
         val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
@@ -143,13 +134,8 @@ class ProfileActivity : AppCompatActivity() {
 
         val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
         btn_logout.visibility = View.VISIBLE
-<<<<<<< HEAD
-        btn_logout.setOnClickListener {
-            log_usuario = Usuario()
-=======
         btn_logout.setOnClickListener{
             this.log_usuario = Usuario()
->>>>>>> main
             Firebase.auth.signOut()
             AuxFunctions.showMessage(this, "Cerrado sesión")
             startActivity(Intent(this, LoginActivity::class.java))
