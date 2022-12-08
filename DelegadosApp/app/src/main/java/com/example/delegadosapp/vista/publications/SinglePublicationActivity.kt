@@ -9,9 +9,12 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.R
+import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SinglePublicationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +57,8 @@ class SinglePublicationActivity : AppCompatActivity() {
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
             btn_logout.setOnClickListener{
-                log_usuario = null
+                log_usuario = Usuario()
+                Firebase.auth.signOut()
                 AuxFunctions.showMessage(this, "Cerrado sesión")
                 startActivity(Intent(this, LoginActivity::class.java))
             }

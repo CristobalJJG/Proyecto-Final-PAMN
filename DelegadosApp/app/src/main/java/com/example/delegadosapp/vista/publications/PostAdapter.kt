@@ -48,15 +48,7 @@ class PostAdapter(
             binding.txtTitle.text = news.getTitle()
             binding.txtDescription.text = news.getDescription()
 
-            binding.cvHolder.setOnClickListener{ onClickListener(news)
-                //val intent = Intent(binding.cvHolder.context, SinglePublicationActivity::class.java)
-
-                //intent.putExtra("title", title)
-                //intent.putExtra("picture", img)
-                //intent.putExtra("description", description)
-
-                //startActivity(binding.cvHolder.context)
-            }
+            binding.cvHolder.setOnClickListener{ onClickListener(news) }
         }
     }
 }
