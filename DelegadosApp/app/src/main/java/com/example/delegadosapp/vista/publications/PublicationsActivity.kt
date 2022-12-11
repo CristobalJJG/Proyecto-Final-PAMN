@@ -24,7 +24,6 @@ import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 var log_usuario: Usuario? = null
@@ -39,7 +38,6 @@ class PublicationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
-        //setContentView(R.layout.activity_publications)
         binding = ActivityPublicationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -100,15 +98,23 @@ class PublicationsActivity : AppCompatActivity() {
 
         fun onItemSelected(noticia: Noticias){
             Log.i("Noticia Clicked", noticia.getTitle())
-            showMessage(this, noticia.getTitle())
+            if(log_usuario?.getRol()==0){
+                showMessage(this, "Debes registrarte para poder leer la publicación.")
+                val modal = BottomSheetDialog(this)
+                val view = layoutInflater.inflate(R.layout.menu_layout, null)
+                modalInvite(view)
+                modal.setContentView(view)
+                modal.show()
+            }else {
+                //showMessage(this, noticia.getTitle())
+                val intent = Intent(this, SinglePublicationActivity::class.java)
 
-            val intent = Intent(this, SinglePublicationActivity::class.java)
+                intent.putExtra("title", noticia.getTitle())
+                intent.putExtra("picture", noticia.getImage())
+                intent.putExtra("description", noticia.getDescription())
 
-            intent.putExtra("title", noticia.getTitle())
-            intent.putExtra("picture", noticia.getImage())
-            intent.putExtra("description", noticia.getDescription())
-
-            startActivity(intent)
+                startActivity(intent)
+            }
         }
 
         fun modalInvite(view:View){

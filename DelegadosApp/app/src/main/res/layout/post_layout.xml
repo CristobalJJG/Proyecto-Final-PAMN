@@ -58,7 +58,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="10dp"
                 android:ellipsize="end"
-                android:maxLines="3"
+                android:maxLines="4"
                 android:text="Wenos días caballero, estamos haciendo cosas de PAMN"
                 android:textSize="14sp" />
 
