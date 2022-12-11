@@ -33,6 +33,7 @@ class PublicationsActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var uid: String
 
+
     private lateinit var binding: ActivityPublicationsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,11 +57,12 @@ class PublicationsActivity : AppCompatActivity() {
 
         //Llamada a la funcion para rescatar datos
         noticias.datosNoticias(object : NewsCallback {
-            override fun onCallback(value: Array<Noticias>) {
-                val adapter = PostAdapter(value) { onItemSelected(it) }
+            override fun onCallback(value: Array<Noticias>, context: Context) {
+                val adapter = PostAdapter(value, {onItemSelected(it)}, context)
+
                 binding.rv.adapter = adapter
             }
-        })
+        },this)
 
         usuario.fetchData(object : UserCallback {
             override fun usuarioCallback(actual_usr: Usuario?, contex: Context) {
@@ -165,8 +167,8 @@ class PublicationsActivity : AppCompatActivity() {
 
             val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
             btn_logout.visibility = View.VISIBLE
-            btn_logout.setOnClickListener{
-                log_usuario = Usuario()
+            btn_logout.setOnClickListener {
+                log_usuario = null
                 Firebase.auth.signOut()
                 showMessage(this, "Cerrado sesión")
                 startActivity(Intent(this, LoginActivity::class.java))
