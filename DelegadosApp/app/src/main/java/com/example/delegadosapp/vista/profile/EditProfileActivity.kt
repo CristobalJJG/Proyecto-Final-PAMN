@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.delegadosapp.R
+import com.example.delegadosapp.databinding.ActivityEditProfileBinding
+import com.example.delegadosapp.databinding.ActivityPublicationsBinding
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.firebase.auth.ktx.auth
@@ -23,23 +25,24 @@ class EditProfileActivity : AppCompatActivity() {
     //Iniciamos Firebase
     val db = FirebaseFirestore.getInstance()
 
+    private lateinit var binding: ActivityEditProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
-        setContentView(R.layout.activity_edit_profile)
+        binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         btn = findViewById(R.id.btn_addInfo)
 
         btn.setOnClickListener {
-
             // Extraemos los datos de la pantalla y lo guardamos como variables.
             // para poder guardarlas en el Firebase
-            val name = findViewById<EditText>(R.id.editTextTextPersonName3).text.toString()
-            val description = findViewById<EditText>(R.id.editTextTextMultiLine2).text.toString()
-            val movile = findViewById<EditText>(R.id.editTextTextPersonName5).text.toString()
-            val discord = findViewById<EditText>(R.id.editTextTextPersonName7).text.toString()
-            val telegram = findViewById<EditText>(R.id.editTextTextPersonName8).text.toString()
-            val instagram = findViewById<EditText>(R.id.editTextTextPersonName9).text.toString()
+            val name = binding.editTextTextPersonName3.text.toString()
+            val description = binding.editTextTextMultiLine2.text.toString()
+            val movile = binding.editTextTextPersonName5.text.toString()
+            val discord = binding.editTextTextPersonName7.text.toString()
+            val telegram = binding.editTextTextPersonName8.text.toString()
+            val instagram = binding.editTextTextPersonName9.text.toString()
 
 
             // Recuperamos los datos del usuario
@@ -54,10 +57,14 @@ class EditProfileActivity : AppCompatActivity() {
                     "instagram" to instagram
                 )
 
-                user.email?.let { it1 ->
-                    db.collection("users").document(it1).set( addusuario, SetOptions.merge() ).addOnSuccessListener { Log.d(
-                        ContentValues.TAG, "Actualización de los datos") }
-                        .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error writing document", e) }
+                user.email?.let {
+                    db.collection("users").document(it)
+                        .set(addusuario, SetOptions.merge())
+                        .addOnSuccessListener {
+                            Log.d("EditUserInfo => ", "Actualización de los datos")
+                        }.addOnFailureListener { e ->
+                            Log.e("EditUserInfo => ", "Error writing document", e)
+                        }
                 }
             }
 
