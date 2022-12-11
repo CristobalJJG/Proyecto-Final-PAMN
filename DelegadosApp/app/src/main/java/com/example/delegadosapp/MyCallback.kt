@@ -9,7 +9,7 @@ interface UserCallback {
 }
 
 interface NewsCallback {
-    fun onCallback(value: Array<Noticias>)
+    fun onCallback(value: Array<Noticias>,contex: Context)
 }
 
 interface UsersCallback {
