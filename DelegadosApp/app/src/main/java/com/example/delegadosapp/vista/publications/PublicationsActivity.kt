@@ -136,7 +136,7 @@ class PublicationsActivity : AppCompatActivity() {
         }
 
     fun modalRegistrado(view: View){
-        view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario?.getNombre();
+        view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario?.getNombre()
         if(log_usuario?.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
         else {
             if(log_usuario?.getPuesto() != "") view.findViewById<TextView>(R.id.txt_modalCargo).text =

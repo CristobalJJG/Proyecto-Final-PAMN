@@ -1,19 +1,13 @@
 package com.example.delegadosapp.vista.profile
 
-import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.ActivityEditProfileBinding
-import com.example.delegadosapp.databinding.ActivityPublicationsBinding
-import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.publications.PublicationsActivity
+import com.example.delegadosapp.vista.publications.log_usuario
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -32,17 +26,29 @@ class EditProfileActivity : AppCompatActivity() {
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        btn = findViewById(R.id.btn_addInfo)
+        var name = log_usuario!!.getNombre()
+        var description = log_usuario!!.getDescripcion()
+        var movile = log_usuario!!.getMovil()
+        var discord = log_usuario!!.getDiscord()
+        var telegram = log_usuario!!.getTelegram()
+        var instagram = log_usuario!!.getInstagram()
 
+        btn = binding.btnAddInfo
         btn.setOnClickListener {
             // Extraemos los datos de la pantalla y lo guardamos como variables.
             // para poder guardarlas en el Firebase
-            val name = binding.editTextTextPersonName3.text.toString()
-            val description = binding.editTextTextMultiLine2.text.toString()
-            val movile = binding.editTextTextPersonName5.text.toString()
-            val discord = binding.editTextTextPersonName7.text.toString()
-            val telegram = binding.editTextTextPersonName8.text.toString()
-            val instagram = binding.editTextTextPersonName9.text.toString()
+            var aux = binding.editName.text.toString()
+            if(aux != "")name = aux
+            aux = binding.editDesc.text.toString()
+            if(aux != "") description = aux
+            aux = binding.editMovil.text.toString()
+            if(aux != "") movile = aux
+            aux = binding.editDiscord.text.toString()
+            if(aux != "") discord = aux
+            aux = binding.editTelegram.text.toString()
+            if(aux != "" )telegram = aux
+            aux = binding.editInstagram.text.toString()
+            if(aux != "") instagram = aux
 
 
             // Recuperamos los datos del usuario
