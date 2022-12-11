@@ -5,12 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.PostLayoutBinding
 import com.example.delegadosapp.modelo.Noticias
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
 class PostAdapter(
@@ -31,19 +36,21 @@ class PostAdapter(
     override fun getItemCount(): Int = news.size
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val binding = PostLayoutBinding.bind(itemView)
+        var binding = PostLayoutBinding.bind(itemView)
 
         fun render(news: Noticias, onClickListener: (Noticias) -> Unit){
-            //img?.let { binding.imgPost.setImageResource(news.getImage()) }
             // Get a non-default Storage bucket
             val storage = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/" + news.getImage().toString())
-
             storage.downloadUrl.addOnSuccessListener { url ->
-                Log.w("URL: =>", url.toString())
+                Log.i("URL: =>", url.toString())
                 Glide.with(context)
                     .load(url)
                     .into(binding.imgPost)
+            }.addOnFailureListener {
+                Log.i("URL: =>", "No se encontró foto")
+                binding.imgPost.visibility = View.GONE
             }
+
 
             binding.txtTitle.text = news.getTitle()
             binding.txtDescription.text = news.getDescription()
