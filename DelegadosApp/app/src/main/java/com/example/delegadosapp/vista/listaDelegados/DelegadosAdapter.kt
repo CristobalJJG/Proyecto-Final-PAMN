@@ -27,7 +27,8 @@ class DelegadosAdapter (
             private val binding = DelegadoLayoutBinding.bind(itemView)
 
             fun render(delegado: Usuario, onClickAction: (Usuario)->Unit){
-                binding.txtDelegaRol.text = delegado.getRol().toString()
+                if(delegado.getPuesto() != "")binding.txtDelegaRol.text = delegado.getPuesto()
+                else binding.txtDelegaRol.text = "Delegado, sin más"
                 binding.txtUsername.text = delegado.getNombre()
                 //binding.txtDelegaRol.img = delegado.getImage()
                 binding.cvDelegado.setOnClickListener{ onClickAction(delegado)}

@@ -33,6 +33,7 @@ class Usuario (
     fun getTelegram():String{ return telegram }
     fun getNombre(): String { return nombre }
     fun getGrade(): String{ return grade }
+    fun getPuesto(): String{ return puesto }
 
     fun setDescripcion(string: String) { this.descripcion = string }
     fun setRol(string: Int) { this.rol = string }
@@ -43,10 +44,12 @@ class Usuario (
     fun setTelegram(string: String){ this.telegram = string }
     fun setNombre(string: String) { this.nombre = string }
     fun setGrade(string: String){ this.grade = string }
+    fun setPuesto(string: String){ this.puesto = string }
 
     fun getHashUsuario(): HashMap<String, Any?> {
         val addusuario = hashMapOf<String, Any?>(
             "rol" to getRol(),
+            "puesto" to getPuesto(),
             "name" to getNombre(),
             "grade" to getGrade(),
             "description" to getDescripcion(),
@@ -77,6 +80,7 @@ class Usuario (
                 setMovil(doc.data?.get("movil").toString())
                 setEmail(doc.data?.get("email").toString())
                 setDiscord(doc.data?.get("discord").toString())
+                setPuesto(doc.data?.get("puesto").toString())
                 setGrade(doc.data?.get("grade").toString())
                 Log.w("USUARIO1", this.toString())
                 myCallback.usuarioCallback(this, contex)

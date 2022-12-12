@@ -135,49 +135,48 @@ class PublicationsActivity : AppCompatActivity() {
             }
         }
 
-        fun modalRegistrado(view: View) {
-
-            view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario?.getNombre();
-            if (log_usuario?.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
-            else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado"
-
-            val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
-            btn_inicio.visibility = View.VISIBLE
-            btn_inicio.setOnClickListener {
-                startActivity( Intent(this, PublicationsActivity::class.java ) )
-            }
-
-            val btn_profile = view.findViewById<Button>(R.id.btn_menuProfile)
-            btn_profile.visibility = View.VISIBLE
-            btn_profile.setOnClickListener { startActivity(Intent(this, ProfileActivity::class.java)) }
-
-            val btn_favs = view.findViewById<Button>(R.id.btn_menuFavs)
-            btn_favs.visibility = View.VISIBLE
-            btn_favs.setOnClickListener {
-                showMessage(this, "Work In Progress")
-            }
-
-            if (log_usuario?.getRol() == 2) {
-                val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
-                btn_meetings.visibility = View.VISIBLE
-                btn_meetings.setOnClickListener {
-                    showMessage(this, "Work In Progress")
-                }
-            }
-
-            val btn_listaDelega = view.findViewById<Button>(R.id.btn_menuListDelega)
-            btn_listaDelega.visibility = View.VISIBLE
-            btn_listaDelega.setOnClickListener {
-                startActivity(Intent(this, DelegaListActivity::class.java ))
-            }
-
-            val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
-            btn_logout.visibility = View.VISIBLE
-            btn_logout.setOnClickListener {
-                log_usuario = null
-                Firebase.auth.signOut()
-                showMessage(this, "Cerrado sesión")
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
+    fun modalRegistrado(view: View){
+        view.findViewById<TextView>(R.id.txt_modalUserName).text = log_usuario?.getNombre()
+        if(log_usuario?.getRol() == 1) view.findViewById<TextView>(R.id.txt_modalCargo).text = "Alumno"
+        else {
+            if(log_usuario?.getPuesto() != "") view.findViewById<TextView>(R.id.txt_modalCargo).text =
+                log_usuario?.getPuesto()
+            else view.findViewById<TextView>(R.id.txt_modalCargo).text = "Delegado, sin más"
         }
+
+        val btn_inicio = view.findViewById<Button>(R.id.btn_menuInicio)
+        btn_inicio.visibility = View.VISIBLE
+        btn_inicio.setOnClickListener {
+            startActivity(Intent(this, PublicationsActivity::class.java))
+        }
+
+        val btn_profile = view.findViewById<Button>(R.id.btn_menuProfile)
+        btn_profile.visibility = View.VISIBLE
+        btn_profile.setOnClickListener { startActivity(Intent(this, ProfileActivity::class.java)) }
+
+        val btn_favs = view.findViewById<Button>(R.id.btn_menuFavs)
+        btn_favs.visibility = View.VISIBLE
+        btn_favs.setOnClickListener { AuxFunctions.showMessage(this, "Work In Progress") }
+
+        if (log_usuario?.getRol() == 2) {
+            val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
+            btn_meetings.visibility = View.VISIBLE
+            btn_meetings.setOnClickListener { AuxFunctions.showMessage(this, "Work In Progress") }
+        }
+
+        val btn_listaDelega = view.findViewById<Button>(R.id.btn_menuListDelega)
+        btn_listaDelega.visibility = View.VISIBLE
+        btn_listaDelega.setOnClickListener {
+            startActivity( Intent(this, DelegaListActivity::class.java))
+        }
+
+        val btn_logout = view.findViewById<Button>(R.id.btn_menuLogout)
+        btn_logout.visibility = View.VISIBLE
+        btn_logout.setOnClickListener{
+            log_usuario = Usuario()
+            Firebase.auth.signOut()
+            AuxFunctions.showMessage(this, "Cerrado sesión")
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
     }
