@@ -2,22 +2,23 @@ package com.example.delegadosapp.vista.login_register
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
-import com.example.delegadosapp.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.example.delegadosapp.modelo.Usuario
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.appcompat.app.AppCompatActivity
 import com.example.delegadosapp.AuxFunctions.showMessage
+import com.example.delegadosapp.R
+import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.profile.EditProfileActivity
 import com.example.delegadosapp.vista.publications.PublicationsActivity
+import com.example.delegadosapp.vista.publications.log_usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -70,15 +71,17 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val user = Firebase.auth.currentUser
                         user?.let {
-                            // Name, email address, and profile photo Url
-                            val email = user.email
-                            val uid = user.uid
-                            newUsuario = Usuario(email = mail, grade = grado)
+                            newUsuario =  Usuario(rol = 1,
+                                instagram = "@", telegram = "@", nombre = "",
+                                descripcion = "", movil = "+34000000000",
+                                email = mail, discord = "", grade = "",
+                                puesto = ""
+                            )
+                            log_usuario = newUsuario
                             db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
                         }
                         val intent = Intent(this, EditProfileActivity::class.java)
-                        intent.putExtra("newUser", newUsuario)
                         startActivity(intent)
                     } else {
                         Log.d(TAG, "RegistrarUsuario: failure", task.exception)
