@@ -1,13 +1,23 @@
 package com.example.delegadosapp.vista.publications
 
+import android.app.Activity
+import android.app.Instrumentation.ActivityResult
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.R
+import com.example.delegadosapp.databinding.ActivityAddNewPublicationBinding
+import com.example.delegadosapp.databinding.ActivityDelegaListBinding
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.example.delegadosapp.vista.login_register.LoginActivity
@@ -15,12 +25,17 @@ import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.jar.Manifest
 
 class AddNewPublicationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddNewPublicationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
-        setContentView(R.layout.activity_add_new_publication)
+        binding = ActivityAddNewPublicationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.button.setOnClickListener{ requestPermissions() }
+//        setContentView(R.layout.activity_add_new_publication)
         //Forma de abrir el modal del menú para redirigir a todas las pantallas
         findViewById<FloatingActionButton>(R.id.btn_modalMenu)
             .setOnClickListener {
@@ -33,6 +48,49 @@ class AddNewPublicationActivity : AppCompatActivity() {
                 modal.setContentView(view)
                 modal.show()
             }
+    }
+
+    private fun requestPermissions(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            when{
+                ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    escogerFotoGaleria()
+                }
+                else -> requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        }else{
+            escogerFotoGaleria()
+        }
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ){isGranted->
+        if (isGranted){
+            escogerFotoGaleria()
+        }else{
+            Toast.makeText(this,"Tienes que dar permisos de acceso a galería", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private val startForGalleryActivity = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            val data = result.data?.data
+            binding.imageView4.setImageURI(data)
+        }
+
+    }
+
+    private fun escogerFotoGaleria() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        startForGalleryActivity.launch(intent)
     }
 
     fun modalInvite(view:View){
