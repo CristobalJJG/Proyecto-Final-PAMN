@@ -4,11 +4,16 @@ import android.app.Activity
 import android.app.Instrumentation.ActivityResult
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
@@ -25,20 +30,29 @@ import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
+import java.util.Objects
 import java.util.jar.Manifest
 
 class AddNewPublicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNewPublicationBinding
+    private var new_photo: Boolean = false
+    private var data: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         binding = ActivityAddNewPublicationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.button.setOnClickListener{ requestPermissions() }
+        binding.button.setOnClickListener{
+            requestPermissions()
+            new_photo=true
+        }
 //        setContentView(R.layout.activity_add_new_publication)
         //Forma de abrir el modal del menú para redirigir a todas las pantallas
-        findViewById<FloatingActionButton>(R.id.btn_modalMenu)
-            .setOnClickListener {
+//        findViewById<FloatingActionButton>(R.id.btn_modalMenu)
+        binding.btnModalMenu.setOnClickListener {
                 val modal = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.menu_layout, null)
 
@@ -47,7 +61,32 @@ class AddNewPublicationActivity : AppCompatActivity() {
 
                 modal.setContentView(view)
                 modal.show()
+        }
+
+        binding.addNews.setOnClickListener {
+            if(new_photo){
+                Log.w("Foto_Naruto=>", data.toString())
+                // Create a storage reference from our app
+                var storageRef = Firebase.storage.reference.child("news")
+                // Get the data from an ImageView as bytes
+                var imageView: ImageView = binding.imageView4
+                val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+
+                var uploadTask = storageRef.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    // Handle unsuccessful uploads
+                    AuxFunctions.showMessage(this, "Noooooo, no se ha subido")
+                }.addOnSuccessListener { taskSnapshot ->
+                    // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                    // ...
+
+                    AuxFunctions.showMessage(this, "Se ha subido imagen")
+                }
             }
+        }
     }
 
     private fun requestPermissions(){
@@ -81,7 +120,7 @@ class AddNewPublicationActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ){result ->
         if(result.resultCode == Activity.RESULT_OK){
-            val data = result.data?.data
+            data = result.data?.data
             binding.imageView4.setImageURI(data)
         }
 
