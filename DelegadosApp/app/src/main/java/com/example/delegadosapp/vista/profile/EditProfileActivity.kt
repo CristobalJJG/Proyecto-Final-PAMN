@@ -1,10 +1,10 @@
 package com.example.delegadosapp.vista.profile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.example.delegadosapp.databinding.ActivityEditProfileBinding
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.example.delegadosapp.vista.publications.log_usuario
@@ -33,8 +33,7 @@ class EditProfileActivity : AppCompatActivity() {
         var telegram = log_usuario!!.getTelegram()
         var instagram = log_usuario!!.getInstagram()
 
-        btn = binding.btnAddInfo
-        btn.setOnClickListener {
+        binding.btnAddInfo.setOnClickListener {
             // Extraemos los datos de la pantalla y lo guardamos como variables.
             // para poder guardarlas en el Firebase
             var aux = binding.editName.text.toString()
@@ -49,33 +48,52 @@ class EditProfileActivity : AppCompatActivity() {
             if(aux != "" )telegram = aux
             aux = binding.editInstagram.text.toString()
             if(aux != "") instagram = aux
-
-
-            // Recuperamos los datos del usuario
-            val user = Firebase.auth.currentUser
-            if (user != null) {
-                val addusuario = hashMapOf<String, String>(
-                    "name" to name,
-                    "description" to description,
-                    "movil" to movile,
-                    "discord" to discord,
-                    "telegram" to telegram,
-                    "instagram" to instagram
-                )
-
-                user.email?.let {
-                    db.collection("users").document(it)
-                        .set(addusuario, SetOptions.merge())
-                        .addOnSuccessListener {
-                            Log.d("EditUserInfo => ", "Actualización de los datos")
-                        }.addOnFailureListener { e ->
-                            Log.e("EditUserInfo => ", "Error writing document", e)
-                        }
-                }
-            }
-
-            val intent = Intent(this, PublicationsActivity::class.java)
-            startActivity(intent)
+            sendInfo(name, description, movile, discord, telegram, instagram)
         }
+
+        binding.btnOmitir.setOnClickListener{
+            var aux = log_usuario!!.getNombre()
+            if(aux != "")name = aux
+            aux = log_usuario!!.getDescripcion()
+            if(aux != "") description = aux
+            aux = log_usuario!!.getMovil()
+            if(aux != "") movile = aux
+            aux = log_usuario!!.getDiscord()
+            if(aux != "") discord = aux
+            aux = log_usuario!!.getTelegram()
+            if(aux != "" )telegram = aux
+            aux = log_usuario!!.getInstagram()
+            if(aux != "") instagram = aux
+            sendInfo(name, description, movile, discord, telegram, instagram)
+        }
+    }
+
+    fun sendInfo(name:String, description:String, movile:String,
+                 discord:String, telegram:String, instagram:String){
+        // Recuperamos los datos del usuario
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            val addusuario = hashMapOf<String, String>(
+                "name" to name,
+                "description" to description,
+                "movil" to movile,
+                "discord" to discord,
+                "telegram" to telegram,
+                "instagram" to instagram
+            )
+
+            user.email?.let {
+                db.collection("users").document(it)
+                    .set(addusuario, SetOptions.merge())
+                    .addOnSuccessListener {
+                        Log.d("EditUserInfo => ", "Actualización de los datos")
+                    }.addOnFailureListener { e ->
+                        Log.e("EditUserInfo => ", "Error writing document", e)
+                    }
+            }
+        }
+
+        val intent = Intent(this, PublicationsActivity::class.java)
+        startActivity(intent)
     }
 }
