@@ -1,7 +1,6 @@
 package com.example.delegadosapp.vista.publications
 
 import android.app.Activity
-import android.app.Instrumentation.ActivityResult
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -10,36 +9,33 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.ActivityAddNewPublicationBinding
-import com.example.delegadosapp.databinding.ActivityDelegaListBinding
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
-import java.util.Objects
-import java.util.jar.Manifest
 
 class AddNewPublicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNewPublicationBinding
     private var new_photo: Boolean = false
     private var data: Uri? = null
+    private var newsname: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
@@ -65,9 +61,18 @@ class AddNewPublicationActivity : AppCompatActivity() {
 
         binding.addNews.setOnClickListener {
             if(new_photo){
-                Log.w("Foto_Naruto=>", data?.)
+                data?.let { returnURI ->
+                    contentResolver.query(returnURI,null,null,null,null)
+                }?.use { cursor ->
+                    var nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    cursor?.moveToFirst()
+                    newsname =  cursor.getString(nameIndex)
+                    Log.w("Nombre archivo ",newsname!!)
+                }
+
+
                 // Create a storage reference from our app
-                val storageRef = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/")
+                val storageRef = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/"+newsname)
                 // Get the data from an ImageView as bytes
                 var imageView: ImageView = binding.imageView4
                 val bitmap = (imageView.drawable as BitmapDrawable).bitmap
