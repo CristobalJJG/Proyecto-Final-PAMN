@@ -19,96 +19,118 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="348dp"
-        android:layout_height="358dp"
+        android:layout_width="350dp"
+        android:layout_height="450dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-        <TextView
-            android:id="@+id/lbl_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/request_mail"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:translationX="50dp"
-            android:translationY="15dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:textAlignment="center">
 
-        <EditText
-            android:id="@+id/txt_mail"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:backgroundTint="@color/light_black"
-            android:ems="10"
-            android:hint="@string/mail_example"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/black"
-            android:textColorHint="@color/dark_white"
-            android:translationX="50dp"
-            android:translationY="55dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            <TextView
+                android:id="@+id/lbl_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/request_mail"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/lbl_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/request_pass"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:translationX="50dp"
-            android:translationY="115dp" />
+            <EditText
+                android:id="@+id/txt_mail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:backgroundTint="@color/light_black"
+                android:ems="10"
+                android:hint="@string/mail_example"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_white"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-        <EditText
-            android:id="@+id/txt_pass"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:backgroundTint="@color/light_black"
-            android:ems="10"
-            android:hint="@string/pass_example"
-            android:importantForAutofill="no"
-            android:inputType="textPassword|textWebPassword"
-            android:textColor="@color/black"
-            android:textColorHint="@color/dark_white"
-            android:translationX="50dp"
-            android:translationY="155dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            <TextView
+                android:id="@+id/lbl_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/request_pass"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/lbl_grado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/request_grado"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:translationX="50dp"
-            android:translationY="210dp" />
+            <EditText
+                android:id="@+id/txt_pass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:backgroundTint="@color/light_black"
+                android:ems="10"
+                android:hint="@string/pass_example"
+                android:importantForAutofill="no"
+                android:inputType="textPassword|textWebPassword"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_white"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-        <Spinner
-            android:id="@+id/spn_grados"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:background="@color/dark_white"
-            android:translationX="50dp"
-            android:translationY="255dp" />
+            <EditText
+                android:id="@+id/txt_pass3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:backgroundTint="@color/light_black"
+                android:ems="10"
+                android:hint="Repite la contraseña"
+                android:importantForAutofill="no"
+                android:inputType="textPassword|textWebPassword"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_white"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="128dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="128dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="onClick_register"
-            android:text="@string/btn_reg"
-            android:textColor="@color/white"
-            android:translationX="-77dp"
-            android:translationY="300dp"
-            tools:ignore="UsingOnClickInXml" />
+            <TextView
+                android:id="@+id/lbl_grado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/request_grado"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <Spinner
+                android:id="@+id/spn_grados"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:background="@color/dark_white" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="100dp"
+                android:onClick="onClick_register"
+                android:text="@string/btn_reg"
+                android:textColor="@color/white"
+                tools:ignore="UsingOnClickInXml" />
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
