@@ -65,9 +65,9 @@ class AddNewPublicationActivity : AppCompatActivity() {
 
         binding.addNews.setOnClickListener {
             if(new_photo){
-                Log.w("Foto_Naruto=>", data.toString())
+                Log.w("Foto_Naruto=>", data?.)
                 // Create a storage reference from our app
-                var storageRef = Firebase.storage.reference.child("news")
+                val storageRef = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/")
                 // Get the data from an ImageView as bytes
                 var imageView: ImageView = binding.imageView4
                 val bitmap = (imageView.drawable as BitmapDrawable).bitmap
