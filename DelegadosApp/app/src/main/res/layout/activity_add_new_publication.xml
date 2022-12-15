@@ -25,6 +25,27 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/default_picture" />
 
+    <LinearLayout
+        android:id="@+id/ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="100dp"
+            app:srcCompat="@drawable/upload" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="Subir Imagen"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_description"
         android:layout_width="match_parent"
@@ -36,7 +57,8 @@
         app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/ly"
+        tools:ignore="UnknownId">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,19 +159,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@color/light_white"
-        app:srcCompat="@android:drawable/button_onoff_indicator_off" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="150dp"
-        android:text="Subir Imagen"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:srcCompat="@drawable/menu_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
