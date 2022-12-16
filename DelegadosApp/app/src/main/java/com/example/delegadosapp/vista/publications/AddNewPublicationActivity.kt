@@ -26,6 +26,7 @@ import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
+import com.example.delegadosapp.vista.profile.EditProfileActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.FirebaseOptions
@@ -102,22 +103,25 @@ class AddNewPublicationActivity : AppCompatActivity() {
                 }
             }
 
-            var calendar = LocalDate.now().toString()
-            var calendarsplit = calendar.split("-")
-            Log.w("Fecha", calendar)
+            var calendar = Calendar.getInstance().timeInMillis
 
 
             val new_news = hashMapOf(
                 "description" to binding.editTextTextMultiLine.text.toString(),
-                "fecha" to Timestamp(calendarsplit[0].toInt(),calendarsplit[1].toInt(),calendarsplit[2].toInt(),0,0,0,0),
+                "fecha" to Timestamp(calendar),
                 "title" to binding.editTextTextPersonName2.text.toString(),
                 "img" to newsname
             )
 
 
             FirebaseFirestore.getInstance().collection("news").document().set(new_news)
-                .addOnSuccessListener { Log.d("EditUserInfo => ", "Actualización de los datos") }
-                .addOnFailureListener { e -> Log.e("EditUserInfo => ", "Error writing document", e) }
+                .addOnSuccessListener {  AuxFunctions.showMessage(this , "Actualización de los datos") }
+                .addOnFailureListener {  AuxFunctions.showMessage(this, "Error writing document") }
+
+
+            val intent = Intent(this, PublicationsActivity::class.java)
+            startActivity(intent)
+
         }
     }
 
