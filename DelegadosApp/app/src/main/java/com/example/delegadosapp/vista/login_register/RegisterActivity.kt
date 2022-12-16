@@ -94,6 +94,7 @@ class RegisterActivity : AppCompatActivity() {
             if(!mail.matches(mail_regex)) showMessage(baseContext, "Error, el correo no está bien formateado (user@host.com).")
             else if(pass.length<6) showMessage(baseContext, "Error, la contraseña tiene que tener mínimo 6 caracteres.")
             else if(!pass.matches(pass_regex)) showMessage(baseContext, "Error. Solo se permiten caracteres alfanuméricos")
+            else if(pass != rpt_pass) showMessage(baseContext, "Error. Solo se permiten caracteres alfanuméricos")
             else showMessage(baseContext, "Error. Algo ha fallado, no sabemos el qué, so sorry.")
         }
     }
