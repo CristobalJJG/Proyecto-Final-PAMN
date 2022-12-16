@@ -31,7 +31,7 @@ class Noticias(
                 //Log.d("hola2", documents.toString())
                 for (document in documents) {
                     listNews.add(Noticias(
-                        document.id,
+                        document.get("title") as String,
                         document.get("description") as String,
                         document.get("img") as String
                     ))

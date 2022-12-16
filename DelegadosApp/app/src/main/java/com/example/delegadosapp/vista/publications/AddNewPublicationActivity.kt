@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.R
@@ -27,15 +28,23 @@ import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.FirebaseOptions
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import org.checkerframework.checker.units.qual.C
 import java.io.ByteArrayOutputStream
+import java.sql.Timestamp
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
 
 class AddNewPublicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNewPublicationBinding
     private var new_photo: Boolean = false
     private var data: Uri? = null
-    private var newsname: String? = null
+    private var newsname: String = ""
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
@@ -60,19 +69,20 @@ class AddNewPublicationActivity : AppCompatActivity() {
         }
 
         binding.addNews.setOnClickListener {
-            if(new_photo){
+            if(new_photo) {
                 data?.let { returnURI ->
-                    contentResolver.query(returnURI,null,null,null,null)
+                    contentResolver.query(returnURI, null, null, null, null)
                 }?.use { cursor ->
-                    var nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    cursor?.moveToFirst()
-                    newsname =  cursor.getString(nameIndex)
-                    Log.w("Nombre archivo ",newsname!!)
+                    val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    cursor.moveToFirst()
+                    newsname = cursor.getString(nameIndex)
+                    Log.w("Nombre archivo ", newsname)
                 }
 
 
                 // Create a storage reference from our app
-                val storageRef = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/"+newsname)
+                val storageRef =
+                    Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/" + newsname)
                 // Get the data from an ImageView as bytes
                 var imageView: ImageView = binding.imageView4
                 val bitmap = (imageView.drawable as BitmapDrawable).bitmap
@@ -91,8 +101,26 @@ class AddNewPublicationActivity : AppCompatActivity() {
                     AuxFunctions.showMessage(this, "Se ha subido imagen")
                 }
             }
+
+            var calendar = LocalDate.now().toString()
+            var calendarsplit = calendar.split("-")
+            Log.w("Fecha", calendar)
+
+
+            val new_news = hashMapOf(
+                "description" to binding.editTextTextMultiLine.toString(),
+                "fecha" to Timestamp(calendarsplit[0].toInt(),calendarsplit[1].toInt(),calendarsplit[2].toInt(),0,0,0,0),
+                "title" to binding.editTextTextPersonName2.toString(),
+                "img" to newsname
+            )
+
+
+            FirebaseFirestore.getInstance().collection("news").document().set(new_news)
+                .addOnSuccessListener { Log.d("EditUserInfo => ", "Actualización de los datos") }
+                .addOnFailureListener { e -> Log.e("EditUserInfo => ", "Error writing document", e) }
         }
     }
+
 
     private fun requestPermissions(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
