@@ -3,14 +3,19 @@ package com.example.delegadosapp.vista.login_register
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.telephony.ims.ImsMmTelManager
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.R
+import com.example.delegadosapp.databinding.ActivityRegisterBinding
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.profile.EditProfileActivity
 import com.example.delegadosapp.vista.publications.PublicationsActivity
@@ -24,8 +29,12 @@ class RegisterActivity : AppCompatActivity() {
 
     private var mail: String = ""
     private var pass: String = ""
+    private var rpt_pass: String = ""
     private var grado: String = ""
     private lateinit var spinner: Spinner
+    private var bool1 = false
+    private var bool2 = false
+
 
     //Declaramos FirebaseAuth
     private lateinit var auth: FirebaseAuth
@@ -37,19 +46,11 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
-        setContentView(R.layout.activity_register)
 
-        //Iniciamos Firebase.auth
-        auth = Firebase.auth
+        val binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-
-        mail = intent.getStringExtra("mail").toString()
-        pass = intent.getStringExtra("pass").toString()
-
-        findViewById<TextView>(R.id.txt_mail).text = mail
-        findViewById<TextView>(R.id.txt_pass).text = pass
-
-        spinner = findViewById(R.id.spn_grados)
+        spinner = binding.spnGrados
         ArrayAdapter.createFromResource(
             this, R.array.grados,
             android.R.layout.simple_spinner_item
@@ -57,15 +58,40 @@ class RegisterActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
+
+        binding.hiddenPass1.setOnClickListener{
+            if(bool1){
+                binding.hiddenPass1.setImageResource(R.drawable.esconder)
+                binding.txtPass.inputType = 225 //Password_Type
+            }else{
+                binding.hiddenPass1.setImageResource(R.drawable.ver)
+                binding.txtPass.inputType = 64 //Short_Text
+            }
+            bool1=!bool1
+        }
+        binding.hiddenPass2.setOnClickListener{
+            if(bool2){
+                binding.hiddenPass2.setImageResource(R.drawable.esconder)
+                binding.txtPass3.inputType = 225 //Password_Type
+            }else{
+                binding.hiddenPass2.setImageResource(R.drawable.ver)
+                binding.txtPass3.inputType = 64 //Short_Text
+            }
+            bool2=!bool2
+        }
     }
 
     fun onClick_register(view: View){
-        mail = findViewById<TextView>(R.id.txt_mail).text.toString()
-        pass = findViewById<TextView>(R.id.txt_pass).text.toString()
+        val binding = ActivityRegisterBinding.inflate(layoutInflater)
+        mail = binding.txtMail.text.toString()
+        pass = binding.txtPass.text.toString()
+        rpt_pass = binding.txtPass3.text.toString()
         val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
         val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
         grado = spinner.selectedItem.toString()
-        if(mail.matches(mail_regex) && pass.matches(pass_regex)) {
+        if(mail.matches(mail_regex) && pass.matches(pass_regex) && pass == rpt_pass) {
+            //Iniciamos Firebase.auth
+            auth = Firebase.auth
             auth.createUserWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -94,7 +120,7 @@ class RegisterActivity : AppCompatActivity() {
             if(!mail.matches(mail_regex)) showMessage(baseContext, "Error, el correo no está bien formateado (user@host.com).")
             else if(pass.length<6) showMessage(baseContext, "Error, la contraseña tiene que tener mínimo 6 caracteres.")
             else if(!pass.matches(pass_regex)) showMessage(baseContext, "Error. Solo se permiten caracteres alfanuméricos")
-            else if(pass != rpt_pass) showMessage(baseContext, "Error. Solo se permiten caracteres alfanuméricos")
+            else if(pass != rpt_pass) showMessage(baseContext, "Error. Las contraseñas deben coincidir")
             else showMessage(baseContext, "Error. Algo ha fallado, no sabemos el qué, so sorry.")
         }
     }
@@ -120,8 +146,4 @@ class RegisterActivity : AppCompatActivity() {
             }
         showMessage(applicationContext,"Acceso como invitado, habrá ciertas cosas que no podrás hacer")
     }
-}
-
-private fun Intent.putExtra(s: String, newUsuario: Usuario) {
-
 }
