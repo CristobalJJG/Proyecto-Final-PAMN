@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_width="361dp"
+        android:layout_height="155dp"
         android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +36,11 @@
         app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+        app:layout_constraintTop_toBottomOf="@+id/button">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="106dp"
             android:orientation="vertical">
 
             <TextView
@@ -57,12 +57,13 @@
                 android:id="@+id/editTextTextPersonName2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:ems="10"
+                android:hint="Nombre de la publicación"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text="Name" />
+                android:textAlignment="center" />
 
         </LinearLayout>
 
@@ -89,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Descripció/Publicación"
+                android:text="Descripción/Publicación"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/dark_yellow" />
@@ -137,5 +138,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@color/light_white"
         app:srcCompat="@android:drawable/button_onoff_indicator_off" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="150dp"
+        android:text="Subir Imagen"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

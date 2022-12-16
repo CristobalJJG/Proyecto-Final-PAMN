@@ -2,15 +2,14 @@ package com.example.delegadosapp.vista.login_register
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.delegadosapp.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.delegadosapp.AuxFunctions.showMessage
-import com.example.delegadosapp.modelo.Usuario
+import com.example.delegadosapp.R
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -67,6 +66,8 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() { this.finishAffinity() }
 
     fun onClick_goToRegister(view:View){
         val intent = Intent(this, RegisterActivity::class.java)

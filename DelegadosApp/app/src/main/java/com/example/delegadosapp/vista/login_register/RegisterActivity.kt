@@ -2,28 +2,30 @@ package com.example.delegadosapp.vista.login_register
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
-import com.example.delegadosapp.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.example.delegadosapp.modelo.Usuario
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.appcompat.app.AppCompatActivity
 import com.example.delegadosapp.AuxFunctions.showMessage
+import com.example.delegadosapp.R
+import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.profile.EditProfileActivity
 import com.example.delegadosapp.vista.publications.PublicationsActivity
+import com.example.delegadosapp.vista.publications.log_usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
 
     private var mail: String = ""
     private var pass: String = ""
     private var grado: String = ""
+    private var rpt_pass: String = ""
     private lateinit var spinner: Spinner
 
     //Declaramos FirebaseAuth
@@ -37,17 +39,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_register)
-
-        //Iniciamos Firebase.auth
-        auth = Firebase.auth
-
-
-        mail = intent.getStringExtra("mail").toString()
-        pass = intent.getStringExtra("pass").toString()
-
-        findViewById<TextView>(R.id.txt_mail).text = mail
-        findViewById<TextView>(R.id.txt_pass).text = pass
-
         spinner = findViewById(R.id.spn_grados)
         ArrayAdapter.createFromResource(
             this, R.array.grados,
@@ -61,24 +52,28 @@ class RegisterActivity : AppCompatActivity() {
     fun onClick_register(view: View){
         mail = findViewById<TextView>(R.id.txt_mail).text.toString()
         pass = findViewById<TextView>(R.id.txt_pass).text.toString()
+        rpt_pass = findViewById<TextView>(R.id.txt_pass3).text.toString()
         val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
         val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
         grado = spinner.selectedItem.toString()
-        if(mail.matches(mail_regex) && pass.matches(pass_regex)) {
-            auth.createUserWithEmailAndPassword(mail, pass)
+        if(mail.matches(mail_regex) && pass.matches(pass_regex) && pass === rpt_pass) {
+            //Iniciamos Firebase.auth
+            Firebase.auth.createUserWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = Firebase.auth.currentUser
                         user?.let {
-                            // Name, email address, and profile photo Url
-                            val email = user.email
-                            val uid = user.uid
-                            newUsuario = Usuario(email = mail, grade = grado)
+                            newUsuario =  Usuario(rol = 1,
+                                instagram = "", telegram = "", nombre = "",
+                                descripcion = "", movil = "",
+                                email = mail, discord = "", grade = spinner.selectedItem.toString(),
+                                puesto = "", profile_picture = ""
+                            )
+                            log_usuario = newUsuario
                             db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
                                 .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
                         }
                         val intent = Intent(this, EditProfileActivity::class.java)
-                        intent.putExtra("newUser", newUsuario)
                         startActivity(intent)
                     } else {
                         Log.d(TAG, "RegistrarUsuario: failure", task.exception)

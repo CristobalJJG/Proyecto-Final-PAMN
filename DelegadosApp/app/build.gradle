@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.example.delegadosapp'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.delegadosapp"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -67,5 +67,5 @@ dependencies {
     // FirebaseUI Storage only
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
 
-
+    implementation 'androidx.activity:activity-ktx:1.6.1'
 }
