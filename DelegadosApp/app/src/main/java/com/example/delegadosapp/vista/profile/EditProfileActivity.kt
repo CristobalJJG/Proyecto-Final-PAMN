@@ -1,10 +1,10 @@
 package com.example.delegadosapp.vista.profile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.example.delegadosapp.databinding.ActivityEditProfileBinding
 import com.example.delegadosapp.vista.publications.PublicationsActivity
 import com.example.delegadosapp.vista.publications.log_usuario
@@ -34,8 +34,7 @@ class EditProfileActivity : AppCompatActivity() {
         var instagram = log_usuario!!.getInstagram()
         var profile_picture = log_usuario!!.getProfilePicture()
 
-        btn = binding.btnAddInfo
-        btn.setOnClickListener {
+        binding.btnAddInfo.setOnClickListener {
             // Extraemos los datos de la pantalla y lo guardamos como variables.
             // para poder guardarlas en el Firebase
             var aux = binding.editName.text.toString()
@@ -104,9 +103,9 @@ class EditProfileActivity : AppCompatActivity() {
                         }
                 }
             }
-
-            val intent = Intent(this, PublicationsActivity::class.java)
-            startActivity(intent)
         }
+
+        val intent = Intent(this, PublicationsActivity::class.java)
+        startActivity(intent)
     }
 }

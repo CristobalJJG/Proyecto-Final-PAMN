@@ -227,15 +227,15 @@
         android:layout_marginStart="15dp"
         android:layout_marginBottom="15dp"
         android:baselineAlignBottom="true"
-        android:scaleX="1.25"
-        android:scaleY="1.25"
         android:clickable="true"
         android:contentDescription="@string/app_name"
-        app:backgroundTint="@color/blue"
+        android:scaleX="1.25"
+        android:scaleY="1.25"
+        app:backgroundTint="@color/dark_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/dark_white"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        app:srcCompat="@drawable/edit_profile" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_modalMenu"
@@ -252,5 +252,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@color/light_white"
-        app:srcCompat="@android:drawable/button_onoff_indicator_off" />
+        app:srcCompat="@drawable/menu_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

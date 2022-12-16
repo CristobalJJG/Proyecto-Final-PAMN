@@ -1,44 +1,58 @@
 package com.example.delegadosapp.vista.publications
 
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Instrumentation.ActivityResult
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.OpenableColumns
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.example.delegadosapp.AuxFunctions
+import com.example.delegadosapp.AuxFunctions.showMessage
 import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.ActivityAddNewPublicationBinding
-import com.example.delegadosapp.databinding.ActivityDelegaListBinding
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.login_register.RegisterActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.jar.Manifest
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
+import java.sql.Timestamp
+import java.util.*
 
 class AddNewPublicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNewPublicationBinding
+    private var new_photo: Boolean = false
+    private var data: Uri? = null
+    private var newsname: String = ""
+    @SuppressLint("InflateParams")
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         binding = ActivityAddNewPublicationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.button.setOnClickListener{ requestPermissions() }
-//        setContentView(R.layout.activity_add_new_publication)
-        //Forma de abrir el modal del menú para redirigir a todas las pantallas
-        findViewById<FloatingActionButton>(R.id.btn_modalMenu)
-            .setOnClickListener {
+        binding.button.setOnClickListener{
+            requestPermissions()
+            new_photo=true
+        }
+
+        binding.btnModalMenu.setOnClickListener {
                 val modal = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.menu_layout, null)
 
@@ -47,44 +61,84 @@ class AddNewPublicationActivity : AppCompatActivity() {
 
                 modal.setContentView(view)
                 modal.show()
+        }
+
+        binding.addNews.setOnClickListener {
+            title = binding.txtEditTitle.text.toString()
+            if(title.length <= 45) {
+                if (new_photo) {
+                    data?.let { contentResolver.query(it, null, null, null, null) }
+                        ?.use {
+                            val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                            it.moveToFirst()
+                            newsname = it.getString(nameIndex)
+                            Log.w("Nombre archivo ", newsname)
+                        }
+
+                    // Create a storage reference from our app
+                    val storageRef = Firebase.storage
+                        .getReferenceFromUrl("gs://delegaapp.appspot.com/news/" + newsname)
+                    // Get the data from an ImageView as bytes
+                    val imageView: ImageView = binding.imageView4
+                    val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+                    val baos = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                    val data = baos.toByteArray()
+
+                    val uploadTask = storageRef.putBytes(data)
+                    // Handle unsuccessful uploads
+                    uploadTask.addOnFailureListener {
+                        showMessage(
+                            this,
+                            "Noooooo, no se ha subido"
+                        )
+                    }
+                        // it.metadata contains file metadata such as size, content-type, etc.
+                        .addOnSuccessListener { showMessage(this, "Se ha subido imagen") }
+                }
+                var calendar = Calendar.getInstance().timeInMillis
+                val new_news = hashMapOf(
+                    "description" to binding.txtEditDescription.text.toString(),
+                    "fecha" to Timestamp(calendar),
+                    "title" to title,
+                    "img" to newsname
+                )
+
+                FirebaseFirestore.getInstance().collection("news").document().set(new_news)
+                    .addOnSuccessListener { showMessage(this, "Actualización de los datos") }
+                    .addOnFailureListener { showMessage(this, "Error writing document") }
+                val intent = Intent(this, PublicationsActivity::class.java)
+                startActivity(intent)
+            }else{
+                showMessage(this, "Los títulos pueden tener como máximo 45 caracteres.")
             }
+        }
     }
 
     private fun requestPermissions(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            when{
-                ContextCompat.checkSelfPermission(
-                    this,
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    escogerFotoGaleria()
-                }
-                else -> requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            when (PackageManager.PERMISSION_GRANTED) {
+                ContextCompat
+                    .checkSelfPermission(this,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE) -> { escogerFotoGaleria() }
+                else -> requestPermission.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             }
-        }else{
-            escogerFotoGaleria()
-        }
+        }else escogerFotoGaleria()
     }
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ){isGranted->
-        if (isGranted){
-            escogerFotoGaleria()
-        }else{
-            Toast.makeText(this,"Tienes que dar permisos de acceso a galería", Toast.LENGTH_SHORT).show()
-        }
-
+    private val requestPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()){
+        if (it) escogerFotoGaleria()
+        else showMessage(this,"Tienes que dar permisos de acceso a galería")
     }
 
     private val startForGalleryActivity = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ){result ->
         if(result.resultCode == Activity.RESULT_OK){
-            val data = result.data?.data
+            data = result.data?.data
             binding.imageView4.setImageURI(data)
         }
-
     }
 
     private fun escogerFotoGaleria() {
@@ -121,12 +175,12 @@ class AddNewPublicationActivity : AppCompatActivity() {
 
         val btn_favs = view.findViewById<Button>(R.id.btn_menuFavs)
         btn_favs.visibility = View.VISIBLE
-        btn_favs.setOnClickListener{ AuxFunctions.showMessage(this, "Work In Progress") }
+        btn_favs.setOnClickListener{ showMessage(this, "Work In Progress") }
 
         if(log_usuario?.getRol()==2){
             val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
             btn_meetings.visibility = View.VISIBLE
-            btn_meetings.setOnClickListener{ AuxFunctions.showMessage(this, "Work In Progress") }
+            btn_meetings.setOnClickListener{ showMessage(this, "Work In Progress") }
         }
         val btn_listaDelega = view.findViewById<Button>(R.id.btn_menuListDelega)
         btn_listaDelega.visibility = View.VISIBLE
@@ -136,7 +190,7 @@ class AddNewPublicationActivity : AppCompatActivity() {
         btn_logout.visibility = View.VISIBLE
         btn_logout.setOnClickListener{
             log_usuario = Usuario()
-            AuxFunctions.showMessage(this, "Cerrado sesión")
+            showMessage(this, "Cerrado sesión")
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }

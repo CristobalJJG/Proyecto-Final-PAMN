@@ -19,16 +19,36 @@
         android:id="@+id/imageView4"
         android:layout_width="361dp"
         android:layout_height="155dp"
-        android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/default_picture" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_description"
+    <LinearLayout
+        android:id="@+id/ly"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="100dp"
+            app:srcCompat="@drawable/upload" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="Subir Imagen"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
@@ -36,7 +56,8 @@
         app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/txt_modalCargo"
+        tools:ignore="UnknownId">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +75,7 @@
                 android:textColor="@color/dark_yellow" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/txt_editTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -65,12 +86,20 @@
                 android:minHeight="48dp"
                 android:textAlignment="center" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="*Tiene que ser menor a 45 caracteres."
+                android:textSize="13sp" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
+        android:id="@+id/cv_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -78,7 +107,7 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_description">
+        app:layout_constraintTop_toBottomOf="@+id/cv_titulo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,7 +125,7 @@
                 android:textColor="@color/dark_yellow" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/txt_editDescription"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginStart="20dp"
@@ -114,13 +143,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:text="* Si no se sube una fotografía, la publicación solo tendrá el texto"
         android:textAlignment="center"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+        app:layout_constraintTop_toBottomOf="@+id/ly" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_modalMenu"
@@ -137,19 +167,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@color/light_white"
-        app:srcCompat="@android:drawable/button_onoff_indicator_off" />
+        app:srcCompat="@drawable/menu_icon" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="150dp"
+        android:id="@+id/add_news"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="150dp"
-        android:text="Subir Imagen"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:text="Añadir Publicación"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
