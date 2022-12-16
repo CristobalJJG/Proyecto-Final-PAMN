@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.example.delegadosapp.NewsCallback
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class Noticias(
     private var title: String = "",
@@ -25,7 +26,7 @@ class Noticias(
     fun datosNoticias(myCallback: NewsCallback, context: Context){
         val listNews: MutableList<Noticias> = mutableListOf()
         db.collection("news")
-            .orderBy("fecha")
+            .orderBy("fecha", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 //Log.d("hola2", documents.toString())
