@@ -25,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
     private var mail: String = ""
     private var pass: String = ""
     private var grado: String = ""
+    private var rpt_pass: String = ""
     private lateinit var spinner: Spinner
 
     //Declaramos FirebaseAuth
@@ -38,17 +39,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_register)
-
-        //Iniciamos Firebase.auth
-        auth = Firebase.auth
-
-
-        mail = intent.getStringExtra("mail").toString()
-        pass = intent.getStringExtra("pass").toString()
-
-        findViewById<TextView>(R.id.txt_mail).text = mail
-        findViewById<TextView>(R.id.txt_pass).text = pass
-
         spinner = findViewById(R.id.spn_grados)
         ArrayAdapter.createFromResource(
             this, R.array.grados,
@@ -62,20 +52,22 @@ class RegisterActivity : AppCompatActivity() {
     fun onClick_register(view: View){
         mail = findViewById<TextView>(R.id.txt_mail).text.toString()
         pass = findViewById<TextView>(R.id.txt_pass).text.toString()
+        rpt_pass = findViewById<TextView>(R.id.txt_pass3).text.toString()
         val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
         val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
         grado = spinner.selectedItem.toString()
-        if(mail.matches(mail_regex) && pass.matches(pass_regex)) {
-            auth.createUserWithEmailAndPassword(mail, pass)
+        if(mail.matches(mail_regex) && pass.matches(pass_regex) && pass === rpt_pass) {
+            //Iniciamos Firebase.auth
+            Firebase.auth.createUserWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = Firebase.auth.currentUser
                         user?.let {
                             newUsuario =  Usuario(rol = 1,
-                                instagram = "@", telegram = "@", nombre = "",
-                                descripcion = "", movil = "+34000000000",
-                                email = mail, discord = "", grade = "",
-                                puesto = ""
+                                instagram = "", telegram = "", nombre = "",
+                                descripcion = "", movil = "",
+                                email = mail, discord = "", grade = spinner.selectedItem.toString(),
+                                puesto = "", profile_picture = ""
                             )
                             log_usuario = newUsuario
                             db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
