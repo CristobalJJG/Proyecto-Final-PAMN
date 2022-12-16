@@ -108,9 +108,9 @@ class AddNewPublicationActivity : AppCompatActivity() {
 
 
             val new_news = hashMapOf(
-                "description" to binding.editTextTextMultiLine.toString(),
+                "description" to binding.editTextTextMultiLine.text.toString(),
                 "fecha" to Timestamp(calendarsplit[0].toInt(),calendarsplit[1].toInt(),calendarsplit[2].toInt(),0,0,0,0),
-                "title" to binding.editTextTextPersonName2.toString(),
+                "title" to binding.editTextTextPersonName2.text.toString(),
                 "img" to newsname
             )
 
