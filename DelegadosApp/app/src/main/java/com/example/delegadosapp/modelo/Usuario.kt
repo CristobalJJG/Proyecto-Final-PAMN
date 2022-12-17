@@ -93,7 +93,7 @@ class Usuario (
             }
     }
 
-    fun getDelegadosCallback(myCallback: UsersCallback) {
+    fun getDelegadosCallback(myCallback: UsersCallback, context: Context) {
         db.collection("users")
             .whereEqualTo("rol",  2)
             .get()
@@ -119,7 +119,7 @@ class Usuario (
                             )
                         )
                 }
-                myCallback.getDelegadosCallback(listOfUsers)
+                myCallback.getDelegadosCallback(listOfUsers, context)
             }
     }
 }
