@@ -43,7 +43,7 @@
                 android:textSize="30sp" />
 
             <EditText
-                android:id="@+id/txt_mail"
+                android:id="@+id/txt_recoveryMail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="50dp"
@@ -83,7 +83,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_recovery"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="50dp"

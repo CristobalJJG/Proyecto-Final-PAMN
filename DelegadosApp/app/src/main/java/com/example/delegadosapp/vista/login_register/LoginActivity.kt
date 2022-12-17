@@ -35,9 +35,9 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         setContentView(R.layout.activity_login)
 
-        btn_login = findViewById(R.id.btn_login)
+        btn_login = findViewById(R.id.btn_recovery)
         btn_login.setOnClickListener{
-            mail = findViewById<TextView>(R.id.txt_mail).text.toString()
+            mail = findViewById<TextView>(R.id.txt_recoveryMail).text.toString()
             pass = findViewById<TextView>(R.id.txt_pass).text.toString()
             val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
             val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
@@ -75,11 +75,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun onClick_rememberPass(view: View){
-        //val intent: Intent = Intent(this,RegisterActivity::class.java)
-        //startActivity(intent)
-        showMessage(applicationContext, "De alguna forma se te intentaría cambiar la contraseña, pero no está hecho todavía, sorry")
-    }
+    fun onClick_rememberPass(view: View){ startActivity(Intent(this,RecoveryPasswordActivity::class.java)) }
 
     fun onClick_goToInvite(view:View){
         //Se intenta hacer el loggeo
