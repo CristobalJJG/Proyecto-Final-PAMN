@@ -27,9 +27,11 @@
 
     <string-array name="grados">
         <item>Grado en Ingeniería Informática</item>
+        <item>Grado en Ingeniería Mecánica</item>
         <item>Grado en Ingerniería de Datos</item>
         <item>Grado en Arquitectura</item>
-        <item>Grado en Química</item>
+        <item>Grado en Ingeniería Química</item>
+        <item>Grado en Derecho</item>
     </string-array>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="label_grado">Grado al que perteneces</string>
