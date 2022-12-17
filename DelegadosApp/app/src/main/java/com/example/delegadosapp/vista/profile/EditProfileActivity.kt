@@ -32,6 +32,7 @@ class EditProfileActivity : AppCompatActivity() {
         var discord = log_usuario!!.getDiscord()
         var telegram = log_usuario!!.getTelegram()
         var instagram = log_usuario!!.getInstagram()
+        var profile_picture = log_usuario!!.getProfilePicture()
 
         binding.btnAddInfo.setOnClickListener {
             // Extraemos los datos de la pantalla y lo guardamos como variables.
@@ -48,7 +49,12 @@ class EditProfileActivity : AppCompatActivity() {
             if(aux != "" )telegram = aux
             aux = binding.editInstagram.text.toString()
             if(aux != "") instagram = aux
+            /*//Url de la foto, nu sé como va
+            aux = binding.editInstagram.text.toString()
+            if(aux != "") instagram = aux
+            */
             sendInfo(name, description, movile, discord, telegram, instagram)
+
         }
 
         binding.btnOmitir.setOnClickListener{
@@ -64,6 +70,10 @@ class EditProfileActivity : AppCompatActivity() {
             if(aux != "" )telegram = aux
             aux = log_usuario!!.getInstagram()
             if(aux != "") instagram = aux
+            /*//Url de la foto, nu sé como va
+            aux = log_usuario!!.getProfilePicture()
+            if(aux != "") instagram = aux
+            */
             sendInfo(name, description, movile, discord, telegram, instagram)
         }
     }
@@ -79,7 +89,8 @@ class EditProfileActivity : AppCompatActivity() {
                 "movil" to movile,
                 "discord" to discord,
                 "telegram" to telegram,
-                "instagram" to instagram
+                "instagram" to instagram,
+                //"profile_picture" to profile_picture
             )
 
             user.email?.let {
