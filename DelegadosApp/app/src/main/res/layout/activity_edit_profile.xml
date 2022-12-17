@@ -42,21 +42,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="217dp"
-                    android:layout_height="88dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/default_picture" />
 
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Cambiar Imagen" />
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="Cambiar Imagen"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -64,6 +67,7 @@
                 android:id="@+id/txtSubtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Datos básicos"
                 android:textAlignment="center"
                 android:textAllCaps="true"

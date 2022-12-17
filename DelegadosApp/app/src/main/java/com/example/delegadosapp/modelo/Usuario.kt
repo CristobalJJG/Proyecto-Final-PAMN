@@ -68,8 +68,8 @@ class Usuario (
 
     override fun toString(): String {
         return "$nombre, $grade, $rol, $descripcion," +
-                "$movil, $email, $telegram, $instagram, $discord" +
-                "$img"
+                "$movil, $email, $telegram, $instagram, " +
+                "$discord, $img"
     }
 
     fun fetchData(myCallback: UserCallback, email: String, contex: Context){
@@ -118,7 +118,6 @@ class Usuario (
                                 img
                             )
                         )
-                    )
                 }
                 myCallback.getDelegadosCallback(listOfUsers)
             }
