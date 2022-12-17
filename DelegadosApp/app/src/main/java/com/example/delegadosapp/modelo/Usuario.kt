@@ -19,6 +19,7 @@ class Usuario (
     private var discord: String = "",
     private var grade: String = "",
     private var puesto: String = "",
+    private var img: String = "",
     private var profile_picture:String =""
 ): Serializable {
     val db = FirebaseFirestore.getInstance()
@@ -35,6 +36,7 @@ class Usuario (
     fun getNombre(): String { return nombre }
     fun getGrade(): String{ return grade }
     fun getPuesto(): String{ return puesto }
+    fun getImage(): String { return img }
     fun getProfilePicture(): String{ return profile_picture }
 
     fun setDescripcion(string: String) { this.descripcion = string }
@@ -47,6 +49,7 @@ class Usuario (
     fun setNombre(string: String) { this.nombre = string }
     fun setGrade(string: String){ this.grade = string }
     fun setPuesto(string: String){ this.puesto = string }
+    fun setImage(string: String){ this.img = string }
     fun setPRofilePicture(string: String){ this.profile_picture = string }
 
     fun getHashUsuario(): HashMap<String, Any?> {
@@ -61,6 +64,7 @@ class Usuario (
             "discord" to getDiscord(),
             "telegram" to getTelegram(),
             "instagram" to getInstagram(),
+            "img" to getImage(),
             "profile_picture" to getProfilePicture()
         )
         return addusuario
@@ -69,7 +73,7 @@ class Usuario (
     override fun toString(): String {
         return "$nombre, $grade, $rol, $descripcion," +
                 "$movil, $email, $telegram, $instagram, " +
-                "$discord, $profile_picture"
+                "$discord, $profile_picture, $img"
     }
 
     fun fetchData(myCallback: UserCallback, email: String, contex: Context){
@@ -87,6 +91,7 @@ class Usuario (
                 setDiscord(doc.data?.get("discord").toString())
                 setPuesto(doc.data?.get("puesto").toString())
                 setGrade(doc.data?.get("grade").toString())
+                setImage(doc.data?.get("img").toString())
                 Log.w("USUARIO1", this.toString())
                 myCallback.usuarioCallback(this, contex)
             }
@@ -99,24 +104,25 @@ class Usuario (
             .addOnSuccessListener { documents ->
                 for (doc in documents) {
                     val rol = (doc.data["rol"].toString().toInt())
-                    val insta = (doc.data["instagram"].toString())
-                    val telegram = (doc.data["telegram"].toString())
-                    val nombre = (doc.data["name"].toString())
-                    val desc = (doc.data["description"].toString())
-                    val movil = (doc.data["movil"].toString())
-                    val email = (doc.data["email"].toString())
-                    val discord = (doc.data["discord"].toString())
-                    val grade = (doc.data["grade"].toString())
-                    val puesto = (doc.data["puesto"].toString())
-                    val profile_picture = (doc.data["profile_picture"]).toString()
-                    listOfUsers.add(
-                        Usuario(
-                            rol, insta, telegram,
-                            nombre, desc, movil,
-                            email, discord, grade,
-                            puesto, profile_picture
+                        val insta = (doc.data["instagram"].toString())
+                        val telegram = (doc.data["telegram"].toString())
+                        val nombre = (doc.data["name"].toString())
+                        val desc = (doc.data["description"].toString())
+                        val movil = (doc.data["movil"].toString())
+                        val email = (doc.data["email"].toString())
+                        val discord = (doc.data["discord"].toString())
+                        val grade = (doc.data["grade"].toString())
+                        val puesto = (doc.data["puesto"].toString())
+                        val img = (doc.data["img"].toString())
+                        val profile_picture = (doc.data["profile_picture"]).toString()
+                        listOfUsers.add(
+                            Usuario(
+                                rol, insta, telegram,
+                                nombre, desc, movil,
+                                email, discord, grade, puesto,
+                                img, profile_picture
+                            )
                         )
-                    )
                 }
                 myCallback.getDelegadosCallback(listOfUsers)
             }

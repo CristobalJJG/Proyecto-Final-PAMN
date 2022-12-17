@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.bumptech.glide.Glide
 import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.UserCallback
 import com.example.delegadosapp.R
@@ -23,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlin.math.log
 
 class ProfileActivity : AppCompatActivity() {
@@ -87,6 +89,19 @@ class ProfileActivity : AppCompatActivity() {
                 modal.setContentView(view)
                 modal.show()
             }
+
+
+        val storage = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/users/" + log_usuario?.getImage()
+            .toString())
+        storage.downloadUrl.addOnSuccessListener { url ->
+            Log.i("URL: =>", url.toString())
+            Glide.with(this)
+                .load(url)
+                .into(binding.imageView5)
+        }.addOnFailureListener {
+            Log.i("URL: =>", "No se encontró foto")
+            binding.imageView5.visibility = View.GONE
+        }
     }
 
 

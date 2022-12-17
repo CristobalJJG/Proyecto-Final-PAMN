@@ -39,6 +39,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="217dp"
+                    android:layout_height="88dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/default_picture" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cambiar Imagen" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/txtSubtitle1"
                 android:layout_width="match_parent"
