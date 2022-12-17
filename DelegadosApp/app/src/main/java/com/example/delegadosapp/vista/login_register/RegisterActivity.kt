@@ -31,7 +31,6 @@ class RegisterActivity : AppCompatActivity() {
     private var pass: String = ""
     private var rpt_pass: String = ""
     private var grado: String = ""
-    private var rpt_pass: String = ""
     private lateinit var spinner: Spinner
     private var bool1 = false
     private var bool2 = false

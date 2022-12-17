@@ -27,69 +27,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hiddenPass_correo">
 
-        <TextView
-            android:id="@+id/lbl_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/request_pass"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:translationX="50dp"
-            android:translationY="115dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/txt_pass"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:backgroundTint="@color/light_black"
-            android:ems="10"
-            android:hint="@string/pass_example"
-            android:importantForAutofill="no"
-            android:inputType="textPassword|textWebPassword"
-            android:textColor="@color/black"
-            android:textColorHint="@color/dark_white"
-            android:translationX="50dp"
-            android:translationY="155dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            <TextView
+                android:id="@+id/lbl_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/request_mail"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/lbl_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/request_mail"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:translationX="50dp"
-            android:translationY="15dp" />
+            <EditText
+                android:id="@+id/txt_mail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:backgroundTint="@color/light_black"
+                android:ems="10"
+                android:hint="@string/mail_example"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_white"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,UsingOnClickInXml" />
 
-        <EditText
-            android:id="@+id/txt_mail"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:backgroundTint="@color/light_black"
-            android:ems="10"
-            android:hint="@string/mail_example"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/black"
-            android:textColorHint="@color/dark_white"
-            android:translationX="50dp"
-            android:translationY="55dp"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,UsingOnClickInXml" />
+            <TextView
+                android:id="@+id/lbl_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/request_pass"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="128dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="128dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/btn_login"
-            android:textColor="@color/white"
-            android:translationX="-77dp"
-            android:translationY="225dp"
-            tools:ignore="UsingOnClickInXml" />
+            <EditText
+                android:id="@+id/txt_pass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:backgroundTint="@color/light_black"
+                android:ems="10"
+                android:hint="@string/pass_example"
+                android:importantForAutofill="no"
+                android:inputType="textPassword|textWebPassword"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_white"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="50dp"
+                android:text="@string/btn_login"
+                android:textColor="@color/white"
+                tools:ignore="UsingOnClickInXml" />
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
