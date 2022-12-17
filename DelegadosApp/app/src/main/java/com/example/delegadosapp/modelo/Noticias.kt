@@ -29,7 +29,6 @@ class Noticias(
             .orderBy("fecha", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                //Log.d("hola2", documents.toString())
                 for (document in documents) {
                     listNews.add(Noticias(
                         document.get("title") as String,

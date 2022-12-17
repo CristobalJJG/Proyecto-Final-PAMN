@@ -22,7 +22,7 @@
             android:id="@+id/img_userProfile"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_margin="15dp"
+            android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
@@ -34,17 +34,20 @@
                 android:id="@+id/txt_Username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="5dp"
                 android:text="Nombre"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txt_delegaRol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:text="Rol"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>

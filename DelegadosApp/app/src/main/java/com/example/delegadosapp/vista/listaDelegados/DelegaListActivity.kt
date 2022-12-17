@@ -1,5 +1,8 @@
 package com.example.delegadosapp.vista.listaDelegados
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,15 +11,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.AuxFunctions.showMessage
-import com.example.delegadosapp.Publications.PostAdapter
 import com.example.delegadosapp.R
-import com.example.delegadosapp.UserCallback
 import com.example.delegadosapp.UsersCallback
 import com.example.delegadosapp.databinding.ActivityDelegaListBinding
-import com.example.delegadosapp.databinding.ActivityPublicationsBinding
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.login_register.LoginActivity
 import com.example.delegadosapp.vista.profile.ProfileActivity
@@ -25,7 +23,6 @@ import com.example.delegadosapp.vista.publications.log_usuario
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 
@@ -42,20 +39,18 @@ class DelegaListActivity : AppCompatActivity() {
         val usuario = Usuario()
         usuario.getDelegadosCallback(
             object : UsersCallback {
-                override fun getDelegadosCallback(users: ArrayList<Usuario>) {
-                    val adapter = DelegadosAdapter(users) { onItemSelected(it) }
+                override fun getDelegadosCallback(users: ArrayList<Usuario>, context: Context) {
+                    val adapter = DelegadosAdapter(users, context) { onItemSelected(it) }
                     binding.lv.adapter = adapter
                 }
-            }
+            }, this
         )
         //Forma de abrir el modal del menú para redirigir a todas las pantallas
         findViewById<FloatingActionButton>(R.id.btn_modalMenu2)
             .setOnClickListener {
                 val modal = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.menu_layout, null)
-
                 modalRegistrado(view)
-
                 modal.setContentView(view)
                 modal.show()
             }
@@ -63,7 +58,10 @@ class DelegaListActivity : AppCompatActivity() {
 
     fun onItemSelected(user: Usuario){
         Log.i("Delegado Clicked", user.getEmail())
-        showMessage(this, user.getEmail())
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip: ClipData = ClipData.newPlainText("simple text", user.getEmail())
+        clipboard.setPrimaryClip(clip)
+        showMessage(this, "Se ha registrado el correo del delegado en tu Portapapeles")
     }
 
 
@@ -88,12 +86,12 @@ class DelegaListActivity : AppCompatActivity() {
 
         val btn_favs = view.findViewById<Button>(R.id.btn_menuFavs)
         btn_favs.visibility = View.VISIBLE
-        btn_favs.setOnClickListener { AuxFunctions.showMessage(this, "Work In Progress") }
+        btn_favs.setOnClickListener { showMessage(this, "Work In Progress") }
 
         if (log_usuario?.getRol() == 2) {
             val btn_meetings = view.findViewById<Button>(R.id.btn_menuMeetings)
             btn_meetings.visibility = View.VISIBLE
-            btn_meetings.setOnClickListener { AuxFunctions.showMessage(this, "Work In Progress") }
+            btn_meetings.setOnClickListener { showMessage(this, "Work In Progress") }
         }
 
         val btn_listaDelega = view.findViewById<Button>(R.id.btn_menuListDelega)
@@ -107,7 +105,7 @@ class DelegaListActivity : AppCompatActivity() {
         btn_logout.setOnClickListener{
             log_usuario = Usuario()
             Firebase.auth.signOut()
-            AuxFunctions.showMessage(this, "Cerrado sesión")
+            showMessage(this, "Cerrado sesión")
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }
