@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var spinner: Spinner
     private var bool1 = false
     private var bool2 = false
-
+    private lateinit var binding: ActivityRegisterBinding
 
     //Declaramos FirebaseAuth
     private lateinit var auth: FirebaseAuth
@@ -47,8 +47,11 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
 
-        val binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Iniciamos Firebase.auth
+        auth = Firebase.auth
 
         spinner = binding.spnGrados
         ArrayAdapter.createFromResource(
@@ -59,76 +62,71 @@ class RegisterActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
-        binding.hiddenPass1.setOnClickListener{
-            if(bool1){
-                binding.hiddenPass1.setImageResource(R.drawable.esconder)
-                binding.txtPass.inputType = 225 //Password_Type
-            }else{
-                binding.hiddenPass1.setImageResource(R.drawable.ver)
-                binding.txtPass.inputType = 64 //Short_Text
-            }
-            bool1=!bool1
+        binding.hiddenPass1.setOnClickListener{ bool1 = changePassVisibility(binding.hiddenPass1, binding.txtPass, bool1) }
+        binding.hiddenPass2.setOnClickListener{ bool2 = changePassVisibility(binding.hiddenPass2, binding.txtPass3, bool2)}
+    }
+
+    fun changePassVisibility(iv: ImageView, txt: TextView, bool: Boolean): Boolean {
+        if(bool){
+            iv.setImageResource(R.drawable.esconder)
+            txt.inputType = 225 //Password_Type
+        }else{
+            iv.setImageResource(R.drawable.ver)
+            txt.inputType = 64 //Short_Text
         }
-        binding.hiddenPass2.setOnClickListener{
-            if(bool2){
-                binding.hiddenPass2.setImageResource(R.drawable.esconder)
-                binding.txtPass3.inputType = 225 //Password_Type
-            }else{
-                binding.hiddenPass2.setImageResource(R.drawable.ver)
-                binding.txtPass3.inputType = 64 //Short_Text
-            }
-            bool2=!bool2
-        }
+        return !bool
     }
 
     fun onClick_register(view: View){
-        val binding = ActivityRegisterBinding.inflate(layoutInflater)
         mail = binding.txtMail.text.toString()
         pass = binding.txtPass.text.toString()
         rpt_pass = binding.txtPass3.text.toString()
-        val mail_regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$".toRegex()
+
+        val mail_regex = "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])".toRegex()
         val pass_regex = "[a-zA-Z0-9]{6,}".toRegex()
-        grado = spinner.selectedItem.toString()
-        if(mail.matches(mail_regex) && pass.matches(pass_regex) && pass == rpt_pass) {
-            //Iniciamos Firebase.auth
-            auth = Firebase.auth
+
+        if(mail.matches(mail_regex) &&
+                pass.matches(pass_regex) &&
+                pass == rpt_pass) {
             auth.createUserWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = Firebase.auth.currentUser
+                        grado = spinner.selectedItem.toString()
                         user?.let {
-                            newUsuario =  Usuario(rol = 1,
-                                instagram = "@", telegram = "@", nombre = "",
-                                descripcion = "", movil = "+34000000000",
-                                email = mail, discord = "", grade = "",
+                            newUsuario = Usuario(
+                                rol = 1,
+                                instagram = "", telegram = "", nombre = "",
+                                descripcion = "", movil = "",
+                                email = mail, discord = "", grade = grado,
                                 puesto = ""
                             )
                             log_usuario = newUsuario
-                            db.collection("users").document(newUsuario.getEmail()).set(newUsuario.getHashUsuario()).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-                                .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                            db.collection("users").document(newUsuario.getEmail())
+                                .set(newUsuario.getHashUsuario())
+                                .addOnSuccessListener { Log.d( TAG, "DocumentSnapshot successfully written!" ) }
+                                .addOnFailureListener { e -> Log.w( TAG, "Error writing document", e ) }
                         }
-                        val intent = Intent(this, EditProfileActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        Log.d(TAG, "RegistrarUsuario: failure", task.exception)
-                        showMessage(baseContext, "Error. Hubo algún problema con Firebase (seguramente el correo esté mal o ya esté registrado).")
-                    }
+                        startActivity(Intent(this, EditProfileActivity::class.java))
+                    } else showMessage(
+                        baseContext,
+                        "Error. Problema con Firebase (seguramente el correo mal o ya registrado)."
+                    )
                 }
-            }
-        //Control de fallos
-        else{
-            if(!mail.matches(mail_regex)) showMessage(baseContext, "Error, el correo no está bien formateado (user@host.com).")
-            else if(pass.length<6) showMessage(baseContext, "Error, la contraseña tiene que tener mínimo 6 caracteres.")
-            else if(!pass.matches(pass_regex)) showMessage(baseContext, "Error. Solo se permiten caracteres alfanuméricos")
-            else if(pass != rpt_pass) showMessage(baseContext, "Error. Las contraseñas deben coincidir")
+
+        //Manejo de errores
+        }else {
+            Log.d("error", mail.matches(mail_regex).toString() + " " + pass.matches(pass_regex).toString() + " " + (pass != rpt_pass).toString())
+            if( !mail.matches(mail_regex) ) showMessage(baseContext, "Error, el correo no está bien formateado (user@host.com).")
+            else if( pass.length<6 ) showMessage(baseContext, "Error, la contraseña tiene que tener mínimo 6 caracteres.")
+            else if( !pass.matches(pass_regex) ) showMessage(baseContext, "Error. Solo se permiten caracteres alfanuméricos")
+            else if( pass != rpt_pass ) showMessage(baseContext, "Error. Las contraseñas deben coincidir")
             else showMessage(baseContext, "Error. Algo ha fallado, no sabemos el qué, so sorry.")
         }
     }
 
     fun onClick_goToLogin(view:View){
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.putExtra("mail", mail)
-        startActivity(intent)
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     fun onClick_goToInvite(view:View){
