@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/hiddenPass_correo"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_marginStart="118dp"
@@ -25,7 +25,7 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/hiddenPass_correo">
 
         <TextView
             android:id="@+id/lbl_pass"

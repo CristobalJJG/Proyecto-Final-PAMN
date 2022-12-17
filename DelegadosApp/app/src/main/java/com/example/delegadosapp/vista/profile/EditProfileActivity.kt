@@ -93,19 +93,13 @@ class EditProfileActivity : AppCompatActivity() {
                 //"profile_picture" to profile_picture
             )
 
-                user.email?.let {
-                    db.collection("users").document(it)
-                        .set(addusuario, SetOptions.merge())
-                        .addOnSuccessListener {
-                            Log.d("EditUserInfo => ", "Actualización de los datos")
-                        }.addOnFailureListener { e ->
-                            Log.e("EditUserInfo => ", "Error writing document", e)
-                        }
+            user.email?.let {
+                db.collection("users").document(it)
+                    .set(addusuario, SetOptions.merge())
+                    .addOnSuccessListener { Log.d("EditUserInfo => ", "Actualización de los datos") }
+                    .addOnFailureListener { e -> Log.e("EditUserInfo => ", "Error writing document", e) }
                 }
-            }
         }
-
-        val intent = Intent(this, PublicationsActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, PublicationsActivity::class.java))
     }
 }
