@@ -18,7 +18,8 @@ class Usuario (
     private var email: String = "",
     private var discord: String = "",
     private var grade: String = "",
-    private var puesto: String = ""
+    private var puesto: String = "",
+    private var img: String = ""
 ): Serializable {
     val db = FirebaseFirestore.getInstance()
 
@@ -34,6 +35,7 @@ class Usuario (
     fun getNombre(): String { return nombre }
     fun getGrade(): String{ return grade }
     fun getPuesto(): String{ return puesto }
+    fun getImage(): String { return img }
 
     fun setDescripcion(string: String) { this.descripcion = string }
     fun setRol(string: Int) { this.rol = string }
@@ -45,6 +47,7 @@ class Usuario (
     fun setNombre(string: String) { this.nombre = string }
     fun setGrade(string: String){ this.grade = string }
     fun setPuesto(string: String){ this.puesto = string }
+    fun setImage(string: String){ this.img = string }
 
     fun getHashUsuario(): HashMap<String, Any?> {
         val addusuario = hashMapOf<String, Any?>(
@@ -57,14 +60,16 @@ class Usuario (
             "email" to getEmail(),
             "discord" to getDiscord(),
             "telegram" to getTelegram(),
-            "instagram" to getInstagram()
+            "instagram" to getInstagram(),
+            "img" to getImage()
         )
         return addusuario
     }
 
     override fun toString(): String {
         return "$nombre, $grade, $rol, $descripcion," +
-                "$movil, $email, $telegram, $instagram, $discord"
+                "$movil, $email, $telegram, $instagram, $discord" +
+                "$img"
     }
 
     fun fetchData(myCallback: UserCallback, email: String, contex: Context){
@@ -82,6 +87,7 @@ class Usuario (
                 setDiscord(doc.data?.get("discord").toString())
                 setPuesto(doc.data?.get("puesto").toString())
                 setGrade(doc.data?.get("grade").toString())
+                setImage(doc.data?.get("img").toString())
                 Log.w("USUARIO1", this.toString())
                 myCallback.usuarioCallback(this, contex)
             }
@@ -103,11 +109,13 @@ class Usuario (
                         val discord = (doc.data["discord"].toString())
                         val grade = (doc.data["grade"].toString())
                         val puesto = (doc.data["puesto"].toString())
+                        val img = (doc.data["img"].toString())
                         listOfUsers.add(
                             Usuario(
                                 rol, insta, telegram,
                                 nombre, desc, movil,
-                                email, discord, grade, puesto
+                                email, discord, grade, puesto,
+                                img
                             )
                         )
                 }
