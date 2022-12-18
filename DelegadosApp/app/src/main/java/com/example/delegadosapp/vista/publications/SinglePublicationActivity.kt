@@ -58,7 +58,6 @@ class SinglePublicationActivity : AppCompatActivity() {
 
         //Adapter
         adapter = AdapterMensajes(this)
-        binding.rvMensajes.adapter=adapter
 
         binding.btnEnviar.setOnClickListener {
             var nombre: String = log_usuario!!.getNombre()
@@ -68,6 +67,7 @@ class SinglePublicationActivity : AppCompatActivity() {
 
             var text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje, hora = hora)
             adapter.addMensaje(text)
+            binding.rvMensajes.adapter=adapter
         }
     }
 
