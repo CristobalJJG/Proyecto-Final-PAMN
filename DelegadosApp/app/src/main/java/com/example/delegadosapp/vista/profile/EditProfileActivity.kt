@@ -49,7 +49,6 @@ class EditProfileActivity : AppCompatActivity() {
         var discord = log_usuario!!.getDiscord()
         var telegram = log_usuario!!.getTelegram()
         var instagram = log_usuario!!.getInstagram()
-        var profile_picture = log_usuario!!.getProfilePicture()
 
         binding.btnAddInfo.setOnClickListener {
             // Extraemos los datos de la pantalla y lo guardamos como variables.
