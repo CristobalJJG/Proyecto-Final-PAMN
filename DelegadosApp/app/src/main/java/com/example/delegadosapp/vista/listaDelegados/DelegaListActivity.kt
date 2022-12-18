@@ -43,8 +43,8 @@ class DelegaListActivity : AppCompatActivity() {
                     val adapter = DelegadosAdapter(users, context) { onItemSelected(it) }
                     binding.lv.adapter = adapter
                 }
-            }, this
-        )
+            }, this)
+
         //Forma de abrir el modal del menú para redirigir a todas las pantallas
         findViewById<FloatingActionButton>(R.id.btn_modalMenu2)
             .setOnClickListener {

@@ -43,5 +43,4 @@ class Noticias(
                 Log.w(TAG, "Error getting documents: ", exception)
             }
     }
-
 }

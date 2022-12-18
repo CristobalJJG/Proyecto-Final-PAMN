@@ -1,5 +1,6 @@
 package com.example.delegadosapp.vista.publications
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +10,8 @@ import android.widget.Button
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.delegadosapp.AuxFunctions
-import com.example.delegadosapp.Publications.AdapterMensajes
+import com.example.delegadosapp.CommentsCallback
+import com.example.delegadosapp.Publications.mensajesAdapter
 import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.ActivitySinglePublicationBinding
 import com.example.delegadosapp.modelo.Mensaje
@@ -24,8 +26,8 @@ import com.google.firebase.storage.ktx.storage
 
 class SinglePublicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySinglePublicationBinding
-    private lateinit var adapter: AdapterMensajes
-
+    private lateinit var adapter: mensajesAdapter
+    private lateinit var title:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +35,8 @@ class SinglePublicationActivity : AppCompatActivity() {
 
         binding = ActivitySinglePublicationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.txtPublicationTitle.text = intent.getStringExtra("title").toString()
+        title = intent.getStringExtra("title").toString()
+        binding.txtPublicationTitle.text = title
         binding.txtPublicationDesc.text  = intent.getStringExtra("description").toString()
         val storage = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/" + intent.getStringExtra("picture").toString())
         storage.downloadUrl.addOnSuccessListener { url ->
@@ -46,7 +48,6 @@ class SinglePublicationActivity : AppCompatActivity() {
             Log.i("URL: =>", "No se encontró foto")
             binding.imgPublication.visibility = View.GONE
         }
-        binding.cvComents.visibility = View.GONE
 
         binding.btnModalMenu.setOnClickListener{
             val modal = BottomSheetDialog(this)
@@ -56,16 +57,30 @@ class SinglePublicationActivity : AppCompatActivity() {
             modal.show()
         }
 
+        val mensaje = Mensaje()
+
+        mensaje.getComments(
+            object: CommentsCallback{
+                override fun getComments(comments: Array<String>, context: Context) {
+                    val adapter = mensajesAdapter(context)
+                    binding.rvMensajes.adapter = adapter
+                }
+            }, title, this)
+
+        binding.cvComents.visibility = View.GONE
+
+
+
         //Adapter
-        adapter = AdapterMensajes(this)
+        adapter = mensajesAdapter(this)
 
         binding.btnEnviar.setOnClickListener {
-            var nombre: String = log_usuario!!.getNombre()
-            var img_usuario = log_usuario!!.getImage()
-            var mensaje = binding.editTextTextPersonName.text.toString()
-            var hora: String = "00:00"
+            val nombre: String = log_usuario!!.getNombre()
+            val img_usuario = log_usuario!!.getImage()
+            val mensaje = binding.editTextTextPersonName.text.toString()
+            //val hora: String = "00:00"
 
-            var text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje, hora = hora)
+            val text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje/*, hora = hora*/)
             adapter.addMensaje(text)
             binding.rvMensajes.adapter=adapter
         }

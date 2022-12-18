@@ -8,21 +8,19 @@
     android:layout_marginStart="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginEnd="5dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    tools:ignore="MissingClass">
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="64dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/img_userProfile"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="15dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
@@ -39,22 +37,26 @@
                     android:id="@+id/txt_Username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre"
-                    android:layout_weight="1"/>
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="Nombre" />
 
-                <TextView
+                <!--TextView
                     android:id="@+id/hora_Mensaje"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="00:00"/>
+                    android:layout_margin="5dp"
+                    android:text="00:00" /-->
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/txt_mensaje"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hola Bienvenido"/>
+                android:drawablePadding="5dp"
+                android:padding="5dp"
+                android:text="Hola Bienvenido" />
 
         </LinearLayout>
     </LinearLayout>

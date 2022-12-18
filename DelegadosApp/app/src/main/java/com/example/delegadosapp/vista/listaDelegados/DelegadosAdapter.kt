@@ -32,7 +32,7 @@ class DelegadosAdapter(
         override fun getItemCount(): Int { return delegados.size }
 
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-            private val binding = DelegadoLayoutBinding.bind(itemView)
+            val binding = DelegadoLayoutBinding.bind(itemView)
 
             fun render(delegado: Usuario, context: Context, onClickAction: (Usuario)->Unit){
                 if(delegado.getPuesto() != "")binding.txtDelegaRol.text = delegado.getPuesto()
