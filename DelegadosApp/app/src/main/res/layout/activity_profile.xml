@@ -34,6 +34,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="190dp"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     tools:srcCompat="@drawable/default_picture" />
             </androidx.cardview.widget.CardView>
 
@@ -41,7 +42,6 @@
                 android:id="@+id/cv_name_desc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
                 android:elevation="5dp">
 
                 <LinearLayout

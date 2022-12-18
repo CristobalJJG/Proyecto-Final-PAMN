@@ -19,8 +19,7 @@ class Usuario (
     private var discord: String = "",
     private var grade: String = "",
     private var puesto: String = "",
-    private var img: String = "",
-    private var profile_picture:String =""
+    private var img: String = ""
 ): Serializable {
     val db = FirebaseFirestore.getInstance()
 
@@ -37,7 +36,6 @@ class Usuario (
     fun getGrade(): String{ return grade }
     fun getPuesto(): String{ return puesto }
     fun getImage(): String { return img }
-    fun getProfilePicture(): String{ return profile_picture }
 
     fun setDescripcion(string: String) { this.descripcion = string }
     fun setRol(string: Int) { this.rol = string }
@@ -50,7 +48,6 @@ class Usuario (
     fun setGrade(string: String){ this.grade = string }
     fun setPuesto(string: String){ this.puesto = string }
     fun setImage(string: String){ this.img = string }
-    fun setPRofilePicture(string: String){ this.profile_picture = string }
 
     fun getHashUsuario(): HashMap<String, Any?> {
         val addusuario = hashMapOf<String, Any?>(
@@ -64,8 +61,7 @@ class Usuario (
             "discord" to getDiscord(),
             "telegram" to getTelegram(),
             "instagram" to getInstagram(),
-            "img" to getImage(),
-            "profile_picture" to getProfilePicture()
+            "img" to getImage()
         )
         return addusuario
     }
@@ -73,7 +69,7 @@ class Usuario (
     override fun toString(): String {
         return "$nombre, $grade, $rol, $descripcion," +
                 "$movil, $email, $telegram, $instagram, " +
-                "$discord, $profile_picture, $img"
+                "$discord, $img"
     }
 
     fun fetchData(myCallback: UserCallback, email: String, contex: Context){
@@ -97,7 +93,7 @@ class Usuario (
             }
     }
 
-    fun getDelegadosCallback(myCallback: UsersCallback) {
+    fun getDelegadosCallback(myCallback: UsersCallback, context: Context) {
         db.collection("users")
             .whereEqualTo("rol",  2)
             .get()
@@ -120,11 +116,11 @@ class Usuario (
                                 rol, insta, telegram,
                                 nombre, desc, movil,
                                 email, discord, grade, puesto,
-                                img, profile_picture
+                                img
                             )
                         )
                 }
-                myCallback.getDelegadosCallback(listOfUsers)
+                myCallback.getDelegadosCallback(listOfUsers, context)
             }
     }
 }
