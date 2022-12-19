@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -46,15 +47,28 @@ class DelegaListActivity : AppCompatActivity() {
             }, this
         )
         //Forma de abrir el modal del menú para redirigir a todas las pantallas
-        findViewById<FloatingActionButton>(R.id.btn_modalMenu2)
-            .setOnClickListener {
+        binding.btnModal.setOnClickListener {
                 val modal = BottomSheetDialog(this)
                 val view = layoutInflater.inflate(R.layout.menu_layout, null)
                 modalRegistrado(view)
                 modal.setContentView(view)
                 modal.show()
             }
+
+        binding.btnDiscord.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/8syzKpYC")))
         }
+
+        binding.btnDis.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dis.ulpgc.es/")))
+        }
+        binding.btnEii.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://eii.ulpgc.es")))
+        }
+        binding.btnWeb.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ulpgc.es")))
+        }
+    }
 
     fun onItemSelected(user: Usuario){
         Log.i("Delegado Clicked", user.getEmail())
