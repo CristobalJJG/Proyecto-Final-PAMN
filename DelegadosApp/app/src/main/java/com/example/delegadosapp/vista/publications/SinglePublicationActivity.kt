@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.delegadosapp.AuxFunctions
 import com.example.delegadosapp.Publications.AdapterMensajes
@@ -46,7 +48,7 @@ class SinglePublicationActivity : AppCompatActivity() {
             Log.i("URL: =>", "No se encontró foto")
             binding.imgPublication.visibility = View.GONE
         }
-        binding.cvComents.visibility = View.GONE
+//        binding.cvComents.visibility = View.GONE
 
         binding.btnModalMenu.setOnClickListener{
             val modal = BottomSheetDialog(this)
@@ -58,6 +60,8 @@ class SinglePublicationActivity : AppCompatActivity() {
 
         //Adapter
         adapter = AdapterMensajes(this)
+        binding.rvMensajes.layoutManager=LinearLayoutManager(this)
+        binding.rvMensajes.adapter=adapter
 
         binding.btnEnviar.setOnClickListener {
             var nombre: String = log_usuario!!.getNombre()
@@ -66,8 +70,8 @@ class SinglePublicationActivity : AppCompatActivity() {
             var hora: String = "00:00"
 
             var text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje, hora = hora)
+
             adapter.addMensaje(text)
-            binding.rvMensajes.adapter=adapter
         }
     }
 

@@ -18,7 +18,7 @@ class AdapterMensajes(
     private val  context: Context
 ): RecyclerView.Adapter<AdapterMensajes.ViewHolder> (){
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         var binding = CardViewMensajesBinding.bind(itemView)
         /*
