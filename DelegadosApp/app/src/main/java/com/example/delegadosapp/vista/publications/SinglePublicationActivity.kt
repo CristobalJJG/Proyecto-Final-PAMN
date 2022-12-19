@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.delegadosapp.AuxFunctions
+import com.example.delegadosapp.Publications.AdapterMensajes
 import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.ActivitySinglePublicationBinding
+import com.example.delegadosapp.modelo.Mensaje
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.example.delegadosapp.vista.login_register.LoginActivity
@@ -23,6 +26,8 @@ import com.google.firebase.storage.ktx.storage
 
 class SinglePublicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySinglePublicationBinding
+    private lateinit var adapter: AdapterMensajes
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +48,7 @@ class SinglePublicationActivity : AppCompatActivity() {
             Log.i("URL: =>", "No se encontró foto")
             binding.imgPublication.visibility = View.GONE
         }
-        binding.cvComents.visibility = View.GONE
+//        binding.cvComents.visibility = View.GONE
 
         binding.btnModalMenu.setOnClickListener{
             val modal = BottomSheetDialog(this)
@@ -53,6 +58,21 @@ class SinglePublicationActivity : AppCompatActivity() {
             modal.show()
         }
 
+        //Adapter
+        adapter = AdapterMensajes(this)
+        binding.rvMensajes.layoutManager=LinearLayoutManager(this)
+        binding.rvMensajes.adapter=adapter
+
+        binding.btnEnviar.setOnClickListener {
+            var nombre: String = log_usuario!!.getNombre()
+            var img_usuario = log_usuario!!.getImage()
+            var mensaje = binding.editTextTextPersonName.text.toString()
+            var hora: String = "00:00"
+
+            var text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje, hora = hora)
+
+            adapter.addMensaje(text)
+        }
     }
 
     fun modalRegistrado(view: View){

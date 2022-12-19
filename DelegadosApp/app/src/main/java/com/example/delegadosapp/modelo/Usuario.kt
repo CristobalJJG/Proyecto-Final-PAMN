@@ -110,6 +110,7 @@ class Usuario (
                         val grade = (doc.data["grade"].toString())
                         val puesto = (doc.data["puesto"].toString())
                         val img = (doc.data["img"].toString())
+                        val profile_picture = (doc.data["profile_picture"]).toString()
                         listOfUsers.add(
                             Usuario(
                                 rol, insta, telegram,
