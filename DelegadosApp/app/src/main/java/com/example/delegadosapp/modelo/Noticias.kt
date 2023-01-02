@@ -52,7 +52,7 @@ class Noticias(
             .document(id)
             .get()
             .addOnSuccessListener { documents ->
-                if (documents.get("comentaruios") != null) {
+                if (documents.get("comentarios") != null) {
                     Log.d("Comentarios", documents.get("comentarios").toString())
                     val mensajes: List<Map<String, Any>> =
                         documents.get("comentarios") as List<Map<String, Any>>
