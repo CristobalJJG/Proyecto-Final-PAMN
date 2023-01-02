@@ -1,7 +1,5 @@
 package com.example.delegadosapp.modelo
 
-import android.widget.ImageView
-import android.widget.TextView
 
 class Mensaje (
     private var mensaje: String,

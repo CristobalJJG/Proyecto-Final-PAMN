@@ -1,6 +1,7 @@
 package com.example.delegadosapp
 
 import android.content.Context
+import com.example.delegadosapp.modelo.Mensaje
 import com.example.delegadosapp.modelo.Noticias
 import com.example.delegadosapp.modelo.Usuario
 

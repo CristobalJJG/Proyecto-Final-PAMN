@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 import com.example.delegadosapp.NewsCallback
+import com.example.delegadosapp.Publications.AdapterMensajes
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -13,8 +14,8 @@ class Noticias(
     private var img: String? = null,
     private var id: String = ""
 ) {
-
     val db = FirebaseFirestore.getInstance()
+
 
     fun getTitle(): String { return title }
     fun getDescription(): String { return description }
@@ -44,6 +45,33 @@ class Noticias(
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
+            }
+    }
+    fun getComentariosCallback(id: String, adapter: AdapterMensajes){
+        db.collection("news")
+            .document(id)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents.get("comentaruios") != null) {
+                    Log.d("Comentarios", documents.get("comentarios").toString())
+                    val mensajes: List<Map<String, Any>> =
+                        documents.get("comentarios") as List<Map<String, Any>>
+                    for (mensaje in mensajes) {
+                        adapter.addMensaje(
+                            Mensaje(
+                                img = mensaje["imgPerfil"].toString(),
+                                hora = mensaje["hora"].toString(),
+                                mensaje = mensaje["mensaje"].toString(),
+                                nombre = mensaje["nombre"].toString()
+                            ), id
+                        )
+                    }
+                }
+                //myCallback.getMensajeNews
+
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting comentarios: ", exception)
             }
     }
 

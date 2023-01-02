@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -15,6 +14,7 @@ import com.example.delegadosapp.Publications.AdapterMensajes
 import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.ActivitySinglePublicationBinding
 import com.example.delegadosapp.modelo.Mensaje
+import com.example.delegadosapp.modelo.Noticias
 import com.example.delegadosapp.modelo.Usuario
 import com.example.delegadosapp.vista.listaDelegados.DelegaListActivity
 import com.example.delegadosapp.vista.login_register.LoginActivity
@@ -39,6 +39,8 @@ class SinglePublicationActivity : AppCompatActivity() {
         binding.txtPublicationTitle.text = intent.getStringExtra("title").toString()
         binding.txtPublicationDesc.text  = intent.getStringExtra("description").toString()
         var id = intent.getStringExtra("id").toString()
+        var noticia: Noticias = Noticias(id = id)
+
         val storage = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/" + intent.getStringExtra("picture").toString())
         storage.downloadUrl.addOnSuccessListener { url ->
             Log.i("URL: =>", url.toString())
@@ -64,6 +66,7 @@ class SinglePublicationActivity : AppCompatActivity() {
         binding.rvMensajes.layoutManager=LinearLayoutManager(this)
         binding.rvMensajes.adapter=adapter
 
+        noticia.getComentariosCallback(id,adapter)
         binding.btnEnviar.setOnClickListener {
             var nombre: String = log_usuario!!.getNombre()
             var img_usuario = log_usuario!!.getImage()
