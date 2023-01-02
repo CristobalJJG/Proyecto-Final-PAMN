@@ -21,6 +21,4 @@ class Mensaje (
     fun setimgPerfil(string: String){this.img=string}
     fun sethora(string: String){this.hora=string}
 
-
-
 }

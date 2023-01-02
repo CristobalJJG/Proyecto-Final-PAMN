@@ -1,5 +1,6 @@
 package com.example.delegadosapp.Publications
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,12 +12,16 @@ import com.example.delegadosapp.R
 import com.example.delegadosapp.databinding.CardViewMensajesBinding
 import com.example.delegadosapp.modelo.Mensaje
 import com.example.delegadosapp.modelo.Noticias
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 class AdapterMensajes(
     private val  context: Context
 ): RecyclerView.Adapter<AdapterMensajes.ViewHolder> (){
+
+
+    val db = FirebaseFirestore.getInstance()
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -61,8 +66,11 @@ class AdapterMensajes(
 
     val mensajes: MutableList<Mensaje> = mutableListOf()
 
-    fun addMensaje(mensaje: Mensaje){
+    fun addMensaje(mensaje: Mensaje, id: String){
         mensajes.add(mensaje)
+        db.collection("news").document(id).update("comentarios",mensajes)
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
         notifyItemInserted(mensajes.size)
     }
 

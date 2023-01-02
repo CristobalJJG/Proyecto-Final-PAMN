@@ -112,6 +112,7 @@ class PublicationsActivity : AppCompatActivity() {
                 intent.putExtra("title", noticia.getTitle())
                 intent.putExtra("picture", noticia.getImage())
                 intent.putExtra("description", noticia.getDescription())
+                intent.putExtra("id", noticia.getId())
 
                 startActivity(intent)
             }

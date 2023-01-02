@@ -38,6 +38,7 @@ class SinglePublicationActivity : AppCompatActivity() {
 
         binding.txtPublicationTitle.text = intent.getStringExtra("title").toString()
         binding.txtPublicationDesc.text  = intent.getStringExtra("description").toString()
+        var id = intent.getStringExtra("id").toString()
         val storage = Firebase.storage.getReferenceFromUrl("gs://delegaapp.appspot.com/news/" + intent.getStringExtra("picture").toString())
         storage.downloadUrl.addOnSuccessListener { url ->
             Log.i("URL: =>", url.toString())
@@ -71,7 +72,7 @@ class SinglePublicationActivity : AppCompatActivity() {
 
             var text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje, hora = hora)
 
-            adapter.addMensaje(text)
+            adapter.addMensaje(text,id)
         }
     }
 

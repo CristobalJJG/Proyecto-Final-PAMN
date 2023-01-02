@@ -10,7 +10,8 @@ import com.google.firebase.firestore.Query
 class Noticias(
     private var title: String = "",
     private var description: String = "",
-    private var img: String? = null
+    private var img: String? = null,
+    private var id: String = ""
 ) {
 
     val db = FirebaseFirestore.getInstance()
@@ -18,6 +19,7 @@ class Noticias(
     fun getTitle(): String { return title }
     fun getDescription(): String { return description }
     fun getImage(): String? { return img }
+    fun getId(): String? { return id }
 
     fun setTitle(string:String) { this.title = string }
     fun setDescription(string:String) { this.description = string }
@@ -33,7 +35,8 @@ class Noticias(
                     listNews.add(Noticias(
                         document.get("title") as String,
                         document.get("description") as String,
-                        document.get("img") as String
+                        document.get("img") as String,
+                        document.id as String
                     ))
                 }
                 myCallback.onCallback(listNews.toTypedArray(),context)
