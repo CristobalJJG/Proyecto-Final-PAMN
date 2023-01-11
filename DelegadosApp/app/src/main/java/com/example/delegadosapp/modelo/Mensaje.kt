@@ -1,7 +1,5 @@
 package com.example.delegadosapp.modelo
 
-import android.widget.ImageView
-import android.widget.TextView
 
 class Mensaje (
     private var mensaje: String,
@@ -20,7 +18,5 @@ class Mensaje (
     fun setmensaje(string: String){this.mensaje=string}
     fun setimgPerfil(string: String){this.img=string}
     fun sethora(string: String){this.hora=string}
-
-
 
 }

@@ -24,8 +24,6 @@ class LoginActivity : AppCompatActivity() {
 
     //Declaramos FirebaseAuth
     private lateinit var auth: FirebaseAuth
-    //Declaramos CloudFirestore
-    val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
