@@ -1,12 +1,15 @@
 package com.example.delegadosapp.vista.publications
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.delegadosapp.AuxFunctions
@@ -23,12 +26,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class SinglePublicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySinglePublicationBinding
     private lateinit var adapter: AdapterMensajes
 
 
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
@@ -51,7 +59,6 @@ class SinglePublicationActivity : AppCompatActivity() {
             Log.i("URL: =>", "No se encontró foto")
             binding.imgPublication.visibility = View.GONE
         }
-//        binding.cvComents.visibility = View.GONE
 
         binding.btnModalMenu.setOnClickListener{
             val modal = BottomSheetDialog(this)
@@ -68,14 +75,16 @@ class SinglePublicationActivity : AppCompatActivity() {
 
         noticia.getComentariosCallback(id,adapter)
         binding.btnEnviar.setOnClickListener {
-            var nombre: String = log_usuario!!.getNombre()
-            var img_usuario = log_usuario!!.getImage()
-            var mensaje = binding.editTextTextPersonName.text.toString()
-            var hora: String = "00:00"
+            val nombre: String = log_usuario!!.getNombre()
+            val img_usuario = log_usuario!!.getImage()
+            val mensaje = binding.editTextTextPersonName.text.toString()
+            val sdf = SimpleDateFormat("hh:mm dd/M/yyyy")
+            val hora: String = sdf.format(Date())
 
-            var text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje, hora = hora)
+            val text = Mensaje(nombre = nombre, img = img_usuario, mensaje = mensaje, hora = hora)
 
             adapter.addMensaje(text,id)
+            findViewById<TextView>(R.id.editTextTextPersonName).text = ""
         }
     }
 
