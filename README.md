@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-# Proyecto Final PAMN
-=======
-=======
->>>>>>> main
 # **Proyecto Final PAMN**
 
 Pretendemos hacer un aplicación "simple", pero que pueda, de alguna forma, ser útil. Decidimos realizar una aplicación con características informativas. 
@@ -27,11 +21,11 @@ Haciendo referencia a lo dado en clase, intentaremos seguir las fases Devops, a 
 
 ### **Fase 1: Análisis del proyecto** 📝
 Mediante el uso de bocetos en digital propusimos ideas, tanto de de las distintas funcionalidades, como de la estética de la interfaz que podría llegar a tener la aplicación.  
-A su vez, usamos [trello](https://trello.com/es) para planear el proyecto. Con respecto a la Metodología de Desarrollo Ágil, hemos decidido adaptarnos, ya que tenemos muchos trabajos, de forma que:
-- Se irán proponiendo tareas durante la primera y segunda semana
-- Nos asignaremos las tareas propuestas
-- Cada jueves, en clase de prácticas, tendremos una pequeña reunión, diciendo los distintos problemas que hemos podido encontrar
-- A su vez, todos los días iremos hablando poco a poco del trabajo  
+A su vez, usamos [trello](https://trello.com/es) para planear el proyecto. Con respecto a la Metodología de Desarrollo Ágil, hemos decidido adaptarnos, ya que tenemos muchos trabajos, de forma que:  
+- Se irán proponiendo tareas durante la primera y segunda semana     
+- Nos asignaremos las tareas propuestas  
+- Cada jueves, en clase de prácticas, tendremos una pequeña reunión, diciendo los distintos problemas que hemos podido encontrar  
+- A su vez, todos los días iremos hablando poco a poco del trabajo    
 
 Trello -> [Tablero de Trello ](https://trello.com/invite/b/5WkKyg91/ATTI7843f8fa3a9e5219bac81f54b5b7cdd45F76642F/pamndelega)
 
@@ -71,7 +65,7 @@ Se irán colocando los Codelabs más interesantes para el desarrollo del trabajo
 - [Creación de diálogos](https://developer.android.com/guide/topics/ui/dialogs?hl=es-419)
 =======
 - []() ->
->>>>>>> main
+
 - []() ->
 
 ---
@@ -92,42 +86,44 @@ Se irán haciendo pruebas en el emulador que nos aporta Android Studio, y a term
 
 ## **Temporización**
 Durante las 2 primeras semanas fuimos alternando entre proponer ideas para el Trello e
-ir diseñando la aplicación:
-	● Dentro de Trello hemos decidio tener 10 calles:
-		○ Historias épicas: Historias demasiado grandes y costosas, pero que si a futuro
-seguimos con la aplicación podrían llegar a ser viables.
-		○ Figma: Historias de usuario de creación de mockups en Figma.
-		○ Historia de usuario(product backlog): Historias de usuarios reales y relacionadas
-con la programación de la aplicación.
-		○ En proceso: Historias que se están desarrollando en el momento actual.
-		○ Estancado: Historias que por diversos motivos no pueden continuar o no se pueden
-dar por terminadas.
-		○ Pendiente de revisión: Historias ya acabadas, pendientes de que la otra parte del
+ir diseñando la aplicación:  
+- Dentro de Trello hemos decidio tener 10 calles:  
+    
+    - Historias épicas: Historias demasiado grandes y costosas, pero que si a futuro
+seguimos con la aplicación podrían llegar a ser viables.  
+    - Figma: Historias de usuario de creación de mockups en Figma.  
+    - Historia de usuario(product backlog): Historias de usuarios reales y relacionadas
+con la programación de la aplicación.  
+    - En proceso: Historias que se están desarrollando en el momento actual.  
+    - Estancado: Historias que por diversos motivos no pueden continuar o no se pueden
+dar por terminadas.  
+    - Pendiente de revisión: Historias ya acabadas, pendientes de que la otra parte del
 grupo o algún usuario externo compruebe su correcto funcionamiento (en caso de
-cambio se pondría otra vez en Historia de usuario o en En proceso).
-		○ Actividades terminadas: Actividades/Vistas de la aplicación terminadas 100%.
-		○ Mockups terminados: Mockups diseñados en Figma que se han aprobado a nivel
-estético y únicamente como referencia.
-		○ Funciones terminadas: Funcionalidades acabadas de forma que son seguras para
-proseguir con la siguiente actividad.
+cambio se pondría otra vez en Historia de usuario o en En proceso).  
+    - Actividades terminadas: Actividades/Vistas de la aplicación terminadas 100%.  
+    - Mockups terminados: Mockups diseñados en Figma que se han aprobado a nivel
+estético y únicamente como referencia.  
+    - Funciones terminadas: Funcionalidades acabadas de forma que son seguras para
+proseguir con la siguiente actividad.  
+
 Decidimos no agregar horas a las historias de usuarios debido a que estamos empleando
 un lenguaje nuevo y no sabemos con aproximación el tiempo que nos llevaría. Lo que
 hicimos fue agregar etiquetas de prioridad a aquellas historias que eran totalmente
-indispensables para la primera versión de la aplicación.
+indispensables para la primera versión de la aplicación.  
 Una vez pasaron esas 2 semanas de organización, empezamos a usar Android Studio para
 desarrollar las primeras actividades y layouts (Iniciar sesión y registro) y para conectar
-con la Cloud Firestore, de forma correcta y sin errores.
+con la Cloud Firestore, de forma correcta y sin errores.  
 Cada jueves, en la clase de práctica, comentamos los problemas que fuimos encontrando
 durante la semana de forma que ese mismo día pudieran estar resueltos para poder
-proseguir con la aplicación.
+proseguir con la aplicación.  
 Además, diariamente se hablaba un poco de lo que habíamos hecho y los avances que
-íbamos teniendo.
+íbamos teniendo.  
 A 5 semanas de la entrega del trabajo nos encontramos con que no éramos capaces de
 mostrar los datos recogidos de Firestore, como se explicó antes, las llamadas son
 asíncronas y el hilo principal se ejecutaba antes de recibir los datos, lo que nos llevó a los
-dos integrantes tratar de resolver este problema que nos llevó su tiempo.
+dos integrantes tratar de resolver este problema que nos llevó su tiempo.  
 Una vez esto fue solventado, solo quedaba crear un par de vistas y recoger los 2 tipos de
-datos para poder usarlos en toda la aplicación.
+datos para poder usarlos en toda la aplicación.  
 
 
 ---
