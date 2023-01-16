@@ -77,7 +77,11 @@ Se irán colocando los Codelabs más interesantes para el desarrollo del trabajo
 ---
 
 ### **Fase 4: Desarrollo** 📐
-Cuando hagamos cosas se pondrá aquí
+Para el desarrollo de la aplicación se ha tratado de aplicar la “Guía de Arquitectura”
+de Android Studio. Con respecto a la arquitectura tratamos de hacer lo más
+parecido a MVC (Model View Controller), teniendo modelos como pueden ser los
+usuarios o las publicaciones, las vistas de la propia aplicación e interfaces como una
+especie de control.
 
 ---
 
@@ -87,7 +91,43 @@ Se irán haciendo pruebas en el emulador que nos aporta Android Studio, y a term
 ---
 
 ## **Temporización**
-Una vez acabemos el trello se pondrán cosas aquí (Seguramente esté sujeto a cambios)
+Durante las 2 primeras semanas fuimos alternando entre proponer ideas para el Trello e
+ir diseñando la aplicación:
+	● Dentro de Trello hemos decidio tener 10 calles:
+		○ Historias épicas: Historias demasiado grandes y costosas, pero que si a futuro
+seguimos con la aplicación podrían llegar a ser viables.
+		○ Figma: Historias de usuario de creación de mockups en Figma.
+		○ Historia de usuario(product backlog): Historias de usuarios reales y relacionadas
+con la programación de la aplicación.
+		○ En proceso: Historias que se están desarrollando en el momento actual.
+		○ Estancado: Historias que por diversos motivos no pueden continuar o no se pueden
+dar por terminadas.
+		○ Pendiente de revisión: Historias ya acabadas, pendientes de que la otra parte del
+grupo o algún usuario externo compruebe su correcto funcionamiento (en caso de
+cambio se pondría otra vez en Historia de usuario o en En proceso).
+		○ Actividades terminadas: Actividades/Vistas de la aplicación terminadas 100%.
+		○ Mockups terminados: Mockups diseñados en Figma que se han aprobado a nivel
+estético y únicamente como referencia.
+		○ Funciones terminadas: Funcionalidades acabadas de forma que son seguras para
+proseguir con la siguiente actividad.
+Decidimos no agregar horas a las historias de usuarios debido a que estamos empleando
+un lenguaje nuevo y no sabemos con aproximación el tiempo que nos llevaría. Lo que
+hicimos fue agregar etiquetas de prioridad a aquellas historias que eran totalmente
+indispensables para la primera versión de la aplicación.
+Una vez pasaron esas 2 semanas de organización, empezamos a usar Android Studio para
+desarrollar las primeras actividades y layouts (Iniciar sesión y registro) y para conectar
+con la Cloud Firestore, de forma correcta y sin errores.
+Cada jueves, en la clase de práctica, comentamos los problemas que fuimos encontrando
+durante la semana de forma que ese mismo día pudieran estar resueltos para poder
+proseguir con la aplicación.
+Además, diariamente se hablaba un poco de lo que habíamos hecho y los avances que
+íbamos teniendo.
+A 5 semanas de la entrega del trabajo nos encontramos con que no éramos capaces de
+mostrar los datos recogidos de Firestore, como se explicó antes, las llamadas son
+asíncronas y el hilo principal se ejecutaba antes de recibir los datos, lo que nos llevó a los
+dos integrantes tratar de resolver este problema que nos llevó su tiempo.
+Una vez esto fue solventado, solo quedaba crear un par de vistas y recoger los 2 tipos de
+datos para poder usarlos en toda la aplicación.
 
 
 ---
@@ -104,13 +144,6 @@ Una vez acabemos el trello se pondrán cosas aquí (Seguramente esté sujeto a c
 - []() ->   
 
 
----
-
-## **Desarrollo / Ejecución**
-
-Aquí se irán colocando las distintas **Actividades** que vayamos desarrollando
-<<<<<<< HEAD
->>>>>>> Stashed changes
 =======
 
 
