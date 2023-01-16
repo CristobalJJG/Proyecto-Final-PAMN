@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+# Proyecto Final PAMN
+=======
+=======
+>>>>>>> main
 # **Proyecto Final PAMN**
 
 Pretendemos hacer un aplicación "simple", pero que pueda, de alguna forma, ser útil. Decidimos realizar una aplicación con características informativas. 
@@ -21,11 +27,11 @@ Haciendo referencia a lo dado en clase, intentaremos seguir las fases Devops, a 
 
 ### **Fase 1: Análisis del proyecto** 📝
 Mediante el uso de bocetos en digital propusimos ideas, tanto de de las distintas funcionalidades, como de la estética de la interfaz que podría llegar a tener la aplicación.  
-A su vez, usamos [trello](https://trello.com/es) para planear el proyecto. Con respecto a la Metodología de Desarrollo Ágil, hemos decidido adaptarnos, ya que tenemos muchos trabajos, de forma que:  
-- Se irán proponiendo tareas durante la primera y segunda semana     
-- Nos asignaremos las tareas propuestas  
-- Cada jueves, en clase de prácticas, tendremos una pequeña reunión, diciendo los distintos problemas que hemos podido encontrar  
-- A su vez, todos los días iremos hablando poco a poco del trabajo    
+A su vez, usamos [trello](https://trello.com/es) para planear el proyecto. Con respecto a la Metodología de Desarrollo Ágil, hemos decidido adaptarnos, ya que tenemos muchos trabajos, de forma que:
+- Se irán proponiendo tareas durante la primera y segunda semana
+- Nos asignaremos las tareas propuestas
+- Cada jueves, en clase de prácticas, tendremos una pequeña reunión, diciendo los distintos problemas que hemos podido encontrar
+- A su vez, todos los días iremos hablando poco a poco del trabajo  
 
 Trello -> [Tablero de Trello ](https://trello.com/invite/b/5WkKyg91/ATTI7843f8fa3a9e5219bac81f54b5b7cdd45F76642F/pamndelega)
 
@@ -61,21 +67,17 @@ Se ha hecho unos de algunos plugins, como son:
 Se irán colocando los Codelabs más interesantes para el desarrollo del trabajo, así como vídeos o páginas que nos sirvan de ayuda.
 - [www.codigofacilito.com](https://codigofacilito.com/articulos/articulo_18_10_2019_18_25_35) -> Puede ayudar a la hora de hacer el login 
 - [Creación de layouts](https://youtu.be/5jXy2S-qdVQ?t=2729) -> Puede ayudar a la creación de las distintas publicaciones, comentarios y zonas donde tengamos que mostrar información.
-
+<<<<<<< HEAD
 - [Creación de diálogos](https://developer.android.com/guide/topics/ui/dialogs?hl=es-419)
-
+=======
 - []() ->
-
+>>>>>>> main
 - []() ->
 
 ---
 
 ### **Fase 4: Desarrollo** 📐
-Para el desarrollo de la aplicación se ha tratado de aplicar la “Guía de Arquitectura”
-de Android Studio. Con respecto a la arquitectura tratamos de hacer lo más
-parecido a MVC (Model View Controller), teniendo modelos como pueden ser los
-usuarios o las publicaciones, las vistas de la propia aplicación e interfaces como una
-especie de control.
+Cuando hagamos cosas se pondrá aquí
 
 ---
 
@@ -85,45 +87,7 @@ Se irán haciendo pruebas en el emulador que nos aporta Android Studio, y a term
 ---
 
 ## **Temporización**
-Durante las 2 primeras semanas fuimos alternando entre proponer ideas para el Trello e
-ir diseñando la aplicación:  
-- Dentro de Trello hemos decidio tener 10 calles:  
-    
-    - Historias épicas: Historias demasiado grandes y costosas, pero que si a futuro
-seguimos con la aplicación podrían llegar a ser viables.  
-    - Figma: Historias de usuario de creación de mockups en Figma.  
-    - Historia de usuario(product backlog): Historias de usuarios reales y relacionadas
-con la programación de la aplicación.  
-    - En proceso: Historias que se están desarrollando en el momento actual.  
-    - Estancado: Historias que por diversos motivos no pueden continuar o no se pueden
-dar por terminadas.  
-    - Pendiente de revisión: Historias ya acabadas, pendientes de que la otra parte del
-grupo o algún usuario externo compruebe su correcto funcionamiento (en caso de
-cambio se pondría otra vez en Historia de usuario o en En proceso).  
-    - Actividades terminadas: Actividades/Vistas de la aplicación terminadas 100%.  
-    - Mockups terminados: Mockups diseñados en Figma que se han aprobado a nivel
-estético y únicamente como referencia.  
-    - Funciones terminadas: Funcionalidades acabadas de forma que son seguras para
-proseguir con la siguiente actividad.  
-
-Decidimos no agregar horas a las historias de usuarios debido a que estamos empleando
-un lenguaje nuevo y no sabemos con aproximación el tiempo que nos llevaría. Lo que
-hicimos fue agregar etiquetas de prioridad a aquellas historias que eran totalmente
-indispensables para la primera versión de la aplicación.  
-Una vez pasaron esas 2 semanas de organización, empezamos a usar Android Studio para
-desarrollar las primeras actividades y layouts (Iniciar sesión y registro) y para conectar
-con la Cloud Firestore, de forma correcta y sin errores.  
-Cada jueves, en la clase de práctica, comentamos los problemas que fuimos encontrando
-durante la semana de forma que ese mismo día pudieran estar resueltos para poder
-proseguir con la aplicación.  
-Además, diariamente se hablaba un poco de lo que habíamos hecho y los avances que
-íbamos teniendo.  
-A 5 semanas de la entrega del trabajo nos encontramos con que no éramos capaces de
-mostrar los datos recogidos de Firestore, como se explicó antes, las llamadas son
-asíncronas y el hilo principal se ejecutaba antes de recibir los datos, lo que nos llevó a los
-dos integrantes tratar de resolver este problema que nos llevó su tiempo.  
-Una vez esto fue solventado, solo quedaba crear un par de vistas y recoger los 2 tipos de
-datos para poder usarlos en toda la aplicación.  
+Una vez acabemos el trello se pondrán cosas aquí (Seguramente esté sujeto a cambios)
 
 
 ---
@@ -138,6 +102,17 @@ datos para poder usarlos en toda la aplicación.
 - []() ->   
 - []() ->   
 - []() ->   
+
+
+---
+
+## **Desarrollo / Ejecución**
+
+Aquí se irán colocando las distintas **Actividades** que vayamos desarrollando
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+
 
 ---
 
@@ -174,3 +149,4 @@ La colección "news" almacenará todas las noticias y estas tendrán propiedades
 			Descripción de la publicación
 		-users = List of users
 			Lista de Usuarios que habrán agregado a favoritos la propia publicacíon.
+>>>>>>> main
